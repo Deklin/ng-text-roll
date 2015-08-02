@@ -1,0 +1,56 @@
+<div class="container">
+
+  <h1>ng-text-roll
+    <small>Development Application</small>
+  </h1>
+
+  <div class="row">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">Numberic Value</div>
+      <div class="panel-body">
+        <form class="form-horizontal" name="numericValueForm">
+          <div class="form-group">
+            <label for="numericValueLabel" class="col-sm-2 col-md-2 control-label">Result</label>
+            <div class="col-sm-10 col-md-10">
+              <div id="numericValueLabel" class="form-control-static">
+                Directive:
+                <ng-text-roll value="numericValue" display-value="numericValue | currency"></ng-text-roll>
+                <br/> Plain Text:
+                <span ng-bind="numericValue"></span>
+                <br/>Currency Filter:
+                <span ng-bind="numericValue | currency"></span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputNumbericValue" class="col-sm-2 col-md-2 control-label">Amount</label>
+              <div class="col-sm-2 col-md-2">
+                <input type="number" class="form-control" id="inputNumbericValue" ng-model="calc.amount">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 col-md-2 control-label">Operation</label>
+              <div class="col-sm-5 col-md-5">
+                <label class="radio-inline">
+                  <input type="radio" ng-model="calc.operator" value="add"> Add
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" ng-model="calc.operator" value="substract"> Substract
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" ng-model="calc.operator" value="multiply"> Multiply
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10  col-md-10">
+                <button type="button" ng-disabled="!calc.amount || numericValueForm.$invalid" class="btn btn-default" ng-click="update()">Update Value</button>
+              </div>
+            </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
