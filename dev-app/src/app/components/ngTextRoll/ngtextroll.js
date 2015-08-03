@@ -20,15 +20,18 @@
         restrict: 'E',
         link: function postLink(scope, element) {
 
-          // Helper function to set display String
+          // Helper function to set display string
           scope.setDisplayText = function() {
             scope.value = scope.value || 'Error: value not set';
-            scope.strDisplayText = scope.displayValue
-              ? String(scope.displayValue) : String(scope.value);
+            scope.strDisplayText = scope.displayValue ?
+              String(scope.displayValue) : String(scope.value);
           };
 
           // Element height
           scope.eleHeight = element[0].offsetHeight;
+          $timeout(function() {
+            scope.heightDiff = element.children()[0].offsetHeight - scope.eleHeight;
+          });
 
           // Set initial styles
           scope.transition = 'margin-top 0.33s';
@@ -54,7 +57,7 @@
               // Perform animation
               $timeout(function() {
                 scope.itemCurrentStyle.transition = scope.transition;
-                scope.itemCurrentStyle['margin-top'] = '-' + scope.eleHeight * 2 + 'px';
+                scope.itemCurrentStyle['margin-top'] = '-' + (scope.eleHeight + scope.heightDiff) * 2 + 'px';
                 scope.itemChangeStyle.transition = scope.transition;
                 scope.itemChangeStyle['margin-top'] = '-' + scope.eleHeight + 'px';
               });
