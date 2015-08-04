@@ -20,7 +20,7 @@
         restrict: 'E',
         link: function postLink(scope, element) {
 
-          // Helper function to set display string
+          // Helper function to set display value as string
           scope.setDisplayText = function() {
             scope.value = scope.value || 'Error: value not set';
             scope.strDisplayText = scope.displayValue ?
