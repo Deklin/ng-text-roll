@@ -2,18 +2,15 @@
   overflow: hidden;
   display: inline-block;
 }
-
 .ng-text-roll-item {
   position: relative;
   display: inline-block;
   color: rgba(0, 0, 0, 0.0);
 }
-
 .ng-text-roll-item-current {
   position: absolute;
   color: rgba(0, 0, 0, 1.0);
 }
-
 .ng-text-roll-item-change {
   position: absolute;
   color: rgba(0, 0, 0, 1.0);

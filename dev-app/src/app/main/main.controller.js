@@ -22,7 +22,7 @@
       var date = new Date();
       date.setDate(date.getDate() + inc);
       return date;
-    }
+    };
 
     $scope.updateNumeric = function() {
       var val = $scope.numericValue || 1;
