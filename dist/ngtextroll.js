@@ -12,7 +12,7 @@
   angular.module('ui.ng-text-roll', [])
     .directive('ngTextRoll', function($timeout) {
       return {
-        templateUrl: 'ngtextroll.html',
+        templateUrl: 'dist/ngtextroll.html',
         scope: {
           displayValue: '=',
           value: '='

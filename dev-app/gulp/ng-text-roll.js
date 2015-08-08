@@ -16,9 +16,8 @@ var paths = {
 };
 
 gulp.task('ng-text-roll', ['ng-text-roll-copy'], function() {
-
   return gulp.src(path.join(paths.src, '*.js'))
-    .pipe(greplace('app/components/ngTextRoll/', ''))
+    .pipe(greplace('app/components/ngTextRoll/', conf.paths.dist + '/'))
     .pipe(gulp.dest(path.join(paths.dist)));
 });
 
