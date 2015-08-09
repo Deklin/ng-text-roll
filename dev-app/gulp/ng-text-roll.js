@@ -42,6 +42,7 @@ gulp.task('ng-text-roll-template', ['ng-text-roll-rename'], function() {
   return gulp.src(paths.dist + '/*.html')
     .pipe(template(templateFilename, {
       module: 'ui.ngTextRoll.template',
+      standalone: true,
       root: 'template'
     }))
     .pipe(gulp.dest(paths.dist))
