@@ -7,3 +7,11 @@ More features coming soon! :)
 ```sh
 $ bower install ng-text-roll
 ```
+
+### Adding dependency to your project
+
+Add a dependency for the `ui.ngTextRoll` AngularJS module:
+
+```js
+angular.module('myModule', ['ui.ngTextRoll']);
+```
