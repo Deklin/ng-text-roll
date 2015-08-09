@@ -20,3 +20,12 @@ Add the ngTextRoll directive to your markup:
 ```html
 <ng-text-roll value=3></ng-text-roll>
 ```
+
+### Options
+NOTE: All inputs are converted to string via JavaScript ``` String() ```
+#### value
+Required.  Value to present in ngTextRoll directive.  
+Example: ```value=3 ```
+#### displayValue
+Optional.  Value to use for presentaion; useful for using filters.
+Example: ``` display-value="totalPrice | currency" ```
