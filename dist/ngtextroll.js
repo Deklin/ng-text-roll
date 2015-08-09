@@ -9,10 +9,10 @@
    * # ngTextRoll
    */
 
-  angular.module('ui.ng-text-roll', [])
+  angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
     .directive('ngTextRoll', function($timeout) {
       return {
-        templateUrl: 'dist/ngtextroll.html',
+        templateUrl: 'template/ngtextroll.html',
         scope: {
           displayValue: '=',
           value: '='
@@ -69,5 +69,9 @@
         }
       };
     });
+
+    // template:js
+    angular.module("ui.ngTextRoll.template").run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"ng-text-roll-container\">\n  <div class=\"ng-text-roll-item\" ng-repeat=\"textChar in strDisplayText track by $index\">{{textChar}}\n    <div class=\"ng-text-roll-item-current\" ng-style=\"itemCurrentStyle\">{{textChar}}</div>\n    <div class=\"ng-text-roll-item-change\" ng-style=\"itemChangeStyle\">{{textChar}}</div>\n  </div>\n</div>\n");}]);
+    // endinject
 
 })();

@@ -9,7 +9,7 @@
    * # ngTextRoll
    */
 
-  angular.module('ui.ng-text-roll', [])
+  angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
     .directive('ngTextRoll', function($timeout) {
       return {
         templateUrl: 'app/components/ngTextRoll/ngtextroll.html',
@@ -69,5 +69,8 @@
         }
       };
     });
+
+    // template:js
+    // endinject
 
 })();
