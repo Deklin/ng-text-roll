@@ -24,8 +24,11 @@
           scope.itemCurrentStyle = [];
           scope.itemChangeStyle = [];
 
-          scope.getRandomInt = function(min, max) {
-            return Math.random() * (max - min) + min;
+          // scope.getRandomInt = function(min, max) {
+          //   return Math.random() * (max - min) + min;
+          // };
+          scope.getRandomDec = function(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
           };
 
           // Default to value but prefer displayValue
@@ -61,7 +64,6 @@
               // Reset position
               for (var i = 0; i < scope.strDisplayText.length; i += 1) {
                 scope.itemCurrentStyle[i].transition = '';
-                scope.itemCurrentStyle[i]['-webkit-transition'] = '';
                 scope.itemCurrentStyle[i]['margin-top'] = '-' + scope.eleHeight + 'px';
                 scope.itemChangeStyle[i].transition = '';
                 scope.itemChangeStyle[i]['margin-top'] = '0';
@@ -70,9 +72,11 @@
               // Perform animation
               $timeout(function() {
                 for (var i = 0; i < scope.strDisplayText.length; i += 1) {
-                  scope.itemCurrentStyle[i].transition = scope.transitionStr;
-                  scope.itemCurrentStyle[i]['margin-top'] = '-' + (scope.eleHeight + scope.heightDiff) * 2 + 'px';
-                  scope.itemChangeStyle[i].transition = scope.transitionStr;
+                  var delay = scope.getRandomDec(0.0, 0.25) + 's';
+                  scope.itemCurrentStyle[i].transition = scope.transitionStr + delay;
+                  scope.itemCurrentStyle[i]['margin-top'] = '-'
+                    + (scope.eleHeight + scope.heightDiff) * 2 + 'px';
+                  scope.itemChangeStyle[i].transition = scope.transitionStr + delay;
                   scope.itemChangeStyle[i]['margin-top'] = '-' + scope.eleHeight + 'px';
                 }
               });
