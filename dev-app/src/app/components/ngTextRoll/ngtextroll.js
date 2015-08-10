@@ -20,25 +20,35 @@
         restrict: 'E',
         link: function postLink(scope, element) {
 
-          // Helper function to set display value as string
+          scope.transitionStr = 'margin-top 0.33s ease ';
+          scope.itemCurrentStyle = [];
+          scope.itemChangeStyle = [];
+
+          scope.getRandomInt = function(min, max) {
+            return Math.random() * (max - min) + min;
+          };
+
+          // Default to value but prefer displayValue
           scope.setDisplayText = function() {
             scope.value = scope.value || 'Error: value not set';
             scope.strDisplayText = scope.displayValue ?
               String(scope.displayValue) : String(scope.value);
+
+            for (var i = 0; i < scope.strDisplayText.length; i += 1) {
+              scope.itemCurrentStyle[i] = {
+                'margin-top': '-' + scope.eleHeight + 'px'
+              };
+              scope.itemChangeStyle[i] = {};
+            }
           };
 
-          // Element height
+          // Child height it not ready immediatly
           scope.eleHeight = element[0].offsetHeight;
           $timeout(function() {
             scope.heightDiff = element.children()[0].offsetHeight - scope.eleHeight;
           });
 
           // Set initial styles
-          scope.transition = 'margin-top 0.33s';
-          scope.itemCurrentStyle = {
-            'margin-top': '-' + scope.eleHeight + 'px'
-          };
-          scope.itemChangeStyle = {};
           scope.setDisplayText();
 
           scope.$watch('value', function(newVal, oldVal) {
@@ -49,17 +59,22 @@
               scope.setDisplayText();
 
               // Reset position
-              scope.itemCurrentStyle.transition = '';
-              scope.itemCurrentStyle['margin-top'] = '-' + scope.eleHeight + 'px';
-              scope.itemChangeStyle.transition = '';
-              scope.itemChangeStyle['margin-top'] = '0';
+              for (var i = 0; i < scope.strDisplayText.length; i += 1) {
+                scope.itemCurrentStyle[i].transition = '';
+                scope.itemCurrentStyle[i]['-webkit-transition'] = '';
+                scope.itemCurrentStyle[i]['margin-top'] = '-' + scope.eleHeight + 'px';
+                scope.itemChangeStyle[i].transition = '';
+                scope.itemChangeStyle[i]['margin-top'] = '0';
+              }
 
               // Perform animation
               $timeout(function() {
-                scope.itemCurrentStyle.transition = scope.transition;
-                scope.itemCurrentStyle['margin-top'] = '-' + (scope.eleHeight + scope.heightDiff) * 2 + 'px';
-                scope.itemChangeStyle.transition = scope.transition;
-                scope.itemChangeStyle['margin-top'] = '-' + scope.eleHeight + 'px';
+                for (var i = 0; i < scope.strDisplayText.length; i += 1) {
+                  scope.itemCurrentStyle[i].transition = scope.transitionStr;
+                  scope.itemCurrentStyle[i]['margin-top'] = '-' + (scope.eleHeight + scope.heightDiff) * 2 + 'px';
+                  scope.itemChangeStyle[i].transition = scope.transitionStr;
+                  scope.itemChangeStyle[i]['margin-top'] = '-' + scope.eleHeight + 'px';
+                }
               });
 
             }
@@ -70,7 +85,7 @@
       };
     });
 
-    // template:js
-    // endinject
+  // template:js
+  // endinject
 
 })();
