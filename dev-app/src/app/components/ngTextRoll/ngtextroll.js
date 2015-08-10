@@ -9,7 +9,7 @@
    * # ngTextRoll
    */
 
-  angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
+  angular.module('ui.ngTextRoll', [])
     .directive('ngTextRoll', function($timeout) {
       return {
         templateUrl: 'app/components/ngTextRoll/ngtextroll.html',
