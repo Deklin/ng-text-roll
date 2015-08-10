@@ -74,4 +74,7 @@ gulp.task('ng-text-roll-rename', ['ng-text-roll-copy'], function() {
       del(path.join(paths.dist, templateFilename), {
         force: true
       });
+      del(path.join(paths.dist, '*.html'), {
+        force: true
+      });
     });
