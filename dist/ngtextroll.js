@@ -20,25 +20,38 @@
         restrict: 'E',
         link: function postLink(scope, element) {
 
-          // Helper function to set display value as string
+          scope.transitionStr = 'margin-top 0.33s ease ';
+          scope.itemCurrentStyle = ['ui.ngTextRoll.template'];
+          scope.itemChangeStyle = ['ui.ngTextRoll.template'];
+
+          // scope.getRandomInt = function(min, max) {
+          //   return Math.random() * (max - min) + min;
+          // };
+          scope.getRandomDec = function(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
+          };
+
+          // Default to value but prefer displayValue
           scope.setDisplayText = function() {
             scope.value = scope.value || 'Error: value not set';
             scope.strDisplayText = scope.displayValue ?
               String(scope.displayValue) : String(scope.value);
+
+            for (var i = 0; i < scope.strDisplayText.length; i += 1) {
+              scope.itemCurrentStyle[i] = {
+                'margin-top': '-' + scope.eleHeight + 'px'
+              };
+              scope.itemChangeStyle[i] = {};
+            }
           };
 
-          // Element height
+          // Child height it not ready immediatly
           scope.eleHeight = element[0].offsetHeight;
           $timeout(function() {
             scope.heightDiff = element.children()[0].offsetHeight - scope.eleHeight;
           });
 
           // Set initial styles
-          scope.transition = 'margin-top 0.33s';
-          scope.itemCurrentStyle = {
-            'margin-top': '-' + scope.eleHeight + 'px'
-          };
-          scope.itemChangeStyle = {};
           scope.setDisplayText();
 
           scope.$watch('value', function(newVal, oldVal) {
@@ -49,17 +62,23 @@
               scope.setDisplayText();
 
               // Reset position
-              scope.itemCurrentStyle.transition = '';
-              scope.itemCurrentStyle['margin-top'] = '-' + scope.eleHeight + 'px';
-              scope.itemChangeStyle.transition = '';
-              scope.itemChangeStyle['margin-top'] = '0';
+              for (var i = 0; i < scope.strDisplayText.length; i += 1) {
+                scope.itemCurrentStyle[i].transition = '';
+                scope.itemCurrentStyle[i]['margin-top'] = '-' + scope.eleHeight + 'px';
+                scope.itemChangeStyle[i].transition = '';
+                scope.itemChangeStyle[i]['margin-top'] = '0';
+              }
 
               // Perform animation
               $timeout(function() {
-                scope.itemCurrentStyle.transition = scope.transition;
-                scope.itemCurrentStyle['margin-top'] = '-' + (scope.eleHeight + scope.heightDiff) * 2 + 'px';
-                scope.itemChangeStyle.transition = scope.transition;
-                scope.itemChangeStyle['margin-top'] = '-' + scope.eleHeight + 'px';
+                for (var i = 0; i < scope.strDisplayText.length; i += 1) {
+                  var delay = scope.getRandomDec(0.0, 0.25) + 's';
+                  scope.itemCurrentStyle[i].transition = scope.transitionStr + delay;
+                  scope.itemCurrentStyle[i]['margin-top'] = '-' +
+                    (scope.eleHeight + scope.heightDiff) * 2 + 'px';
+                  scope.itemChangeStyle[i].transition = scope.transitionStr + delay;
+                  scope.itemChangeStyle[i]['margin-top'] = '-' + scope.eleHeight + 'px';
+                }
               });
 
             }
@@ -70,8 +89,8 @@
       };
     });
 
-    // template:js
-    angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"ng-text-roll-container\">\n  <div class=\"ng-text-roll-item\" ng-repeat=\"textChar in strDisplayText track by $index\">{{textChar}}\n    <div class=\"ng-text-roll-item-current\" ng-style=\"itemCurrentStyle\">{{textChar}}</div>\n    <div class=\"ng-text-roll-item-change\" ng-style=\"itemChangeStyle\">{{textChar}}</div>\n  </div>\n</div>\n");}]);
-    // endinject
+  // template:js
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"ng-text-roll-container\">\n  <div class=\"ng-text-roll-item\" ng-repeat=\"textChar in strDisplayText track by $index\">{{textChar}}\n    <div class=\"ng-text-roll-item-current\" ng-style=\"itemCurrentStyle[$index]\">{{textChar}}</div>\n    <div class=\"ng-text-roll-item-change\" ng-style=\"itemChangeStyle[$index]\">{{textChar}}</div>\n  </div>\n</div>\n");}]);
+  // endinject
 
 })();

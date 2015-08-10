@@ -74,8 +74,8 @@
                 for (var i = 0; i < scope.strDisplayText.length; i += 1) {
                   var delay = scope.getRandomDec(0.0, 0.25) + 's';
                   scope.itemCurrentStyle[i].transition = scope.transitionStr + delay;
-                  scope.itemCurrentStyle[i]['margin-top'] = '-'
-                    + (scope.eleHeight + scope.heightDiff) * 2 + 'px';
+                  scope.itemCurrentStyle[i]['margin-top'] = '-' +
+                    (scope.eleHeight + scope.heightDiff) * 2 + 'px';
                   scope.itemChangeStyle[i].transition = scope.transitionStr + delay;
                   scope.itemChangeStyle[i]['margin-top'] = '-' + scope.eleHeight + 'px';
                 }
