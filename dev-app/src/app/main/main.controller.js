@@ -13,8 +13,7 @@
     };
 
     $scope.getRandomDecimal = function(min, max) {
-      var num = Math.random() * (max - min) + min;
-      return parseFloat(num.toFixed(2));
+      return parseFloat((Math.random() * (max - min) + min).toFixed(2));
     };
 
     $scope.getRandomDate = function() {
@@ -45,6 +44,7 @@
     };
 
     $scope.numericValue = $scope.getRandomDecimal(0.01, 10.99);
+    $scope.calc.amount = $scope.getRandomDecimal(0.01, 3.99);
     $scope.dateValue = $scope.getRandomDate();
 
   }

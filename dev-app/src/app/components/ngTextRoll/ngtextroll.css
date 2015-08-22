@@ -1,17 +1,23 @@
-.ng-text-roll-container {
-  overflow: hidden;
-  display: inline-block;
-}
-.ng-text-roll-item {
+.text-roll {
   position: relative;
   display: inline-block;
-  color: rgba(0, 0, 0, 0.0);
+  height: 100%;
+  visibility: hidden;
+  overflow: hidden;
 }
-.ng-text-roll-item-current {
+.text-roll .item1 {
+  top: 0;
   position: absolute;
-  color: rgba(0, 0, 0, 1.0);
+  visibility: visible;
 }
-.ng-text-roll-item-change {
+.text-roll .item1 .char1 {
+  display: inline;
+}
+.text-roll .item2 {
+  top: 0;
   position: absolute;
-  color: rgba(0, 0, 0, 1.0);
+  visibility: visible;
+}
+.text-roll .item2 .char2 {
+  display: inline;
 }

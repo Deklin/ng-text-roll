@@ -1,6 +1,9 @@
-<div class="ng-text-roll-container">
-  <div class="ng-text-roll-item" ng-repeat="textChar in strDisplayText track by $index">{{textChar}}
-    <div class="ng-text-roll-item-current" ng-style="itemCurrentStyle[$index]">{{textChar}}</div>
-    <div class="ng-text-roll-item-change" ng-style="itemChangeStyle[$index]">{{textChar}}</div>
+<div class="text-roll">
+  {{str1}}
+  <div class="item1" ng-style="styl1">
+    <div class="char1" ng-repeat="char in str1 track by $index">{{char}}</div>
+  </div>
+  <div class="item2" ng-style="styl2">
+    <div class="char2" ng-repeat="char in str2 track by $index">{{char}}</div>
   </div>
 </div>
