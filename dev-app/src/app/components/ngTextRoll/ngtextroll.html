@@ -1,9 +1,9 @@
 <div class="text-roll">
-  {{str1}}
-  <div class="item1" ng-style="styl1">
-    <div class="char1" ng-repeat="char in str1 track by $index">{{char}}</div>
+  {{displayValue}}
+  <div class="container1">
+    <div class="display-char" ng-style="styl1" ng-repeat="char in str1 track by $index">{{char}}</div>
   </div>
-  <div class="item2" ng-style="styl2">
-    <div class="char2" ng-repeat="char in str2 track by $index">{{char}}</div>
+  <div class="container2">
+    <div class="display-char" ng-style="styl2" ng-repeat="char in str2 track by $index">{{char}}</div>
   </div>
 </div>
