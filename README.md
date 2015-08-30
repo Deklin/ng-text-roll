@@ -1,7 +1,7 @@
 # ng-text-roll
 An AngularJS directive that highlights string changes by “rolling” characters.
 
-<a href="http://daveteply.github.io/ng-text-roll/src">Demo Page (coming soon!)</a>
+<a href="http://daveteply.github.io/ng-text-roll/dist">Demo Page (coming soon!)</a>
 
 ### Install with Bower
 ```sh
