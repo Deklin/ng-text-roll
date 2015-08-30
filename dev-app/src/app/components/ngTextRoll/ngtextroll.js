@@ -21,6 +21,7 @@
 
         // set initial string value
         scope.str1 = String(scope.displayValue || scope.value || '');
+        scope.str2 = scope.str1;
 
         scope.getRandomDecimal = function(min, max) {
           return parseFloat((Math.random() * (max - min) + min).toFixed(2));
@@ -34,23 +35,21 @@
             // clear timeout
             $timeout.cancel(strAnim);
 
-            // disable animation, set new string and position outside
-            //  of overflow region
-            scope.str1 = String(scope.displayValue);
-            angular.forEach(scope.str1, function(char, inx) {
+            // disable animation, set new strings
+            angular.forEach(String(scope.displayValue), function(char, inx) {
               scope.styl1[inx] = scope.styl1[inx] || {};
               scope.styl1[inx].transition = '';
               scope.styl1[inx].top = h + 'px';
-              // disable animation, set old string to currently viewable
+              scope.str1 = String(scope.displayValue);
               scope.styl2[inx] = scope.styl2[inx] || {};
               scope.styl2[inx].transition = '';
               scope.styl2[inx].top = '-' + ch + 'px';
             });
-            scope.str2 = scope.str1;
 
             // animate on next tick
             strAnim = $timeout(function() {
               angular.forEach(scope.str1, function(char, inx) {
+                scope.str2 = scope.str1;
                 var delay = ' ' + scope.getRandomDecimal(0.1, 0.25) + 's';
                 scope.styl1[inx].transition = t + delay;
                 scope.styl1[inx].top = '0';
