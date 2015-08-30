@@ -14,36 +14,45 @@
 
       var linkFunc = function(scope, element) {
 
-        var h = element.children()[0].offsetHeight;
         var t = 'top 0.5s ease';
-        scope.styl1 = {};
-        scope.styl2 = {};
+        var strAnim = {};
+        scope.styl1 = ['ui.ngTextRoll.template'];
+        scope.styl2 = ['ui.ngTextRoll.template'];
 
-        // set initial binding
+        // set initial string value
         scope.str1 = String(scope.displayValue || scope.value || '');
 
         scope.$watch('value', function(newVal, oldVal) {
           if (newVal !== oldVal) {
+            // get height
+            var ch = element.children()[0].offsetHeight;
+            var h = element[0].offsetHeight;
+            // clear timeout
+            $timeout.cancel(strAnim);
 
-            // 1
-            scope.styl1.top = h + 'px';
-            scope.styl2.top = '0';
+            // disable animation, set new string and position outside
+            //  of overflow region
             scope.styl1.transition = '';
+            scope.styl1.top = h + 'px';
+            scope.str1 = String(scope.displayValue);
+            // disable animation, set old string to currently viewable
             scope.styl2.transition = '';
+            scope.styl2.top = '-' + ch + 'px';
             scope.str2 = scope.str1;
 
-            $timeout(function() {
-              // 2
-              scope.str1 = String(scope.displayValue);
-              $timeout(function() {
-                // 3
-                scope.styl1.transition = t;
-                scope.styl2.transition = t;
-                scope.styl2.top = '-' + h + 'px';
-                scope.styl1.top = '0';
-              });
+            // animate on next tick
+            strAnim = $timeout(function() {
+              scope.styl1.transition = t;
+              scope.styl1.top = '0';
+              scope.styl2.transition = t;
+              scope.styl2.top = '-' + (ch + h + 1) + 'px';
             });
           }
+        });
+
+        // clear timeout
+        scope.$on('destroy', function() {
+          $timeout.cancel(strAnim);
         });
 
       };
@@ -61,7 +70,7 @@
     });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"text-roll\">\n  {{str1}}\n  <div class=\"item1\" ng-style=\"styl1\">\n    <div class=\"char1\" ng-repeat=\"char in str1 track by $index\">{{char}}</div>\n  </div>\n  <div class=\"item2\" ng-style=\"styl2\">\n    <div class=\"char2\" ng-repeat=\"char in str2 track by $index\">{{char}}</div>\n  </div>\n</div>\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"text-roll\">\n  {{displayValue}}\n  <div class=\"container1\">\n    <div class=\"display-char\" ng-style=\"styl1\" ng-repeat=\"char in str1 track by $index\">{{char}}</div>\n  </div>\n  <div class=\"container2\">\n    <div class=\"display-char\" ng-style=\"styl2\" ng-repeat=\"char in str2 track by $index\">{{char}}</div>\n  </div>\n</div>\n");}]);
   // endinject
 
 })();

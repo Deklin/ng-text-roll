@@ -15,11 +15,16 @@
       var linkFunc = function(scope, element) {
 
         var t = 'top 0.5s ease';
-        scope.styl1 = {};
-        scope.styl2 = {};
+        var strAnim = {};
+        scope.styl1 = [];
+        scope.styl2 = [];
 
         // set initial string value
         scope.str1 = String(scope.displayValue || scope.value || '');
+
+        scope.getRandomDecimal = function(min, max) {
+          return parseFloat((Math.random() * (max - min) + min).toFixed(2));
+        };
 
         scope.$watch('value', function(newVal, oldVal) {
           if (newVal !== oldVal) {
@@ -31,27 +36,34 @@
 
             // disable animation, set new string and position outside
             //  of overflow region
-            scope.styl1.transition = '';
-            scope.styl1.top = h + 'px';
             scope.str1 = String(scope.displayValue);
-            // disable animation, set old string to currently viewable
-            scope.styl2.transition = '';
-            scope.styl2.top = '-' + ch + 'px';
+            angular.forEach(scope.str1, function(char, inx) {
+              scope.styl1[inx] = scope.styl1[inx] || {};
+              scope.styl1[inx].transition = '';
+              scope.styl1[inx].top = h + 'px';
+              // disable animation, set old string to currently viewable
+              scope.styl2[inx] = scope.styl2[inx] || {};
+              scope.styl2[inx].transition = '';
+              scope.styl2[inx].top = '-' + ch + 'px';
+            });
             scope.str2 = scope.str1;
 
             // animate on next tick
-            var strAnim = $timeout(function() {
-              scope.styl1.transition = t;
-              scope.styl1.top = '0';
-              scope.styl2.transition = t;
-              scope.styl2.top = '-' + (ch + h + 1) + 'px';
+            strAnim = $timeout(function() {
+              angular.forEach(scope.str1, function(char, inx) {
+                var delay = ' ' + scope.getRandomDecimal(0.1, 0.25) + 's';
+                scope.styl1[inx].transition = t + delay;
+                scope.styl1[inx].top = '0';
+                scope.styl2[inx].transition = t + delay;
+                scope.styl2[inx].top = '-' + (ch + h + 1) + 'px';
+              });
             });
           }
         });
 
         // clear timeout
         scope.$on('destroy', function() {
-          $timout.cancel(strAnim);
+          $timeout.cancel(strAnim);
         });
 
       };
