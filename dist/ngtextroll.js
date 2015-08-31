@@ -21,6 +21,11 @@
 
         // set initial string value
         scope.str1 = String(scope.displayValue || scope.value || '');
+        scope.str2 = scope.str1;
+
+        scope.getRandomDecimal = function(min, max) {
+          return parseFloat((Math.random() * (max - min) + min).toFixed(2));
+        };
 
         scope.$watch('value', function(newVal, oldVal) {
           if (newVal !== oldVal) {
@@ -30,22 +35,27 @@
             // clear timeout
             $timeout.cancel(strAnim);
 
-            // disable animation, set new string and position outside
-            //  of overflow region
-            scope.styl1.transition = '';
-            scope.styl1.top = h + 'px';
-            scope.str1 = String(scope.displayValue);
-            // disable animation, set old string to currently viewable
-            scope.styl2.transition = '';
-            scope.styl2.top = '-' + ch + 'px';
-            scope.str2 = scope.str1;
+            // disable animation, set new strings
+            angular.forEach(String(scope.displayValue), function(char, inx) {
+              scope.styl1[inx] = scope.styl1[inx] || {};
+              scope.styl1[inx].transition = '';
+              scope.styl1[inx].top = h + 'px';
+              scope.str1 = String(scope.displayValue);
+              scope.styl2[inx] = scope.styl2[inx] || {};
+              scope.styl2[inx].transition = '';
+              scope.styl2[inx].top = '-' + ch + 'px';
+            });
 
             // animate on next tick
             strAnim = $timeout(function() {
-              scope.styl1.transition = t;
-              scope.styl1.top = '0';
-              scope.styl2.transition = t;
-              scope.styl2.top = '-' + (ch + h + 1) + 'px';
+              angular.forEach(scope.str1, function(char, inx) {
+                scope.str2 = scope.str1;
+                var delay = ' ' + scope.getRandomDecimal(0.1, 0.25) + 's';
+                scope.styl1[inx].transition = t + delay;
+                scope.styl1[inx].top = '0';
+                scope.styl2[inx].transition = t + delay;
+                scope.styl2[inx].top = '-' + (ch + h + 1) + 'px';
+              });
             });
           }
         });
@@ -70,7 +80,7 @@
     });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"text-roll\">\n  {{displayValue}}\n  <div class=\"container1\">\n    <div class=\"display-char\" ng-style=\"styl1\" ng-repeat=\"char in str1 track by $index\">{{char}}</div>\n  </div>\n  <div class=\"container2\">\n    <div class=\"display-char\" ng-style=\"styl2\" ng-repeat=\"char in str2 track by $index\">{{char}}</div>\n  </div>\n</div>\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"text-roll\">\r\n  {{displayValue}}\r\n  <div class=\"container1\">\r\n    <div class=\"display-char\" ng-style=\"styl1[$index]\" ng-repeat=\"char in str1 track by $index\">{{char}}</div>\r\n  </div>\r\n  <div class=\"container2\">\r\n    <div class=\"display-char\" ng-style=\"styl2[$index]\" ng-repeat=\"char in str2 track by $index\">{{char}}</div>\r\n  </div>\r\n</div>\r\n");}]);
   // endinject
 
 })();
