@@ -9,15 +9,15 @@
    * # ngTextRoll
    */
 
-  angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
+  angular.module('ui.ngTextRoll', [])
     .directive('ngTextRoll', function($timeout) {
 
       var linkFunc = function(scope, element) {
 
         var t = 'top 0.5s ease';
         var strAnim = {};
-        scope.styl1 = ['ui.ngTextRoll.template'];
-        scope.styl2 = ['ui.ngTextRoll.template'];
+        scope.styl1 = [];
+        scope.styl2 = [];
 
         // set initial string value
         scope.str1 = String(scope.displayValue || scope.value || '');
