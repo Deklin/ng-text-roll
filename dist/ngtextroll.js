@@ -9,7 +9,7 @@
    * # ngTextRoll
    */
 
-  angular.module('ui.ngTextRoll', [])
+  angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
     .directive('ngTextRoll', function($timeout) {
 
       var linkFunc = function(scope, element) {
