@@ -49,32 +49,33 @@ gulp.task('ng-text-roll-template', ['ng-text-roll-rename'], function() {
 });
 
 gulp.task('ng-text-roll-rename', ['ng-text-roll-copy'], function() {
-      return gulp.src(path.join(paths.src, '*.js'))
-        .pipe(greplace('app/components/ngTextRoll/', 'template/'))
-        .pipe(greplace('[]', '[\'ui.ngTextRoll.template\']'))
-          .pipe(gulp.dest(path.join(paths.dist)));
-        });
+  return gulp.src(path.join(paths.src, '*.js'))
+    .pipe(greplace('app/components/ngTextRoll/', 'template/'))
+    // find first occurance of [] and add module dependency 
+    .pipe(greplace(/\[\]/, '[\'ui.ngTextRoll.template\']'))
+    .pipe(gulp.dest(path.join(paths.dist)));
+});
 
-    gulp.task('ng-text-roll-copy', ['ng-text-roll-clean'], function() {
-      return gulp.src(
-          [
-            path.join(paths.src, '*'),
-            '!' + path.join(paths.src, '*.js')
-          ])
-        .pipe(gulp.dest(paths.dist));
-    });
+gulp.task('ng-text-roll-copy', ['ng-text-roll-clean'], function() {
+  return gulp.src(
+      [
+        path.join(paths.src, '*'),
+        '!' + path.join(paths.src, '*.js')
+      ])
+    .pipe(gulp.dest(paths.dist));
+});
 
-    gulp.task('ng-text-roll-clean', function() {
-      del(path.join(paths.dist, '*'), {
-        force: true
-      });
-    });
+gulp.task('ng-text-roll-clean', function() {
+  del(path.join(paths.dist, '*'), {
+    force: true
+  });
+});
 
-    gulp.task('ng-text-roll-del-template', function() {
-      del(path.join(paths.dist, templateFilename), {
-        force: true
-      });
-      del(path.join(paths.dist, '*.html'), {
-        force: true
-      });
-    });
+gulp.task('ng-text-roll-del-template', function() {
+  del(path.join(paths.dist, templateFilename), {
+    force: true
+  });
+  del(path.join(paths.dist, '*.html'), {
+    force: true
+  });
+});
