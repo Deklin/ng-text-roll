@@ -32,18 +32,22 @@
             // get height
             var ch = element.children()[0].offsetHeight;
             var h = element[0].offsetHeight;
+
             // clear timeout
             $timeout.cancel(strAnim);
+
+            // roll 'up' or roll 'down'
+            var direction = newVal > oldVal;
 
             // disable animation, set new strings
             angular.forEach(String(scope.displayValue), function(char, inx) {
               scope.styl1[inx] = scope.styl1[inx] || {};
               scope.styl1[inx].transition = '';
-              scope.styl1[inx].top = h + 'px';
+              scope.styl1[inx].top = (direction ? h : '-' + h) + 'px';
               scope.str1 = String(scope.displayValue);
               scope.styl2[inx] = scope.styl2[inx] || {};
               scope.styl2[inx].transition = '';
-              scope.styl2[inx].top = '-' + ch + 'px';
+              scope.styl2[inx].top ='-' + ch + 'px';
             });
 
             // animate on next tick
@@ -54,7 +58,7 @@
                 scope.styl1[inx].transition = t + delay;
                 scope.styl1[inx].top = '0';
                 scope.styl2[inx].transition = t + delay;
-                scope.styl2[inx].top = '-' + (ch + h + 1) + 'px';
+                scope.styl2[inx].top = direction ? '-' + (ch + h + 1) + 'px' : '0';
               });
             });
           }
