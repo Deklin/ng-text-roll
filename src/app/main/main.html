@@ -15,13 +15,16 @@
             <div class="form-group">
               <label for="numericValueLabel" class="col-sm-2 control-label">Result</label>
               <div class="col-sm-10">
-                <span id="numericValueLabel">
-                  Directive:
-                  <ng-text-roll value="numericValue" display-value="numericValue | currency"></ng-text-roll>
-                  <br>Plain Text:
-                  <span ng-bind="numericValue"></span>
-                  <br>Currency Filter:
-                  <span ng-bind="numericValue | currency"></span>
+                <span id="numericValueLabel" ng-style="numericStyle">
+                  <div class="row">Plain Text:
+                    <span ng-bind="numericValue"></span>
+                  </div>
+                  <div class="row">Currency Filter:
+                    <span ng-bind="numericValue | currency"></span>
+                  </div>
+                  <div class="row">ng-text-roll:
+                    <ng-text-roll value="numericValue" display-value="numericValue | currency"></ng-text-roll>
+                  </div>
                 </span>
               </div>
               <div class="form-group">
@@ -67,12 +70,17 @@
               <label for="numericValueLabel" class="col-sm-2 control-label">Result</label>
               <div class="col-sm-10">
                 <span id="numericValueLabel">
-                  Directive:
-                  <!-- <ng-text-roll value="dateValue" display-value="dateValue | date"></ng-text-roll> -->
-                  <br>Date Filter:
-                  <span ng-bind="dateValue | date"></span>
-                  <br>Date Input:
-                  <input type="date" ng-model="dateValue">
+                  <div style="row">Date Filter:
+                    <span ng-bind="dateValue | date"></span>
+                  </div>
+                  <div class="row">ng-text-roll:
+                    <ng-text-roll
+                      value="dateValue"
+                      display-value="dateValue | date"></ng-text-roll>
+                  </div>
+                  <div style="row">Date Input:
+                    <input type="date" ng-model="dateValue">
+                  </div>
                 </span>
               </div>
           </form>
