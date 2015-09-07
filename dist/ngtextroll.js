@@ -34,32 +34,34 @@
             var h = element[0].offsetHeight;
 
             // clear timeout
-            $timeout.cancel(strAnim);
+            //$timeout.cancel(strAnim);
 
             // roll 'up' or roll 'down'
             var direction = newVal > oldVal;
 
-            // disable animation, set new strings
+            // disable animation, set new string
             angular.forEach(String(scope.displayValue), function(char, inx) {
               scope.styl1[inx] = scope.styl1[inx] || {};
               scope.styl1[inx].transition = '';
-              scope.styl1[inx].top = (direction ? h : '-' + h) + 'px';
-              scope.str1 = String(scope.displayValue);
+              scope.styl1[inx].top = (direction ? '' : '-') + (h + 1) + 'px';
               scope.styl2[inx] = scope.styl2[inx] || {};
               scope.styl2[inx].transition = '';
-              scope.styl2[inx].top ='-' + ch + 'px';
+              scope.styl2[inx].top = '-' + (ch + 1) + 'px';
             });
 
             // animate on next tick
             strAnim = $timeout(function() {
               angular.forEach(scope.str1, function(char, inx) {
-                scope.str2 = scope.str1;
                 var delay = ' ' + scope.getRandomDecimal(0.1, 0.25) + 's';
                 scope.styl1[inx].transition = t + delay;
                 scope.styl1[inx].top = '0';
                 scope.styl2[inx].transition = t + delay;
                 scope.styl2[inx].top = direction ? '-' + (ch + h + 1) + 'px' : '0';
               });
+              strAnim = $timeout(function() {
+                scope.str1 = String(scope.displayValue);
+                scope.str2 = scope.str1;
+              }, 200);
             });
           }
         });
