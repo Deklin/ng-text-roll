@@ -3,90 +3,47 @@
   'use strict';
 
   /**
-   * @ngdoc directive
+   * @ngdoc component
    * @name ui.ng-text-roll.directive:ngTextRoll
    * @description
    * # ngTextRoll
    */
 
-  angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
-    .directive('ngTextRoll', function($timeout) {
+  angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template']).component('ngTextRoll', {
+    templateUrl: 'template/ngtextroll.html',
+    bindings: {
+      target: '=',
+      height: '<'
+    },
+    controller: function() {
+      this.current = 0;
+      this.render = [{}, {}];
+      this.intHeight = parseInt(this.height);
+      this.unitHeight = this.height.replace(this.intHeight, '');
 
-      var linkFunc = function(scope, element) {
+      this.next = function() {
+        this.current = (this.current === 0 ? 1 : 0);
+      };
 
-        var t = 'top 0.5s ease';
-        var strAnim = {};
-        scope.styl1 = [];
-        scope.styl2 = [];
-
-        // set initial string value
-        scope.str1 = String(scope.displayValue || scope.value || '');
-        scope.str2 = scope.str1;
-
-        scope.getRandomDecimal = function(min, max) {
-          return parseFloat((Math.random() * (max - min) + min).toFixed(2));
+      this.update = function(increase) {
+        this.render[this.current].style = {
+          'top': increase ?  1 : 2
         };
-
-        scope.$watch('value', function(newVal, oldVal) {
-          if (newVal !== oldVal) {
-            // get height
-            var ch = element.children()[0].offsetHeight;
-            var h = element[0].offsetHeight;
-
-            // clear timeout
-            //$timeout.cancel(strAnim);
-
-            // roll 'up' or roll 'down'
-            var direction = newVal > oldVal;
-
-            // disable animation, set new string
-            angular.forEach(String(scope.displayValue), function(char, inx) {
-              scope.styl1[inx] = scope.styl1[inx] || {};
-              scope.styl1[inx].transition = '';
-              scope.styl1[inx].top = (direction ? '' : '-') + (h + 1) + 'px';
-              scope.styl2[inx] = scope.styl2[inx] || {};
-              scope.styl2[inx].transition = '';
-              scope.styl2[inx].top = '-' + (ch + 1) + 'px';
-            });
-
-            // animate on next tick
-            strAnim = $timeout(function() {
-              angular.forEach(scope.str1, function(char, inx) {
-                var delay = ' ' + scope.getRandomDecimal(0.1, 0.25) + 's';
-                scope.styl1[inx].transition = t + delay;
-                scope.styl1[inx].top = '0';
-                scope.styl2[inx].transition = t + delay;
-                scope.styl2[inx].top = direction ? '-' + (ch + h + 1) + 'px' : '0';
-              });
-              strAnim = $timeout(function() {
-                scope.str1 = String(scope.displayValue);
-                scope.str2 = scope.str1;
-              }, 200);
-            });
-          }
-        });
-
-        // clear timeout
-        scope.$on('destroy', function() {
-          $timeout.cancel(strAnim);
-        });
-
+        this.render[this.current === 0 ? 1 : 0].style = {
+          'top': 'inline'
+        };
       };
+      this.update();
 
-      return {
-        templateUrl: 'template/ngtextroll.html',
-        scope: {
-          displayValue: '=',
-          value: '='
-        },
-        restrict: 'E',
-        link: linkFunc
+      this.temp = function() {
+        this.next();
+        this.update();
       };
-
-    });
+    }
+  });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"text-roll\">\r\n  {{displayValue}}\r\n  <div class=\"container1\">\r\n    <div class=\"display-char\" ng-style=\"styl1[$index]\" ng-repeat=\"char in str1 track by $index\">{{char}}</div>\r\n  </div>\r\n  <div class=\"container2\">\r\n    <div class=\"display-char\" ng-style=\"styl2[$index]\" ng-repeat=\"char in str2 track by $index\">{{char}}</div>\r\n  </div>\r\n</div>\r\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"ng-text-roll\">\r\n  <div ng-style=\"$ctrl.render[0].style\">1 taco</div>\r\n  <div ng-style=\"$ctrl.render[1].style\">2 burrito</div>\r\n  <pre>T{{$ctrl.render|json}}T{{$ctrl.current}}</pre>\r\n  <button ng-click=\"$ctrl.temp()\">temp toggle</button>\r\n</div>\r\n");}]);
   // endinject
 
 })();

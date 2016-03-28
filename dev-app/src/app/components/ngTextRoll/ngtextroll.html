@@ -1,9 +1,13 @@
-<div class="text-roll">
-  {{displayValue}}
-  <div class="container1">
-    <div class="display-char" ng-style="styl1[$index]" ng-repeat="char in str1 track by $index">{{char}}</div>
-  </div>
-  <div class="container2">
-    <div class="display-char" ng-style="styl2[$index]" ng-repeat="char in str2 track by $index">{{char}}</div>
-  </div>
+<div class="ng-text-roll" ng-style="{'font-size' : $ctrl.height }">
+  PLACE HOLDER
+  <div class="ng-text-roll-render" ng-style="$ctrl.render[0].style">0 taco</div>
+  <div class="ng-text-roll-render" ng-style="$ctrl.render[1].style">1 burrito</div>
+</div>
+<div style="height:100px"></div>
+<div>
+  <pre>T{{$ctrl.render|json}}T{{$ctrl.current}}</pre>
+  <button ng-click="$ctrl.next()">next</button>
+  <button ng-click="$ctrl.animSetup()">animSetup</button>
+  <button ng-click="$ctrl.animate()">animate</button>
+  <button ng-click="$ctrl.runAnim()">run</button>
 </div>

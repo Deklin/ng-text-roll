@@ -17,24 +17,23 @@
     };
 
     $scope.getRandomDate = function() {
-      var inc = parseInt($scope.getRandomDecimal(1,99));
+      var inc = parseInt($scope.getRandomDecimal(1, 99));
       var date = new Date();
       date.setDate(date.getDate() + inc);
       return date;
     };
 
     $scope.updateNumeric = function() {
-      var val = $scope.numericValue || 1;
-      var delta = $scope.calc.amount || 0;
+      var val = $scope.numericValue;
       switch ($scope.calc.operator) {
         case 'add':
-          val += delta;
+          val += $scope.calc.amount;
           break;
         case 'substract':
-          val -= delta;
+          val -= $scope.calc.amount;
           break;
         case 'multiply':
-          val *= delta;
+          val *= $scope.calc.amount;
           break;
         default:
           break;
@@ -43,8 +42,8 @@
       $scope.numericValue = val;
     };
 
-    $scope.numericValue = $scope.getRandomDecimal(0.01, 10.99);
-    $scope.calc.amount = $scope.getRandomDecimal(0.01, 3.99);
+    $scope.numericValue = $scope.getRandomDecimal(0.01, 10.99) || 1;
+    $scope.calc.amount = $scope.getRandomDecimal(0.01, 3.99) || 0.1;
     $scope.dateValue = $scope.getRandomDate();
 
   }
