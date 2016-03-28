@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope) {
+  function MainController($scope, ngTextRollSvc) {
 
     $scope.calc = {
       operator: 'add'
@@ -40,12 +40,12 @@
       }
       val = parseFloat(val.toFixed(2));
       $scope.numericValue = val;
+      ngTextRollSvc.runAnim();
     };
 
     $scope.numericValue = $scope.getRandomDecimal(0.01, 10.99) || 1;
     $scope.calc.amount = $scope.getRandomDecimal(0.01, 3.99) || 0.1;
     $scope.dateValue = $scope.getRandomDate();
-
   }
 
 })();

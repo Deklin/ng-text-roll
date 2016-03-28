@@ -10,10 +10,69 @@
    */
 
   angular.module('ui.ngTextRoll', [])
-    .factory('ngTextRollSvc', function() {
+    .factory('ngTextRollSvc', function($timeout) {
       var svc = {};
-      svc.trigger = function() {};
-      svc.foo = 34;
+
+      // local vars
+      svc.current = 0;
+      svc.render = [{}, {}];
+      // Constants
+      svc.trans = 'top 0.5s ease-in-out';
+      svc.zero = '0';
+
+      svc.init = function(height) {
+        svc.height = height;
+        svc.intHeight = parseInt(svc.height);
+        svc.unitHeight = svc.height.replace(svc.intHeight, '');
+        svc.offset = svc.intHeight * 0.1;
+        svc.topAbove = ((svc.intHeight + svc.offset) * -1) + svc.unitHeight;
+        svc.topBelow = (svc.intHeight + svc.offset) + svc.unitHeight;
+        // set initial render
+        svc.render[0].style = {
+          'top': svc.zero
+        };
+      };
+
+      svc.next = function() {
+        svc.current = (svc.current === 0 ? 1 : 0);
+      };
+
+      svc.animSetup = function() {
+        svc.render[svc.current].style = {
+          '-webkit-transition': undefined,
+          'transition': undefined,
+          'top': svc.topAbove
+        };
+        svc.render[svc.current === 0 ? 1 : 0].style = {
+          '-webkit-transition': undefined,
+          'transition': undefined,
+          'top': svc.zero
+        };
+      };
+
+      svc.animate = function() {
+        svc.render[svc.current].style = {
+          'top': svc.zero,
+          '-webkit-transition': svc.trans,
+          'transition': svc.trans
+        };
+        svc.render[svc.current === 0 ? 1 : 0].style = {
+          '-webkit-transition': svc.trans,
+          'transition': svc.trans,
+          'top': svc.topBelow
+        };
+      };
+
+      svc.runAnim = function() {
+        svc.next();
+        svc.animSetup();
+        svc.t = $timeout(svc.animate);
+      };
+
+      svc.clearTimeout = function() { // clean up timer
+        $timeout.cancel(svc.t);
+      };
+
       return svc;
     })
     .component('ngTextRoll', {
@@ -27,55 +86,11 @@
 
         ctrl.$onInit = function() {
           ctrl.svc = ngTextRollSvc; // simplify bindings
-          ctrl.current = 0;
-          ctrl.render = [{}, {}];
-          ctrl.intHeight = parseInt(ctrl.height);
-          ctrl.unitHeight = ctrl.height.replace(ctrl.intHeight, '');
-          ctrl.offset = ctrl.intHeight * 0.1;
-          ctrl.topAbove = ((ctrl.intHeight + ctrl.offset) * -1) + ctrl.unitHeight;
-          ctrl.topBelow = (ctrl.intHeight + ctrl.offset) + ctrl.unitHeight;
-          ctrl.trans = 'top 0.5s'; // constant
-          ctrl.zero = '0'; // constant
-        };
-
-        ctrl.next = function() {
-          ctrl.current = (ctrl.current === 0 ? 1 : 0);
-        };
-
-        ctrl.animSetup = function() {
-          ctrl.render[ctrl.current].style = {
-            '-webkit-transition': undefined,
-            'transition': undefined,
-            'top': ctrl.topAbove
-          };
-          ctrl.render[ctrl.current === 0 ? 1 : 0].style = {
-            '-webkit-transition': undefined,
-            'transition': undefined,
-            'top': ctrl.zero
-          };
-        };
-
-        ctrl.animate = function(scope) { // can only run from within $timeout
-          scope.render[scope.current].style = {
-            'top': ctrl.zero,
-            '-webkit-transition': scope.trans,
-            'transition': scope.trans
-          };
-          scope.render[scope.current === 0 ? 1 : 0].style = {
-            '-webkit-transition': scope.trans,
-            'transition': scope.trans,
-            'top': scope.topBelow
-          };
-        };
-
-        ctrl.runAnim = function() {
-          ctrl.next();
-          ctrl.animSetup();
-          ctrl.t = $timeout(ctrl.animate, 0, true, ctrl);
+          ctrl.svc.init(ctrl.height);
         };
 
         ctrl.$onDestroy = function() { // clean up timer
-          $timeout.cancel(ctrl.t);
+          svc.clearTimeout();
         };
 
       }

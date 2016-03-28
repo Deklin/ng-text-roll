@@ -1,13 +1,13 @@
 <div class="ng-text-roll" ng-style="{'font-size' : $ctrl.height }">
   PLACE HOLDER
-  <div class="ng-text-roll-render" ng-style="$ctrl.render[0].style">0 taco</div>
-  <div class="ng-text-roll-render" ng-style="$ctrl.render[1].style">1 burrito</div>
+  <div class="ng-text-roll-render" ng-style="$ctrl.svc.render[0].style">0 taco</div>
+  <div class="ng-text-roll-render" ng-style="$ctrl.svc.render[1].style">1 burrito</div>
 </div>
 <div style="height:100px"></div>
 <div>
-  <pre>T{{$ctrl.render|json}}T{{$ctrl.current}}</pre>
-  <button ng-click="$ctrl.next()">next</button>
-  <button ng-click="$ctrl.animSetup()">animSetup</button>
-  <button ng-click="$ctrl.animate()">animate</button>
-  <button ng-click="$ctrl.runAnim()">run</button>
+  <pre>T{{$ctrl.render|json}}T{{$ctrl.svc.current}}</pre>
+  <button ng-click="$ctrl.svc.next()">next</button>
+  <button ng-click="$ctrl.svc.animSetup()">animSetup</button>
+  <button ng-click="$ctrl.svc.animate()">animate</button>
+  <button ng-click="$ctrl.svc.runAnim()">run</button>
 </div>
