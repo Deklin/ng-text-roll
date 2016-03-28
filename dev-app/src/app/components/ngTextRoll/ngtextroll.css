@@ -1,11 +1,10 @@
 .ng-text-roll {
   position: relative;
   overflow: hidden;
-  color: gray;
-  //border: 1px dashed green;
+  visibility: hidden; /* hide placeholder */
 }
 .ng-text-roll-render {
   position: absolute;
   left: 0;
-  color: black;
+  visibility: visible; /* show animated text */
 }

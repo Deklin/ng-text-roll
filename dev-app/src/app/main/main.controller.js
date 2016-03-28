@@ -24,6 +24,7 @@
     };
 
     $scope.updateNumeric = function() {
+      var oldVal = $scope.numericValue;
       var val = $scope.numericValue;
       switch ($scope.calc.operator) {
         case 'add':
@@ -40,11 +41,11 @@
       }
       val = parseFloat(val.toFixed(2));
       $scope.numericValue = val;
-      ngTextRollSvc.runAnim();
+      ngTextRollSvc.runAnim(oldVal, val);
     };
 
-    $scope.numericValue = $scope.getRandomDecimal(0.01, 10.99) || 1;
-    $scope.calc.amount = $scope.getRandomDecimal(0.01, 3.99) || 0.1;
+    $scope.numericValue = $scope.getRandomDecimal(0.01, 1000.99) || 1;
+    $scope.calc.amount = $scope.getRandomDecimal(0.01, 300.99) || 0.1;
     $scope.dateValue = $scope.getRandomDate();
   }
 

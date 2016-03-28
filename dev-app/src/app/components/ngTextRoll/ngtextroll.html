@@ -1,7 +1,7 @@
 <div class="ng-text-roll" ng-style="{'font-size' : $ctrl.height }">
-  PLACE HOLDER
-  <div class="ng-text-roll-render" ng-style="$ctrl.svc.render[0].style">0 taco</div>
-  <div class="ng-text-roll-render" ng-style="$ctrl.svc.render[1].style">1 burrito</div>
+  {{$ctrl.svc.render[0].target}}
+  <div class="ng-text-roll-render" ng-style="$ctrl.svc.render[0].style">{{$ctrl.svc.render[0].target}}</div>
+  <div class="ng-text-roll-render" ng-style="$ctrl.svc.render[1].style">{{$ctrl.svc.render[1].target}}</div>
 </div>
 <div style="height:100px"></div>
 <div>

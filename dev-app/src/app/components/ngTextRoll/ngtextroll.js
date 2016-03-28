@@ -10,7 +10,7 @@
    */
 
   angular.module('ui.ngTextRoll', [])
-    .factory('ngTextRollSvc', function($timeout) {
+    .factory('ngTextRollSvc', function($timeout, $filter) {
       var svc = {};
 
       // local vars
@@ -20,34 +20,42 @@
       svc.trans = 'top 0.5s ease-in-out';
       svc.zero = '0';
 
-      svc.init = function(height) {
+     svc.init = function(height, target, currency) {
         svc.height = height;
+        svc.currency = currency;
         svc.intHeight = parseInt(svc.height);
         svc.unitHeight = svc.height.replace(svc.intHeight, '');
-        svc.offset = svc.intHeight * 0.1;
+        svc.offset = svc.intHeight * 0.149;
         svc.topAbove = ((svc.intHeight + svc.offset) * -1) + svc.unitHeight;
         svc.topBelow = (svc.intHeight + svc.offset) + svc.unitHeight;
         // set initial render
         svc.render[0].style = {
           'top': svc.zero
         };
+        svc.render[0].target = svc.formatCurrency(target);
+      };
+
+      svc.formatCurrency = function(target) {
+        return svc.currency ? $filter('currency')(target) : target;
       };
 
       svc.next = function() {
         svc.current = (svc.current === 0 ? 1 : 0);
       };
 
-      svc.animSetup = function() {
+      svc.animSetup = function(oldVal, newVal) {
         svc.render[svc.current].style = {
           '-webkit-transition': undefined,
           'transition': undefined,
           'top': svc.topAbove
         };
+        svc.render[svc.current].target = svc.formatCurrency(newVal);
         svc.render[svc.current === 0 ? 1 : 0].style = {
           '-webkit-transition': undefined,
           'transition': undefined,
           'top': svc.zero
         };
+        svc.render[svc.current === 0 ? 1 : 0].target = svc.formatCurrency(oldVal);
       };
 
       svc.animate = function() {
@@ -63,9 +71,9 @@
         };
       };
 
-      svc.runAnim = function() {
+      svc.runAnim = function(oldVal, newVal) {
         svc.next();
-        svc.animSetup();
+        svc.animSetup(oldVal, newVal);
         svc.t = $timeout(svc.animate);
       };
 
@@ -79,6 +87,7 @@
       templateUrl: 'app/components/ngTextRoll/ngtextroll.html',
       bindings: {
         target: '=',
+        currency: '<',
         height: '<'
       },
       controller: function($timeout, ngTextRollSvc) {
@@ -86,11 +95,11 @@
 
         ctrl.$onInit = function() {
           ctrl.svc = ngTextRollSvc; // simplify bindings
-          ctrl.svc.init(ctrl.height);
+          ctrl.svc.init(ctrl.height, ctrl.target, this.currency);
         };
 
         ctrl.$onDestroy = function() { // clean up timer
-          svc.clearTimeout();
+          ctrl.svc.clearTimeout();
         };
 
       }
