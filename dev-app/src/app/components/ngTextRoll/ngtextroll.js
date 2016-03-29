@@ -15,17 +15,21 @@
 
       // local vars
       svc.current = 0;
-      svc.render = [{}, {}];
+      svc.render = [{
+        style: {}
+      }, {
+        style: {}
+      }];
       // Constants
       svc.trans = 'top 0.5s ease-in-out';
       svc.zero = '0';
 
-     svc.init = function(height, target, currency) {
+      svc.init = function(height, target, currency) {
         svc.height = height;
         svc.currency = currency;
         svc.intHeight = parseInt(svc.height);
         svc.unitHeight = svc.height.replace(svc.intHeight, '');
-        svc.offset = svc.intHeight * 0.149;
+        svc.offset = svc.intHeight * 0.17;
         svc.topAbove = ((svc.intHeight + svc.offset) * -1) + svc.unitHeight;
         svc.topBelow = (svc.intHeight + svc.offset) + svc.unitHeight;
         // set initial render
@@ -43,38 +47,39 @@
         svc.current = (svc.current === 0 ? 1 : 0);
       };
 
-      svc.animSetup = function(oldVal, newVal) {
-        svc.render[svc.current].style = {
-          '-webkit-transition': undefined,
-          'transition': undefined,
-          'top': svc.topAbove
-        };
+      svc.animSetup = function(oldVal, newVal, pos) {
+        svc.render[svc.current].style['-webkit-transition'] = undefined;
+        svc.render[svc.current].style['-moz-transition'] = undefined;
+        svc.render[svc.current].style.transition = undefined;
+        svc.render[svc.current].style.top = pos ? svc.topBelow : svc.topAbove;
         svc.render[svc.current].target = svc.formatCurrency(newVal);
-        svc.render[svc.current === 0 ? 1 : 0].style = {
-          '-webkit-transition': undefined,
-          'transition': undefined,
-          'top': svc.zero
-        };
-        svc.render[svc.current === 0 ? 1 : 0].target = svc.formatCurrency(oldVal);
+
+        var inx = svc.current === 0 ? 1 : 0;
+        svc.render[inx].style['-webkit-transition'] = undefined;
+        svc.render[inx].style['-moz-transition'] = undefined;
+        svc.render[inx].style.transition = undefined;
+        svc.render[inx].style.top = svc.zero;
+        svc.render[inx].target = svc.formatCurrency(oldVal);
       };
 
-      svc.animate = function() {
-        svc.render[svc.current].style = {
-          'top': svc.zero,
-          '-webkit-transition': svc.trans,
-          'transition': svc.trans
-        };
-        svc.render[svc.current === 0 ? 1 : 0].style = {
-          '-webkit-transition': svc.trans,
-          'transition': svc.trans,
-          'top': svc.topBelow
-        };
+      svc.animate = function(pos) {
+        svc.render[svc.current].style.top = svc.zero;
+        svc.render[svc.current].style['-webkit-transition'] = svc.trans;
+        svc.render[svc.current].style['-moz-transition'] = svc.trans;
+        svc.render[svc.current].style.transition = svc.trans;
+
+        var inx = svc.current === 0 ? 1 : 0;
+        svc.render[inx].style['-webkit-transition'] = svc.trans;
+        svc.render[inx].style['-moz-transition'] = svc.trans;
+        svc.render[inx].style.transition = svc.trans;
+        svc.render[inx].style.top = pos ? svc.topAbove : svc.topBelow;
       };
 
       svc.runAnim = function(oldVal, newVal) {
+        var pos = newVal > oldVal;
         svc.next();
-        svc.animSetup(oldVal, newVal);
-        svc.t = $timeout(svc.animate);
+        svc.animSetup(oldVal, newVal, pos);
+        svc.t = $timeout(svc.animate, 25, true, pos);
       };
 
       svc.clearTimeout = function() { // clean up timer
