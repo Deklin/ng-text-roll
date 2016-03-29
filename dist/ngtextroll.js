@@ -106,7 +106,7 @@
     });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"ng-text-roll\" ng-style=\"{\'font-size\' : $ctrl.height }\">\n  {{$ctrl.svc.render[0].target}}\n  <div class=\"ng-text-roll-render\" ng-style=\"$ctrl.svc.render[0].style\">{{$ctrl.svc.render[0].target}}</div>\n  <div class=\"ng-text-roll-render\" ng-style=\"$ctrl.svc.render[1].style\">{{$ctrl.svc.render[1].target}}</div>\n</div>\n<div style=\"height:100px\"></div>\n<div>\n  <pre>T{{$ctrl.render|json}}T{{$ctrl.svc.current}}</pre>\n  <button ng-click=\"$ctrl.svc.next()\">next</button>\n  <button ng-click=\"$ctrl.svc.animSetup()\">animSetup</button>\n  <button ng-click=\"$ctrl.svc.animate()\">animate</button>\n  <button ng-click=\"$ctrl.svc.runAnim()\">run</button>\n</div>\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div class=\"ng-text-roll\" ng-style=\"{\'font-size\' : $ctrl.height }\">\r\n  {{$ctrl.svc.render[0].target}}\r\n  <div class=\"ng-text-roll-render\" ng-style=\"$ctrl.svc.render[0].style\">{{$ctrl.svc.render[0].target}}</div>\r\n  <div class=\"ng-text-roll-render\" ng-style=\"$ctrl.svc.render[1].style\">{{$ctrl.svc.render[1].target}}</div>\r\n</div>\r\n");}]);
   // endinject
 
 })();
