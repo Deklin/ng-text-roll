@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope) {
+  function MainController($scope, ngTextRollSvc) {
 
     $scope.calc = {
       operator: 'add'
@@ -24,23 +24,24 @@
     };
 
     $scope.updateNumeric = function() {
-      var val = $scope.numericValue || 1;
-      var delta = $scope.calc.amount || 0;
+      var oldVal = $scope.numericValue;
+      var val = $scope.numericValue;
       switch ($scope.calc.operator) {
         case 'add':
-          val += delta;
+          val += $scope.calc.amount;
           break;
         case 'substract':
-          val -= delta;
+          val -= $scope.calc.amount;
           break;
         case 'multiply':
-          val *= delta;
+          val *= $scope.calc.amount;
           break;
         default:
           break;
       }
       val = parseFloat(val.toFixed(2));
       $scope.numericValue = val;
+      ngTextRollSvc.runAnim(oldVal, val);
     };
 
     $scope.numericValue = $scope.getRandomDecimal(0.01, 10.99);
