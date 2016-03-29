@@ -1,7 +1,7 @@
 # ng-text-roll
 An AngularJS directive that highlights string changes by “rolling” characters.
 
-<a href="http://daveteply.github.io/ng-text-roll/dist">Demo Page</a>(only works in Chrome currently, hooray for web standards! :/)
+<a href="http://daveteply.github.io/ng-text-roll/dist">Demo Page</a> (there is an issue with Firefox at the moment)
 
 ### Install with Bower
 ```sh
@@ -18,14 +18,17 @@ angular.module('myModule', ['ui.ngTextRoll']);
 ### Example usage
 Add the ngTextRoll directive to your markup:
 ```html
-<ng-text-roll value=3></ng-text-roll>
+<ng-text-roll target="scopeValue" currency=true height="'20px'"></ng-text-roll>
 ```
 
 ### Options
-NOTE: All inputs are converted to string via JavaScript ``` String() ```
-#### value
-Required.  Value to present in ngTextRoll directive.  
-Example: ```value=3 ```
-#### displayValue
-Optional.  Value to use for presentaion; useful for using filters.
-Example: ``` display-value="totalPrice | currency" ```
+
+#### target
+Required.  Value to present in ngTextRoll directive.
+Example: ```target="values.totalPrice" ```
+#### currency
+Optional.  Value to use for presentation; useful for using filters.
+Example: ``` currency=true ```
+### height
+Element height.
+Example: ```height="12px"```
