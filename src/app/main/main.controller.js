@@ -16,12 +16,12 @@
       return parseFloat((Math.random() * (max - min) + min).toFixed(2));
     };
 
-    $scope.getRandomDate = function() {
-      var inc = parseInt($scope.getRandomDecimal(1,99));
-      var date = new Date();
-      date.setDate(date.getDate() + inc);
-      return date;
-    };
+    // $scope.getRandomDate = function() {
+    //   var inc = parseInt($scope.getRandomDecimal(1,99));
+    //   var date = new Date();
+    //   date.setDate(date.getDate() + inc);
+    //   return date;
+    // };
 
     $scope.updateNumeric = function() {
       var oldVal = $scope.numericValue;
@@ -44,9 +44,13 @@
       ngTextRollSvc.runAnim(oldVal, val);
     };
 
-    $scope.numericValue = $scope.getRandomDecimal(0.01, 10.99);
-    $scope.calc.amount = $scope.getRandomDecimal(0.01, 3.99);
-    $scope.dateValue = $scope.getRandomDate();
+    $scope.numericValue = $scope.getRandomDecimal(0.01, 100.99);
+    $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99);
+    //$scope.dateValue = $scope.getRandomDate();
+
+    $scope.changeAmt = function() {
+      $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99);
+    };
 
   }
 
