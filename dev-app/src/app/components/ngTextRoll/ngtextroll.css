@@ -1,13 +1,16 @@
-.ng-text-roll {
+#ng-text-roll {
   display: inline-block;
   line-height: initial;
   overflow: hidden;
 }
-.ng-text-roll-container {
+#ng-text-roll .container {
   display: flex;
-  visibility: hidden; /* hide placeholder */
+  visibility: hidden;
 }
-.ng-text-roll-char {
+#ng-text-roll .inner {
+  position: relative;
+}
+#ng-text-roll .char {
   position: absolute;
-  visibility: visible; /* show animated text */
+  visibility: visible;
 }
