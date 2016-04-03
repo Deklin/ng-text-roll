@@ -1,3 +1,5 @@
+/*jshint bitwise: false*/
+
 (function() {
 
   'use strict';
@@ -27,19 +29,17 @@
         svc.offset = svc.intHeight * 0.17;
         svc.topAbove = ((svc.intHeight + svc.offset) * -1) + svc.unitHeight;
         svc.topBelow = (svc.intHeight + svc.offset) + svc.unitHeight;
+        svc.transTemplate = 'top Xs ease-in-out';
+        svc.transRegex = /X/;
         // set initial render
         svc.render[svc.current].style = {
           'top': svc.zero
         };
-        svc.render[svc.current].target = svc.targetArray(target);
+        svc.render[svc.current].target = svc.formatTarget(target);
       };
 
-      svc.targetArray = function(target) {
+      svc.formatTarget = function(target) {
         return svc.currency ? $filter('currency')(target) : String(target);
-      };
-
-      svc.next = function() {
-        svc.current = (svc.current === 0 ? 1 : 0);
       };
 
       svc.randDec = function(min, max) {
@@ -47,11 +47,11 @@
       };
 
       svc.trans = function() {
-        return 'top '.concat(svc.randDec(0.3, 0.8), 's ease-in-out');
+        return svc.transTemplate.replace(svc.transRegex, svc.randDec(0.3, 0.8));
       };
 
       svc.animSetup = function(oldVal, newVal, pos) {
-        svc.render[svc.current].target = svc.targetArray(newVal);
+        svc.render[svc.current].target = svc.formatTarget(newVal);
         svc.render[svc.current].style = [];
         angular.forEach(svc.render[svc.current].target, function() {
           svc.render[svc.current].style.push({
@@ -62,8 +62,8 @@
           });
         });
 
-        var inx = svc.current === 0 ? 1 : 0;
-        svc.render[inx].target = svc.targetArray(oldVal);
+        var inx = svc.current ^ 1;
+        svc.render[inx].target = svc.formatTarget(oldVal);
         svc.render[inx].style = [];
         angular.forEach(svc.render[inx].target, function() {
           svc.render[inx].style.push({
@@ -73,7 +73,6 @@
             'top': svc.zero
           });
         });
-
       };
 
       svc.animate = function(pos) {
@@ -85,7 +84,7 @@
           s.top = svc.zero;
         });
 
-        var inx = svc.current === 0 ? 1 : 0;
+        var inx = svc.current ^ 1;
         angular.forEach(svc.render[inx].style, function(s) {
           var trans = svc.trans();
           s['-webkit-transition'] = trans;
@@ -97,12 +96,14 @@
 
       svc.runAnim = function(oldVal, newVal) {
         var pos = newVal > oldVal;
-        svc.next();
+        svc.current ^= svc.current;
         svc.animSetup(oldVal, newVal, pos);
+        // A small delay is needed to achieve the desired effect
+        //  NOTE: Firefox required at least 25ms delay
         svc.t = $timeout(svc.animate, 25, true, pos);
       };
 
-      svc.clearTimeout = function() { // clean up timer
+      svc.clearTimeout = function() {
         $timeout.cancel(svc.t);
       };
 
