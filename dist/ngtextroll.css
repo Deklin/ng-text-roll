@@ -4,6 +4,7 @@
   overflow: hidden;
 }
 #ng-text-roll .container {
+  width: inital;
   display: flex;
   visibility: hidden;
 }
