@@ -44,12 +44,12 @@
       ngTextRollSvc.runAnim(oldVal, val);
     };
 
-    $scope.numericValue = $scope.getRandomDecimal(0.01, 100.99);
-    $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99);
+    $scope.numericValue = $scope.getRandomDecimal(0.01, 400.99);
+    $scope.calc.amount = $scope.getRandomDecimal(20.01, 130.99);
     //$scope.dateValue = $scope.getRandomDate();
 
     $scope.changeAmt = function() {
-      $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99);
+      $scope.calc.amount = $scope.getRandomDecimal(20.01, 130.99);
     };
 
   }

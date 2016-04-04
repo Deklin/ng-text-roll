@@ -4,21 +4,27 @@
     <small>Demo Page</small>
   </h1>
 
-The price is
-  <ng-text-roll target="numericValue" currency=true height="'40px'"></ng-text-roll>
-for some items.
-
-  <br/>
-  <br/>
-  <ul>
-    <li><input type="radio" ng-model="calc.operator" value="add">
-      Add</li>
-    <li><input type="radio" ng-model="calc.operator" value="substract">
-      Substract</li>
-    <li><input type="radio" ng-model="calc.operator" value="multiply">
-      Multiple</li>
-  </ul>
-  <button ng-click="updateNumeric()">Update [{{calc.amount}}]</button>
-  <button ng-click="changeAmt()">Get new value</button>
+  <div class="row">
+    <div id="demo1">
+      <p>
+        This demo shows how ng-text-roll can tumble characters as a price changes.
+        A blur is added when the lenth of the string changes to prevent character
+        stacking for proportional fonts.
+      </p>
+      The price is
+      <ng-text-roll target="numericValue" currency=true height="'35px'"></ng-text-roll>
+      for some items.
+      <ul>
+        <li><input type="radio" ng-model="calc.operator" value="add">
+          Add</li>
+        <li><input type="radio" ng-model="calc.operator" value="substract">
+          Substract</li>
+        <li><input type="radio" ng-model="calc.operator" value="multiply">
+          Multiple</li>
+      </ul>
+      <button type="button" class="btn btn-primary" ng-click="updateNumeric()">Update [{{calc.amount}}]</button>
+      <button type="button" class="btn btn-info" ng-click="changeAmt()">Get new Update value</button>
+    </div>
+  </div>
 
 </div>
