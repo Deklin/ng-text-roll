@@ -75,7 +75,7 @@
         });
       };
 
-      svc.animate = function(pos) {
+      svc.animate = function(isIncrease) {
         angular.forEach(svc.render[svc.current].style, function(s) {
           var trans = svc.trans();
           s['-webkit-transition'] = trans;
@@ -85,22 +85,27 @@
         });
 
         var inx = svc.current ^ 1;
+        var blur = svc.render[svc.current].target.length !== svc.render[inx].target.length;
         angular.forEach(svc.render[inx].style, function(s) {
           var trans = svc.trans();
           s['-webkit-transition'] = trans;
           s['-moz-transition'] = trans;
           s.transition = trans;
-          s.top = pos ? svc.topAbove : svc.topBelow;
+          s.top = isIncrease ? svc.topAbove : svc.topBelow;
+          if (blur) {
+            s['-webkit-filter'] = 'blur(5px)';
+            s.filter = 'blur(5px)';
+          }
         });
       };
 
       svc.runAnim = function(oldVal, newVal) {
-        var pos = newVal > oldVal;
+        var isIncrease = newVal > oldVal;
         svc.current ^= svc.current;
-        svc.animSetup(oldVal, newVal, pos);
+        svc.animSetup(oldVal, newVal, isIncrease);
         // A small delay is needed to achieve the desired effect
         //  NOTE: Firefox required at least 25ms delay
-        svc.t = $timeout(svc.animate, 25, true, pos);
+        svc.t = $timeout(svc.animate, 25, true, isIncrease);
       };
 
       svc.clearTimeout = function() {
@@ -132,7 +137,7 @@
     });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\" ng-style=\"{\'font-size\' : $ctrl.height }\">\n  <div class=\"container\">\n    <div class=\"inner\" ng-repeat=\"pChar in $ctrl.svc.render[$ctrl.svc.current].target track by $index\">\n      <div class=\"char\" ng-style=\"$ctrl.svc.render[0].style[$index]\">{{$ctrl.svc.render[0].target[$index]}}</div>\n      <div class=\"char\" ng-style=\"$ctrl.svc.render[1].style[$index]\">{{$ctrl.svc.render[1].target[$index]}}</div>\n      {{pChar}}\n    </div>\n  </div>\n</div>\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\" ng-style=\"{\'font-size\' : $ctrl.height }\">\r\n  <div class=\"container\">\r\n    <div class=\"inner\" ng-repeat=\"pChar in $ctrl.svc.render[$ctrl.svc.current].target track by $index\">\r\n      <div class=\"char\" ng-style=\"$ctrl.svc.render[0].style[$index]\">{{$ctrl.svc.render[0].target[$index]}}</div>\r\n      <div class=\"char\" ng-style=\"$ctrl.svc.render[1].style[$index]\">{{$ctrl.svc.render[1].target[$index]}}</div>\r\n      {{pChar}}\r\n    </div>\r\n  </div>\r\n</div>\r\n");}]);
   // endinject
 
 })();
