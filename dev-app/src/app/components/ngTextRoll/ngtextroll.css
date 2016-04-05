@@ -4,7 +4,11 @@
   overflow: hidden;
 }
 #ng-text-roll .container {
-  width: inital;
+  width: inherit;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   visibility: hidden;
 }
