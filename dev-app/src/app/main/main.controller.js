@@ -24,7 +24,6 @@
     };
 
     $scope.updateNumeric = function() {
-      var oldVal = $scope.numericValue;
       var val = $scope.numericValue;
       switch ($scope.calc.operator) {
         case 'add':
@@ -39,9 +38,8 @@
         default:
           break;
       }
-      val = parseFloat(val.toFixed(2));
-      $scope.numericValue = val;
-      ngTextRollSvc.runAnim(oldVal, val);
+      $scope.numericValue = parseFloat(val.toFixed(2));
+      ngTextRollSvc.roll($scope.numericValue);
     };
 
     $scope.numericValue = $scope.getRandomDecimal(0.01, 1000.99) || 1;
