@@ -39,7 +39,7 @@
       svc.init = function() {
         svc.intHeight = parseFloat(svc.height);
         svc.unitHeight = svc.height.replace(svc.intHeight, '');
-        svc.offset = svc.intHeight * 0.17;
+        svc.offset = svc.intHeight * 0.5;
         svc.topAbove = ((svc.intHeight + svc.offset) * -1) + svc.unitHeight;
         svc.topBelow = (svc.intHeight + svc.offset) + svc.unitHeight;
         svc.transTemplate = 'top Xs ease-in-out';

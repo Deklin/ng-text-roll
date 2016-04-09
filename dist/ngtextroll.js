@@ -39,7 +39,7 @@
       svc.init = function() {
         svc.intHeight = parseFloat(svc.height);
         svc.unitHeight = svc.height.replace(svc.intHeight, '');
-        svc.offset = svc.intHeight * 0.17;
+        svc.offset = svc.intHeight * 0.5;
         svc.topAbove = ((svc.intHeight + svc.offset) * -1) + svc.unitHeight;
         svc.topBelow = (svc.intHeight + svc.offset) + svc.unitHeight;
         svc.transTemplate = 'top Xs ease-in-out';
@@ -159,7 +159,7 @@
     });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\" ng-style=\"{\'font-size\' : $ctrl.height }\">\r\n  <div class=\"outer\">\r\n    <div class=\"inner\" ng-repeat=\"pChar in $ctrl.svc.render[$ctrl.svc.current].target track by $index\">\r\n      <div class=\"char\" ng-style=\"$ctrl.svc.render[0].style[$index]\">{{$ctrl.svc.render[0].target[$index]}}</div>\r\n      <div class=\"char\" ng-style=\"$ctrl.svc.render[1].style[$index]\">{{$ctrl.svc.render[1].target[$index]}}</div>\r\n      {{pChar}}\r\n    </div>\r\n  </div>\r\n</div>\r\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\">\n  <div class=\"outer\" ng-style=\"{\'font-size\' : $ctrl.height }\">\n    <div class=\"inner\" ng-repeat=\"pChar in $ctrl.svc.render[$ctrl.svc.current].target track by $index\">\n      <div class=\"char\" ng-style=\"$ctrl.svc.render[0].style[$index]\">{{$ctrl.svc.render[0].target[$index]}}</div>\n      <div class=\"char\" ng-style=\"$ctrl.svc.render[1].style[$index]\">{{$ctrl.svc.render[1].target[$index]}}</div>\n      {{pChar}}\n    </div>\n  </div>\n</div>\n");}]);
   // endinject
 
 })();

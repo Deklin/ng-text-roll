@@ -1,6 +1,5 @@
 #ng-text-roll {
   display: inline-block;
-  overflow: hidden;
 }
 #ng-text-roll .outer {
   display: -webkit-box;
@@ -9,6 +8,7 @@
   display: -webkit-flex;
   display: flex;
   visibility: hidden;
+  overflow: hidden;
 }
 #ng-text-roll .inner {
   position: relative;
