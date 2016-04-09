@@ -23,6 +23,10 @@
       return date;
     };
 
+    // $scope.rollConfig = {
+    //   filter: 'date'
+    // };
+
     $scope.updateNumeric = function() {
       var val = $scope.numericValue;
       switch ($scope.calc.operator) {

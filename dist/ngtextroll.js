@@ -12,7 +12,7 @@
    */
 
   angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
-    .factory('ngTextRollSvc', function($timeout) {
+    .factory('ngTextRollSvc', function($timeout, $filter) {
       var svc = {};
 
       // local vars
@@ -21,7 +21,7 @@
       // Constants
       svc.zero = '0';
 
-      svc.validate = function(initialValue, height) {
+      svc.validate = function(initialValue, height, cfg) {
         svc.height = height;
         if (!svc.height) {
           var defaultHeight = '2em';
@@ -33,6 +33,15 @@
           var defaultInitial = 'ngTextRoll';
           console.error('ngTextRoll: initialValue not specified, defaulting to\'' + defaultInitial + '\'');
           svc.initialValue = defaultInitial;
+        }
+        svc.cfg = cfg || {};
+        if (svc.cfg.filter) {
+          try {
+            $filter(svc.cfg.filter);
+          } catch (e) {
+            svc.cfg.filter = '';
+            console.warn('ngTextRoll: config.filter incorrectly specified, disabling');
+          }
         }
       };
 
@@ -57,8 +66,7 @@
       };
 
       svc.formatTarget = function(target) {
-        //return svc.currency ? $filter('currency')(target) : String(target);
-        return String(target);
+        return svc.cfg.filter ? $filter(svc.cfg.filter)(target) : String(target);
       };
 
       svc.randDec = function(min, max) {
@@ -147,7 +155,7 @@
 
         ctrl.$onInit = function() {
           ctrl.svc = ngTextRollSvc; // simplify bindings
-          ctrl.svc.validate(ctrl.initialValue, ctrl.height);
+          ctrl.svc.validate(ctrl.initialValue, ctrl.height, ctrl.config);
           ctrl.svc.init();
         };
 
