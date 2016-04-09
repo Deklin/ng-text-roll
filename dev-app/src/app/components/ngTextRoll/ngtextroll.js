@@ -12,8 +12,8 @@
    */
 
   angular.module('ui.ngTextRoll', [])
-    .factory('ngTextRollSvc', function($timeout, $filter) {
-      var svc = {};
+    .service('ngTextRollSvc', function($timeout, $filter) {
+      var svc = this;
 
       // local vars
       svc.current = 0;
