@@ -8,7 +8,7 @@
   display: -webkit-flex;
   display: flex;
   visibility: hidden;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 #ng-text-roll .inner {
   position: relative;
