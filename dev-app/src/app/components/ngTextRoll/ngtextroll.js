@@ -12,133 +12,146 @@
    */
 
   angular.module('ui.ngTextRoll', [])
-    .service('ngTextRollSvc', function($timeout, $filter) {
-      var svc = this;
+    .controller('ngTextRollCtrl', function($timeout, ngTextRollSvc) {
+      var ctrl = this;
 
       // local vars
-      svc.current = 0;
-      svc.render = [{}, {}];
+      ctrl.current = 0;
+      ctrl.render = [{}, {}];
       // Constants
-      svc.zero = '0';
+      ctrl.zero = '0';
+      ctrl.transTemplate = 'top Xs ease-in-out';
+      ctrl.transRegex = /X/;
+      ctrl.tumbleMs = { // range of milliseconds for random tumble effect
+        min: 0.3,
+        max: 0.8
+      };
 
-      svc.validate = function(initialValue, height, cfg) {
-        svc.height = height;
-        if (!svc.height) {
-          var defaultHeight = '2em';
+      ctrl.$onInit = function() {
+        ctrl.svc = ngTextRollSvc; // simplify bindings
+        ctrl.svc.validate(ctrl);
+        ctrl.svc.init(ctrl);
+      };
+
+      ctrl.$onDestroy = function() { // clean up timer (set with service)
+        $timeout.cancel(ctrl.animTimeout);
+      };
+
+      ctrl.$onChanges = function(obj) {
+        if (obj.target) {
+          ngTextRollSvc.roll(ctrl, obj.target.previousValue, obj.target.currentValue);
+        }
+      };
+
+    })
+    .factory('ngTextRollSvc', function($timeout, $filter) {
+      var svc = {};
+
+      // Check incoming values and update/warn accordingly
+      svc.validate = function(ctrl) {
+        if (!ctrl.height) {
+          var defaultHeight = '1em';
           console.warn('ngTextRoll: height not specified, defaulting to \'' + defaultHeight + '\'');
-          svc.height = defaultHeight;
+          ctrl.height = defaultHeight;
         }
-        svc.initialValue = initialValue;
-        if (!svc.initialValue) {
-          var defaultInitial = 'ngTextRoll';
-          console.error('ngTextRoll: initialValue not specified, defaulting to\'' + defaultInitial + '\'');
-          svc.initialValue = defaultInitial;
+        if (!ctrl.target) {
+          console.error('ngTextRoll: target not specified');
+          ctrl.target = 'ngTextRoll error';
         }
-        svc.cfg = cfg || {};
-        if (svc.cfg.filter) {
+        if (ctrl.config && ctrl.config.filter) {
           try {
-            $filter(svc.cfg.filter);
+            $filter(ctrl.config.filter);
           } catch (e) {
-            svc.cfg.filter = '';
+            ctrl.config.filter = '';
             console.warn('ngTextRoll: config.filter incorrectly specified, disabling');
           }
         }
       };
 
-      svc.init = function() {
-        svc.intHeight = parseFloat(svc.height);
-        svc.unitHeight = svc.height.replace(svc.intHeight, '');
-        svc.offset = svc.intHeight * 0.5;
-        svc.topAbove = ((svc.intHeight + svc.offset) * -1) + svc.unitHeight;
-        svc.topBelow = (svc.intHeight + svc.offset) + svc.unitHeight;
-        svc.transTemplate = 'top Xs ease-in-out';
-        svc.transRegex = /X/;
-        svc.tumbleMs = {
-          min: 0.3,
-          max: 0.8
-        };
+      // Initialize values and setup value defaults
+      svc.init = function(ctrl) {
+        var valueHeight = parseFloat(ctrl.height);
+        var unitHeight = ctrl.height.replace(valueHeight, '');
+        var offset = valueHeight * 0.5;
+        ctrl.topAbove = ((valueHeight + offset) * -1) + unitHeight;
+        ctrl.topBelow = (valueHeight + offset) + unitHeight;
+
         // set initial render
-        svc.render[svc.current].style = {
-          'top': svc.zero
+        ctrl.render[ctrl.current].style = {
+          'top': ctrl.zero
         };
-        svc.oldVal = svc.initialValue;
-        svc.render[svc.current].target = svc.formatTarget(svc.initialValue);
+        ctrl.render[ctrl.current].target = svc.formatTarget(ctrl.config, ctrl.target);
       };
 
-      svc.formatTarget = function(target) {
-        return svc.cfg.filter ? $filter(svc.cfg.filter)(target) : String(target);
+      svc.formatTarget = function(cfg, target) {
+        return (cfg && cfg.filter) ? $filter(cfg.filter)(target) : String(target);
       };
 
       svc.randDec = function(min, max) {
         return parseFloat((Math.random() * (max - min) + min).toFixed(2));
       };
 
-      svc.trans = function() {
-        return svc.transTemplate.replace(svc.transRegex, svc.randDec(svc.tumbleMs.min, svc.tumbleMs.max));
+      svc.trans = function(ctrl) {
+        return ctrl.transTemplate.replace(ctrl.transRegex,
+          svc.randDec(ctrl.tumbleMs.min, ctrl.tumbleMs.max));
       };
 
-      svc.animSetup = function(oldVal, newVal, pos) {
-        svc.render[svc.current].target = svc.formatTarget(newVal);
-        svc.render[svc.current].style = [];
-        angular.forEach(svc.render[svc.current].target, function() {
-          svc.render[svc.current].style.push({
+      svc.animSetup = function(ctrl, oldVal, newVal, pos) {
+        ctrl.render[ctrl.current].target = svc.formatTarget(ctrl.config, newVal);
+        ctrl.render[ctrl.current].style = [];
+        angular.forEach(ctrl.render[ctrl.current].target, function() {
+          ctrl.render[ctrl.current].style.push({
             '-webkit-transition': undefined,
             '-moz-transition': undefined,
             'transition': undefined,
-            'top': pos ? svc.topBelow : svc.topAbove
+            'top': pos ? ctrl.topBelow : ctrl.topAbove
           });
         });
 
-        var inx = svc.current ^ 1;
-        svc.render[inx].target = svc.formatTarget(oldVal);
-        svc.render[inx].style = [];
-        angular.forEach(svc.render[inx].target, function() {
-          svc.render[inx].style.push({
+        var inx = ctrl.current ^ 1;
+        ctrl.render[inx].target = svc.formatTarget(ctrl.config, oldVal);
+        ctrl.render[inx].style = [];
+        angular.forEach(ctrl.render[inx].target, function() {
+          ctrl.render[inx].style.push({
             '-webkit-transition': undefined,
             '-moz-transition': undefined,
             'transition': undefined,
-            'top': svc.zero
+            'top': ctrl.zero
           });
         });
       };
 
-      svc.animate = function(isIncrease) {
-        angular.forEach(svc.render[svc.current].style, function(s) {
-          var trans = svc.trans();
+      svc.animate = function(ctrl, isIncrease) {
+        angular.forEach(ctrl.render[ctrl.current].style, function(s) {
+          var trans = svc.trans(ctrl);
           s['-webkit-transition'] = trans;
           s['-moz-transition'] = trans;
           s.transition = trans;
-          s.top = svc.zero;
+          s.top = ctrl.zero;
         });
 
-        var inx = svc.current ^ 1;
-        var blur = svc.render[svc.current].target.length !== svc.render[inx].target.length;
-        angular.forEach(svc.render[inx].style, function(s) {
-          var trans = svc.trans();
+        var inx = ctrl.current ^ 1;
+        var blur = ctrl.render[ctrl.current].target.length !== ctrl.render[inx].target.length;
+        angular.forEach(ctrl.render[inx].style, function(s) {
+          var trans = svc.trans(ctrl);
           s['-webkit-transition'] = trans;
           s['-moz-transition'] = trans;
           s.transition = trans;
-          s.top = isIncrease ? svc.topAbove : svc.topBelow;
+          s.top = isIncrease ? ctrl.topAbove : ctrl.topBelow;
           if (blur) {
             s['-webkit-filter'] = 'blur(5px)';
             s.filter = 'blur(5px)';
           }
         });
-        svc.oldVal = svc.newVal;
       };
 
-      svc.roll = function(newVal) {
-        svc.newVal = newVal;
-        var isIncrease = svc.newVal > svc.oldVal;
-        svc.current ^= svc.current;
-        svc.animSetup(svc.oldVal, newVal, isIncrease);
+      svc.roll = function(ctrl, oldVal, newVal) {
+        var isIncrease = newVal > oldVal;
+        ctrl.current = ctrl.current ? 0 : 1;
+        svc.animSetup(ctrl, oldVal, newVal, isIncrease);
         // A delay is needed to achieve the desired effect
         //  NOTE: Firefox required at least 25ms delay
-        svc.t = $timeout(svc.animate, 25, true, isIncrease);
-      };
-
-      svc.clearTimeout = function() {
-        $timeout.cancel(svc.t);
+        ctrl.animTimeout = $timeout(svc.animate, 25, true, ctrl, isIncrease);
       };
 
       return svc;
@@ -146,24 +159,11 @@
     .component('ngTextRoll', {
       templateUrl: 'app/components/ngTextRoll/ngtextroll.html',
       bindings: {
-        initialValue: '<',
-        config: '<',
-        height: '@'
+        target: '<',
+        height: '@',
+        config: '<'
       },
-      controller: function(ngTextRollSvc) {
-        var ctrl = this;
-
-        ctrl.$onInit = function() {
-          ctrl.svc = ngTextRollSvc; // simplify bindings
-          ctrl.svc.validate(ctrl.initialValue, ctrl.height, ctrl.config);
-          ctrl.svc.init();
-        };
-
-        ctrl.$onDestroy = function() { // clean up timer
-          ctrl.svc.clearTimeout();
-        };
-
-      }
+      controller: 'ngTextRollCtrl'
     });
 
   // template:js

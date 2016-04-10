@@ -43,7 +43,7 @@
           break;
       }
       $scope.numericValue = parseFloat(val.toFixed(2));
-      ngTextRollSvc.roll($scope.numericValue);
+      //ngTextRollSvc.roll($scope.numericValue);
     };
 
     $scope.numericValue = $scope.getRandomDecimal(0.01, 1000.99) || 1;
