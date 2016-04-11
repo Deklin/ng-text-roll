@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('devApp', ['ngSanitize', 'ngRoute', 'ui.ngTextRoll']);
+    .module('devApp', ['ngSanitize', 'ui.router', 'ui.ngTextRoll']);
 
 })();

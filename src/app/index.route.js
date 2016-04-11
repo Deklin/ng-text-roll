@@ -5,16 +5,26 @@
     .module('devApp')
     .config(routeConfig);
 
-  function routeConfig($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
+  function routeConfig($stateProvider) {
+
+    $stateProvider.state('index', {
+      url: '',
+      views: {
+        "demoNumber": {
+          templateUrl: 'app/demos/number.html',
+          controller: 'numberCtrl'
+        },
+        "demoCurrency": {
+          templateUrl: 'app/demos/currency.html',
+          controller: 'currencyCtrl'
+        },
+        "demoDate": {
+          templateUrl: 'app/demos/date.html',
+          controller: 'dateCtrl'
+        }
+      }
+    });
+
   }
 
 })();

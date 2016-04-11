@@ -1,0 +1,20 @@
+<h3>Currency Demo</h3>
+<p>
+  Here is a demo displaying rolling characters as a price changes. Feel free to use styles :) This demo is using:
+  <p style="font-family:monospace;">
+  color: green; font-family: 'Times New Roman'; letter-spacing: 3px; font-style: italic;
+</p>
+</p>
+<span>The price is</span>
+<ng-text-roll style="color: green; font-family: 'Times New Roman'; letter-spacing: 3px; font-style: italic;" target="numericValue" height="25px" config="rollConfig"></ng-text-roll>
+<span>for some items.</span>
+<ul>
+  <li><input type="radio" ng-model="calc.operator" value="add">
+    Add</li>
+  <li><input type="radio" ng-model="calc.operator" value="substract">
+    Substract</li>
+  <li><input type="radio" ng-model="calc.operator" value="multiply">
+    Multiple</li>
+</ul>
+<button type="button" class="btn btn-primary" ng-click="updateNumeric()">Update [{{calc.amount}}]</button>
+<button type="button" class="btn btn-info" ng-click="changeAmt()">Get new Update value</button>
