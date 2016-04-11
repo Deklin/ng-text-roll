@@ -35,11 +35,11 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 #### target
 Required.  Value used to present in ngTextRoll directive when first displayed.
 Example: ``` target="values.totalPrice" ```
-### height
+#### height
 Element height.
 Example: ```height="12px"```
 If height is not provided, a warning is thrown and a default value of 1em is set.
-### config
+#### config
 Configuration object for additional options.
 Example:
 ```html
