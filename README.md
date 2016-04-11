@@ -18,25 +18,37 @@ angular.module('myModule', ['ui.ngTextRoll']);
 ### Example usage
 Add the ngTextRoll directive to your markup:
 ```html
-<ng-text-roll initial-value="amount" height="20px"></ng-text-roll>
+<ng-text-roll target="amount" height="20px"></ng-text-roll>
 ```
 
 ```js
-angular.moddule('myApp', []).controller('myCtrl', function($scope, ngTextRollSvc){
+angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	$scope.amount = 1.23;
 	$scope.buttonClick = function() {
-		var newValue = $scope.amount + 0.02;
-		ngTextRollSvc.roll(newValue);
+		$scope.amount += 1;
 	};
 });
 ```
 
 ### Options
 
-#### initialValue
-Value used to present in ngTextRoll directive when first displayed.
-Example: ``` initial-value="values.totalPrice" ```
+#### target
+Required.  Value used to present in ngTextRoll directive when first displayed.
+Example: ``` target="values.totalPrice" ```
 ### height
 Element height.
 Example: ```height="12px"```
 If height is not provided, a warning is thrown and a default value of 1em is set.
+### config
+Configuration object for additional options.
+Example:
+```html
+<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+```
+```js
+angular.moddule('myApp', []).controller('myCtrl', function($scope) {
+	$scope.rollConfig = {
+		filter: 'currency'
+	};
+});
+```

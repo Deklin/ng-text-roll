@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, ngTextRollSvc) {
+  function MainController($scope) {
 
     $scope.calc = {
       operator: 'add'
@@ -23,9 +23,9 @@
       return date;
     };
 
-    // $scope.rollConfig = {
-    //   filter: 'date'
-    // };
+    $scope.rollConfig = {
+      filter: 'currency'
+    };
 
     $scope.updateNumeric = function() {
       var val = $scope.numericValue;
