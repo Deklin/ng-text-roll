@@ -4,15 +4,15 @@
     <small>Demo Page</small>
   </h1>
 
-  The price is<ng-text-roll target="numericValue" height="35px" config="rollConfig"></ng-text-roll>before tax.
+  The price is<ng-text-roll target="dateValue" height="35px" config="rollConfig"></ng-text-roll>before tax.
 
   <br/>
   <br/>
   <ul>
     <li><input type="radio" ng-model="calc.operator" value="add"> Add</li>
     <li><input type="radio" ng-model="calc.operator" value="substract"> Substract</li>
-    <li><input type="radio" ng-model="calc.operator" value="multiply"> Multiple</li>
+    <!-- <li><input type="radio" ng-model="calc.operator" value="multiply"> Multiple</li> -->
   </ul>
-  <button ng-click="updateNumeric()">Update [{{calc.amount}}]</button>
+  <button ng-click="updateDate()">Update [{{calc.amount}}]</button>
 
 </div>

@@ -24,31 +24,29 @@
     };
 
     $scope.rollConfig = {
-      filter: 'currency'
+      filter: 'date'
     };
 
-    $scope.updateNumeric = function() {
-      var val = $scope.numericValue;
+    $scope.updateDate = function() {
+      var val = new Date();// $scope.dateValue;
       switch ($scope.calc.operator) {
         case 'add':
-          val += $scope.calc.amount;
+          val.setDate($scope.dateValue.getDate() + $scope.calc.amount);
           break;
         case 'substract':
-          val -= $scope.calc.amount;
-          break;
-        case 'multiply':
-          val *= $scope.calc.amount;
+          val.setDate($scope.dateValue.getDate() - $scope.calc.amount);
           break;
         default:
           break;
       }
-      $scope.numericValue = parseFloat(val.toFixed(2));
-      //ngTextRollSvc.roll($scope.numericValue);
+      $scope.dateValue = val;
     };
 
-    $scope.numericValue = $scope.getRandomDecimal(0.01, 1000.99) || 1;
-    $scope.calc.amount = $scope.getRandomDecimal(0.01, 300.99) || 0.1;
+    //$scope.numericValue = $scope.getRandomDecimal(0.01, 1000.99) || 1;
     $scope.dateValue = $scope.getRandomDate();
+console.log(1, typeof $scope.dateValue);
+    $scope.calc.amount = $scope.getRandomDecimal(0.01, 300.99) || 0.1;
+
   }
 
 })();
