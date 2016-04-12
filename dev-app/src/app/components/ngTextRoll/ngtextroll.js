@@ -47,6 +47,21 @@
     .factory('ngTextRollSvc', function($timeout, $filter) {
       var svc = {};
 
+      /* Utility methods */
+
+      var formatTarget = function(cfg, target) {
+        return (cfg && cfg.filter) ? $filter(cfg.filter)(target) : String(target);
+      };
+
+      var randDec = function(min, max) {
+        return parseFloat((Math.random() * (max - min) + min).toFixed(2));
+      };
+
+      var trans = function(ctrl) {
+        return ctrl.transTemplate.replace(ctrl.transRegex,
+          randDec(ctrl.tumbleMs.min, ctrl.tumbleMs.max));
+      };
+
       // Check incoming values and update/warn accordingly
       svc.validate = function(ctrl) {
         if (!ctrl.height) {
@@ -80,24 +95,11 @@
         ctrl.render[ctrl.current].style = {
           'top': ctrl.zero
         };
-        ctrl.render[ctrl.current].target = svc.formatTarget(ctrl.config, ctrl.target);
-      };
-
-      svc.formatTarget = function(cfg, target) {
-        return (cfg && cfg.filter) ? $filter(cfg.filter)(target) : String(target);
-      };
-
-      svc.randDec = function(min, max) {
-        return parseFloat((Math.random() * (max - min) + min).toFixed(2));
-      };
-
-      svc.trans = function(ctrl) {
-        return ctrl.transTemplate.replace(ctrl.transRegex,
-          svc.randDec(ctrl.tumbleMs.min, ctrl.tumbleMs.max));
+        ctrl.render[ctrl.current].target = formatTarget(ctrl.config, ctrl.target);
       };
 
       svc.animSetup = function(ctrl, oldVal, newVal, pos) {
-        ctrl.render[ctrl.current].target = svc.formatTarget(ctrl.config, newVal);
+        ctrl.render[ctrl.current].target = formatTarget(ctrl.config, newVal);
         ctrl.render[ctrl.current].style = [];
         angular.forEach(ctrl.render[ctrl.current].target, function() {
           ctrl.render[ctrl.current].style.push({
@@ -109,7 +111,7 @@
         });
 
         var inx = ctrl.current ^ 1;
-        ctrl.render[inx].target = svc.formatTarget(ctrl.config, oldVal);
+        ctrl.render[inx].target = formatTarget(ctrl.config, oldVal);
         ctrl.render[inx].style = [];
         angular.forEach(ctrl.render[inx].target, function() {
           ctrl.render[inx].style.push({
@@ -123,20 +125,20 @@
 
       svc.animate = function(ctrl, isIncrease) {
         angular.forEach(ctrl.render[ctrl.current].style, function(s) {
-          var trans = svc.trans(ctrl);
-          s['-webkit-transition'] = trans;
-          s['-moz-transition'] = trans;
-          s.transition = trans;
+          var tran = trans(ctrl);
+          s['-webkit-transition'] = tran;
+          s['-moz-transition'] = tran;
+          s.transition = tran;
           s.top = ctrl.zero;
         });
 
         var inx = ctrl.current ^ 1;
         var blur = ctrl.render[ctrl.current].target.length !== ctrl.render[inx].target.length;
         angular.forEach(ctrl.render[inx].style, function(s) {
-          var trans = svc.trans(ctrl);
-          s['-webkit-transition'] = trans;
-          s['-moz-transition'] = trans;
-          s.transition = trans;
+          var tran = trans(ctrl);
+          s['-webkit-transition'] = tran;
+          s['-moz-transition'] = tran;
+          s.transition = tran;
           s.top = isIncrease ? ctrl.topAbove : ctrl.topBelow;
           if (blur) {
             s['-webkit-filter'] = 'blur(5px)';
