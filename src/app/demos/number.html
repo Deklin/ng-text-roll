@@ -1,9 +1,9 @@
-<h3>Number Demo</h3>
+<h3>Number</h3>
 <p>
   This demo shows how ngTextRoll can tumble characters as a number changes. A blur is added when the lenth of the string changes to prevent character stacking for proportional fonts.
 </p>
 <p>
-  There are&nbsp;
+  There are
   <ng-text-roll target="numericValue" height="16px"></ng-text-roll>items.
 </p>
 <ul>
@@ -14,5 +14,5 @@
   <li><input type="radio" ng-model="calc.operator" value="multiply">
     Multiple</li>
 </ul>
-<button type="button" class="btn btn-primary" ng-click="updateNumeric()">Update [{{calc.amount}}]</button>
+<button type="button" class="btn btn-primary" ng-click="updateNumeric()">{{calc.operator}} [by {{calc.amount}}]</button>
 <button type="button" class="btn btn-info" ng-click="changeAmt()">Get new Update value</button>

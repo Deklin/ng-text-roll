@@ -13,17 +13,18 @@
     };
 
     $scope.rollConfig = {
-      filter: 'date'
+      filter: 'date',
+      filterParams: 'MM/dd/yyyy'
     };
 
     $scope.updateDate = function() {
-      var val = new Date();
+      var val = new Date($scope.dateValue.valueOf());
       switch ($scope.calc.operator) {
         case 'add':
           val.setDate($scope.dateValue.getDate() + $scope.calc.amount);
           break;
         case 'substract':
-          val.setDate($scope.dateValue.getDate() + $scope.calc.amount);
+          val.setDate($scope.dateValue.getDate() - $scope.calc.amount);
           break;
         default:
           break;
