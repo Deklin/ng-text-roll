@@ -63,7 +63,7 @@ Example:
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	$scope.rollConfig = {
 		filter: 'date',
-		filterParams: 
+		filterParams: 'MM/dd/yyyy'
 	};
 });
 ```
