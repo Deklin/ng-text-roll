@@ -1,7 +1,8 @@
 # ng-text-roll
-An AngularJS component that highlights string changes by “rolling” characters.
+An AngularJS [component](https://docs.angularjs.org/guide/component)
+that highlights string changes by “rolling” characters.
 
-<a href="http://daveteply.github.io/ng-text-roll/dist">Demo Page</a>
+[Demo Page](http://daveteply.github.io/ng-text-roll/dist)
 
 ### Install with Bower
 ```sh
@@ -41,6 +42,7 @@ Example: ```height="12px"```
 If height is not provided, a warning is thrown and a default value of 1em is set.
 #### config
 Configuration object for additional options.
+##### filter
 Example:
 ```html
 <ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
@@ -49,6 +51,19 @@ Example:
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	$scope.rollConfig = {
 		filter: 'currency'
+	};
+});
+```
+##### filterParams
+Example:
+```html
+<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+```
+```js
+angular.moddule('myApp', []).controller('myCtrl', function($scope) {
+	$scope.rollConfig = {
+		filter: 'date',
+		filterParams: 
 	};
 });
 ```

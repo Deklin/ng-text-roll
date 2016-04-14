@@ -50,7 +50,7 @@
       /* Utility methods */
 
       var formatTarget = function(cfg, target) {
-        return (cfg && cfg.filter) ? $filter(cfg.filter)(target) : String(target);
+        return (cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParams) : String(target);
       };
 
       var randDec = function(min, max) {
@@ -95,6 +95,7 @@
         ctrl.render[ctrl.current].style = {
           'top': ctrl.zero
         };
+        ctrl.config = ctrl.config || {}; // ensure config is not null
         ctrl.render[ctrl.current].target = formatTarget(ctrl.config, ctrl.target);
       };
 

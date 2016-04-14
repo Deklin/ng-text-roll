@@ -28,7 +28,8 @@
     };
 
     $scope.rollConfig = {
-      filter: 'date'
+      filter: 'date',
+      filterParams: 'MM/dd/yyyy'
     };
 
     $scope.updateDate = function() {
