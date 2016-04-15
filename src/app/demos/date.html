@@ -4,7 +4,8 @@
 </p>
 <p>
   The date
-  <ng-text-roll target="dateValue" height="18px" config="rollConfig"></ng-text-roll> is a date!
+  <ng-text-roll target="dateValue" height="18px" config="rollConfig"></ng-text-roll>
+  is a date!
 </p>
 <ul>
   <li><input type="radio" ng-model="calc.operator" value="add">
@@ -12,5 +13,8 @@
   <li><input type="radio" ng-model="calc.operator" value="substract">
     Substract</li>
 </ul>
-<button type="button" class="btn btn-primary" ng-click="updateDate()">Update [{{calc.amount}}]</button>
-<button type="button" class="btn btn-info" ng-click="changeAmt()">Get new Update value</button>
+<button type="button" class="btn btn-primary" ng-click="updateDate()">{{calc.operator}}
+  by
+  {{calc.amount}}
+  days</button>
+<button type="button" class="btn btn-info" ng-click="changeAmt()">new delta</button>
