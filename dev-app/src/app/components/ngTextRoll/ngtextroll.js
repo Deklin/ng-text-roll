@@ -6,7 +6,7 @@
 
   /**
    * @ngdoc component
-   * @name ui.ng-text-roll.directive:ngTextRoll
+   * @name ui.ng-text-roll.component:ngTextRoll
    * @description
    * # ngTextRoll
    */
@@ -102,12 +102,14 @@
       var animSetup = function(ctrl, oldVal, newVal, isIncrease, lengthDiffers) {
         ctrl.render[ctrl.current].style = [];
         angular.forEach(ctrl.render[ctrl.current].target, function(undefined, key) {
-          ctrl.render[ctrl.current].style.push({
-            '-webkit-transition': undefined,
-            '-moz-transition': undefined,
-            'transition': undefined,
-            'top': isIncrease ? ctrl.topBelow : ctrl.topAbove
-          });
+          if (!lengthDiffers) {
+            ctrl.render[ctrl.current].style.push({
+              '-webkit-transition': undefined,
+              '-moz-transition': undefined,
+              'transition': undefined,
+              'top': isIncrease ? ctrl.topBelow : ctrl.topAbove
+            });
+          }
         });
 
         ctrl.render[ctrl.notCurrent].style = [];

@@ -1,20 +1,44 @@
-<div class="container">
-
+<div class="row">
   <h1>ngTextRoll
     <small>Demo Page</small>
   </h1>
+</div>
 
-  Text before
-  <ng-text-roll target="dateValue" height="35px" config="rollConfig"></ng-text-roll>
-  and text after.
+<div class="row">
+  <p>Text before
+    <ng-text-roll target="theValue" height="35px" config="rollConfig"></ng-text-roll>
+    and text after.</p>
+</div>
 
-  <br/>
-  <br/>
-  <ul class="demo-ctrls">
-    <li><input type="radio" ng-model="calc.operator" value="add"> Add</li>
-    <li><input type="radio" ng-model="calc.operator" value="substract"> Substract</li>
-    <!-- <li><input type="radio" ng-model="calc.operator" value="multiply"> Multiple</li> -->
-  </ul>
-  <button ng-click="updateDate()">Update [{{calc.amount}}]</button>
+<div class="row">
+  <label class="radio-inline">
+    <input type="radio" ng-model="calc.type" value="date" ng-change="changeType()">
+    Date
+  </label>
+  <label class="radio-inline">
+    <input type="radio" ng-model="calc.type" value="number" ng-change="changeType()">
+    Number
+  </label>
+</div>
+<div class="row">
+  <label class="radio-inline">
+    <input type="radio" ng-model="calc.operator" value="add">
+    Add
+  </label>
+  <label class="radio-inline">
+    <input type="radio" ng-model="calc.operator" value="substract">
+    Substract
+  </label>
+  <label class="radio-inline" ng-show="calc.type !== 'date'">
+    <input type="radio" ng-model="calc.operator" value="multiply">
+    Multiply
+  </label>
+</div>
 
+<div class="row">
+  <button ng-click="updateValue()">
+    {{calc.operator}}
+    {{calc.operator === 'multiply' ? 'by' : ''}}
+    {{calc.amount}}
+  </button>
 </div>
