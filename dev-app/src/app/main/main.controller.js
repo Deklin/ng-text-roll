@@ -33,7 +33,7 @@
         filterParams: '2'
       };
       $scope.theValue = 1.23;
-      $scope.calc.amount = $scope.getRandomDecimal(0.01, 1000.99) || 1;
+      $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99) || 1;
     };
     $scope.init();
 

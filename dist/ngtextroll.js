@@ -6,7 +6,7 @@
 
   /**
    * @ngdoc component
-   * @name ui.ng-text-roll.directive:ngTextRoll
+   * @name ui.ng-text-roll.component:ngTextRoll
    * @description
    * # ngTextRoll
    */
@@ -62,6 +62,10 @@
           randDec(ctrl.tumbleMs.min, ctrl.tumbleMs.max));
       };
 
+      var charDiff = function(ctrl, inx) {
+        return ctrl.render[ctrl.current].target[inx] === ctrl.render[ctrl.notCurrent].target[inx];
+      };
+
       // Check incoming values and update/warn accordingly
       svc.validate = function(ctrl) {
         if (!ctrl.height) {
@@ -78,7 +82,7 @@
             $filter(ctrl.config.filter);
           } catch (e) {
             ctrl.config.filter = '';
-            console.warn('ngTextRoll: config.filter incorrectly specified, disabling');
+            console.warn('ngTextRoll: config.filter incorrectly specified; disabling');
           }
         }
       };
@@ -87,35 +91,32 @@
       svc.init = function(ctrl) {
         var valueHeight = parseFloat(ctrl.height);
         var unitHeight = ctrl.height.replace(valueHeight, '');
-        var offset = valueHeight * 0.5;
+        var offset = valueHeight * 0.5; // ensure pre-animation divs are out of sight
         ctrl.topAbove = ((valueHeight + offset) * -1) + unitHeight;
         ctrl.topBelow = (valueHeight + offset) + unitHeight;
 
-        // set initial render
-        ctrl.render[ctrl.current].style = {
+        ctrl.render[ctrl.current].style = { // set initial render
           'top': ctrl.zero
         };
         ctrl.config = ctrl.config || {}; // ensure config is not null
         ctrl.render[ctrl.current].target = formatTarget(ctrl.config, ctrl.target);
       };
 
-      svc.animSetup = function(ctrl, oldVal, newVal, pos) {
-        ctrl.render[ctrl.current].target = formatTarget(ctrl.config, newVal);
+      // Move pre-animation divs without animations
+      var animSetup = function(ctrl, oldVal, newVal, isIncrease) {
         ctrl.render[ctrl.current].style = [];
         angular.forEach(ctrl.render[ctrl.current].target, function() {
           ctrl.render[ctrl.current].style.push({
             '-webkit-transition': undefined,
             '-moz-transition': undefined,
             'transition': undefined,
-            'top': pos ? ctrl.topBelow : ctrl.topAbove
+            'top': isIncrease ? ctrl.topBelow : ctrl.topAbove
           });
         });
 
-        var inx = ctrl.current ^ 1;
-        ctrl.render[inx].target = formatTarget(ctrl.config, oldVal);
-        ctrl.render[inx].style = [];
-        angular.forEach(ctrl.render[inx].target, function() {
-          ctrl.render[inx].style.push({
+        ctrl.render[ctrl.notCurrent].style = [];
+        angular.forEach(ctrl.render[ctrl.notCurrent].target, function() {
+          ctrl.render[ctrl.notCurrent].style.push({
             '-webkit-transition': undefined,
             '-moz-transition': undefined,
             'transition': undefined,
@@ -124,37 +125,45 @@
         });
       };
 
-      svc.animate = function(ctrl, isIncrease) {
-        angular.forEach(ctrl.render[ctrl.current].style, function(s) {
-          var tran = trans(ctrl);
-          s['-webkit-transition'] = tran;
-          s['-moz-transition'] = tran;
-          s.transition = tran;
-          s.top = ctrl.zero;
+      // Enable animations on divs and animate
+      var animate = function(ctrl, isIncrease, lengthDiffers) {
+        angular.forEach(ctrl.render[ctrl.current].style, function(s, inx) {
+          if (!charDiff(ctrl, inx)) {
+            var tran = trans(ctrl);
+            s['-webkit-transition'] = tran;
+            s['-moz-transition'] = tran;
+            s.transition = tran;
+            s.top = ctrl.zero;
+          }
         });
 
-        var inx = ctrl.current ^ 1;
-        var blur = ctrl.render[ctrl.current].target.length !== ctrl.render[inx].target.length;
-        angular.forEach(ctrl.render[inx].style, function(s) {
-          var tran = trans(ctrl);
-          s['-webkit-transition'] = tran;
-          s['-moz-transition'] = tran;
-          s.transition = tran;
-          s.top = isIncrease ? ctrl.topAbove : ctrl.topBelow;
-          if (blur) {
-            s['-webkit-filter'] = 'blur(5px)';
-            s.filter = 'blur(5px)';
+        angular.forEach(ctrl.render[ctrl.notCurrent].style, function(s, inx) {
+          if (!charDiff(ctrl, inx)) {
+            var tran = trans(ctrl);
+            s['-webkit-transition'] = tran;
+            s['-moz-transition'] = tran;
+            s.transition = tran;
+            s.top = isIncrease ? ctrl.topAbove : ctrl.topBelow;
+            if (lengthDiffers) {
+              s['-webkit-filter'] = 'blur(5px)';
+              s.filter = 'blur(5px)';
+            }
           }
         });
       };
 
+      // Set strings, setup, animate
       svc.roll = function(ctrl, oldVal, newVal) {
         var isIncrease = newVal > oldVal;
-        ctrl.current = ctrl.current ? 0 : 1;
-        svc.animSetup(ctrl, oldVal, newVal, isIncrease);
+        ctrl.notCurrent = ctrl.current;
+        ctrl.current = ctrl.current ^ 1;
+        ctrl.render[ctrl.current].target = formatTarget(ctrl.config, newVal);
+        ctrl.render[ctrl.notCurrent].target = formatTarget(ctrl.config, oldVal);
+        var lengthDiffers = (ctrl.render[ctrl.current].target.length !== ctrl.render[ctrl.notCurrent].target.length);
+        animSetup(ctrl, oldVal, newVal, isIncrease, lengthDiffers);
         // A delay is needed to achieve the desired effect
         //  NOTE: Firefox required at least 25ms delay
-        ctrl.animTimeout = $timeout(svc.animate, 25, true, ctrl, isIncrease);
+        ctrl.animTimeout = $timeout(animate, 25, true, ctrl, isIncrease, lengthDiffers);
       };
 
       return svc;

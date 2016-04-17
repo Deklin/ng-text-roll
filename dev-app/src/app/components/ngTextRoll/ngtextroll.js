@@ -62,6 +62,10 @@
           randDec(ctrl.tumbleMs.min, ctrl.tumbleMs.max));
       };
 
+      var charDiff = function(ctrl, inx) {
+        return ctrl.render[ctrl.current].target[inx] === ctrl.render[ctrl.notCurrent].target[inx];
+      };
+
       // Check incoming values and update/warn accordingly
       svc.validate = function(ctrl) {
         if (!ctrl.height) {
@@ -99,17 +103,15 @@
       };
 
       // Move pre-animation divs without animations
-      var animSetup = function(ctrl, oldVal, newVal, isIncrease, lengthDiffers) {
+      var animSetup = function(ctrl, oldVal, newVal, isIncrease) {
         ctrl.render[ctrl.current].style = [];
-        angular.forEach(ctrl.render[ctrl.current].target, function(undefined, key) {
-          if (!lengthDiffers) {
-            ctrl.render[ctrl.current].style.push({
-              '-webkit-transition': undefined,
-              '-moz-transition': undefined,
-              'transition': undefined,
-              'top': isIncrease ? ctrl.topBelow : ctrl.topAbove
-            });
-          }
+        angular.forEach(ctrl.render[ctrl.current].target, function() {
+          ctrl.render[ctrl.current].style.push({
+            '-webkit-transition': undefined,
+            '-moz-transition': undefined,
+            'transition': undefined,
+            'top': isIncrease ? ctrl.topBelow : ctrl.topAbove
+          });
         });
 
         ctrl.render[ctrl.notCurrent].style = [];
@@ -125,23 +127,27 @@
 
       // Enable animations on divs and animate
       var animate = function(ctrl, isIncrease, lengthDiffers) {
-        angular.forEach(ctrl.render[ctrl.current].style, function(s) {
-          var tran = trans(ctrl);
-          s['-webkit-transition'] = tran;
-          s['-moz-transition'] = tran;
-          s.transition = tran;
-          s.top = ctrl.zero;
+        angular.forEach(ctrl.render[ctrl.current].style, function(s, inx) {
+          if (!charDiff(ctrl, inx)) {
+            var tran = trans(ctrl);
+            s['-webkit-transition'] = tran;
+            s['-moz-transition'] = tran;
+            s.transition = tran;
+            s.top = ctrl.zero;
+          }
         });
 
-        angular.forEach(ctrl.render[ctrl.notCurrent].style, function(s) {
-          var tran = trans(ctrl);
-          s['-webkit-transition'] = tran;
-          s['-moz-transition'] = tran;
-          s.transition = tran;
-          s.top = isIncrease ? ctrl.topAbove : ctrl.topBelow;
-          if (lengthDiffers) {
-            s['-webkit-filter'] = 'blur(5px)';
-            s.filter = 'blur(5px)';
+        angular.forEach(ctrl.render[ctrl.notCurrent].style, function(s, inx) {
+          if (!charDiff(ctrl, inx)) {
+            var tran = trans(ctrl);
+            s['-webkit-transition'] = tran;
+            s['-moz-transition'] = tran;
+            s.transition = tran;
+            s.top = isIncrease ? ctrl.topAbove : ctrl.topBelow;
+            if (lengthDiffers) {
+              s['-webkit-filter'] = 'blur(5px)';
+              s.filter = 'blur(5px)';
+            }
           }
         });
       };
@@ -153,7 +159,7 @@
         ctrl.current = ctrl.current ^ 1;
         ctrl.render[ctrl.current].target = formatTarget(ctrl.config, newVal);
         ctrl.render[ctrl.notCurrent].target = formatTarget(ctrl.config, oldVal);
-        var lengthDiffers = ctrl.render[ctrl.current].target.length !== ctrl.render[ctrl.notCurrent].target.length;
+        var lengthDiffers = (ctrl.render[ctrl.current].target.length !== ctrl.render[ctrl.notCurrent].target.length);
         animSetup(ctrl, oldVal, newVal, isIncrease, lengthDiffers);
         // A delay is needed to achieve the desired effect
         //  NOTE: Firefox required at least 25ms delay
