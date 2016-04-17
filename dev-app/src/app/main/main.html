@@ -12,12 +12,12 @@
 
 <div class="row">
   <label class="radio-inline">
-    <input type="radio" ng-model="calc.type" value="date" ng-change="changeType()">
-    Date
-  </label>
-  <label class="radio-inline">
     <input type="radio" ng-model="calc.type" value="number" ng-change="changeType()">
     Number
+  </label>
+  <label class="radio-inline">
+    <input type="radio" ng-model="calc.type" value="date" ng-change="changeType()">
+    Date
   </label>
 </div>
 <div class="row">
@@ -36,9 +36,13 @@
 </div>
 
 <div class="row">
-  <button ng-click="updateValue()">
-    {{calc.operator}}
-    {{calc.operator === 'multiply' ? 'by' : ''}}
-    {{calc.amount}}
-  </button>
+  <form class="form-inline">
+    <button ng-click="updateValue()">
+      {{calc.operator}}
+      {{calc.operator === 'multiply' ? 'by' : ''}}
+      {{calc.specAmt || calc.amount}}
+    </button>
+    <input type="text" class="form-control" ng-model="calc.specAmt">
+  </div>
+
 </div>

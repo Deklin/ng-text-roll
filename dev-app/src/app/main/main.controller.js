@@ -26,14 +26,14 @@
     $scope.init = function() {
       $scope.calc = {
         operator: 'add',
-        type: 'date'
+        type: 'number'
       };
       $scope.rollConfig = {
-        filter: 'date',
-        filterParams: 'MM/dd/yyyy'
+        filter: $scope.calc.type,
+        filterParams: '2'
       };
-      $scope.theValue = $scope.getRandomDate();
-      $scope.calc.amount = $scope.getRandomDecimal(0.01, 300.99) || 0.1;
+      $scope.theValue = 1.23;
+      $scope.calc.amount = $scope.getRandomDecimal(0.01, 1000.99) || 1;
     };
     $scope.init();
 
@@ -43,28 +43,31 @@
         filterParams: $scope.calc.type === 'date' ? 'MM/dd/yyyy' : '2'
       };
       $scope.theValue = $scope.calc.type === 'date' ? $scope.getRandomDate() : $scope.getRandomDecimal(0.01, 1000.99) || 1;
-      $scope.calc.amount = $scope.calc.type === 'date' ? $scope.getRandomInt(1, 15) : $scope.getRandomDecimal(0.01, 300.99) || 0.1;
+      if (!$scope.calc.specAmt) {
+        $scope.calc.amount = $scope.calc.type === 'date' ? $scope.getRandomInt(1, 15) : $scope.getRandomDecimal(0.01, 300.99) || 0.1;
+      }
     };
 
     $scope.updateValue = function() {
       var val = $scope.calc.type === 'date' ? new Date($scope.theValue.valueOf()) : $scope.theValue;
+      var delta = (parseFloat($scope.calc.specAmt) || $scope.calc.amount);
       switch ($scope.calc.operator) {
         case 'add':
           if ($scope.calc.type === 'date') {
-            val.setDate($scope.theValue.getDate() + $scope.calc.amount);
+            val.setDate($scope.theValue.getDate() + delta);
           } else {
-            val += $scope.calc.amount;
+            val += delta;
           }
           break;
         case 'substract':
           if ($scope.calc.type === 'date') {
-            val.setDate($scope.theValue.getDate() - $scope.calc.amount);
+            val.setDate($scope.theValue.getDate() - delta);
           } else {
-            val -= $scope.calc.amount;
+            val -= delta;
           }
           break;
         case 'multiply':
-          val *= $scope.calc.amount;
+          val *= delta;
           break;
         default:
           break;
