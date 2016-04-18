@@ -64,6 +64,7 @@ Example:
 ```
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
+	// ...
 	$scope.rollConfig = {
 		filter: 'date',
 		filterParams: 'MM/dd/yyyy'
@@ -79,6 +80,7 @@ Example:
 ```
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
+	// ...
 	$scope.rollConfig = {
 		rollAll: true
 	};
