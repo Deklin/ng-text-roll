@@ -57,7 +57,7 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 });
 ```
 ##### filterParams
-Some AngularJS filters can have extra parameters passed, like `currency` can take a `symbol` parameter.
+Some AngularJS filters can have extra parameters passed, like `date` can take a string formatting parameter.
 Example:
 ```html
 <ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
