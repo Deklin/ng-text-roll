@@ -50,6 +50,7 @@ Example:
 ```
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
+	// ...
 	$scope.rollConfig = {
 		filter: 'currency'
 	};
