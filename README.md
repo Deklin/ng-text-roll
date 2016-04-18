@@ -35,14 +35,14 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 
 #### target
 Required.  Value used to present in ngTextRoll directive when first displayed.
-Example: ``` target="values.totalPrice" ```
+Example: `target="values.totalPrice"`
 #### height
-Element height.
-Example: ```height="12px"```
-If height is not provided, a warning is thrown and a default value of 1em is set.
+Element height.  If height is not provided, a warning is thrown and a default value of 1em is set.
+Example: `height="12px"`
 #### config
 Configuration object for additional options.
 ##### filter
+Add and AngularJS [filter](https://docs.angularjs.org/api/ng/filter) to the `target` value.
 Example:
 ```html
 <ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
@@ -55,6 +55,7 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 });
 ```
 ##### filterParams
+Some AngularJS filters can have extra parameters passed, like `currency` can take a `symbol` parameter.
 Example:
 ```html
 <ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
@@ -64,6 +65,20 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	$scope.rollConfig = {
 		filter: 'date',
 		filterParams: 'MM/dd/yyyy'
+	};
+});
+```
+##### rollAll
+By default, `ngTextRoll` will only roll characters that have changed.  Enabling this config option
+will roll all the characters with each change.
+Example:
+```html
+<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+```
+```js
+angular.moddule('myApp', []).controller('myCtrl', function($scope) {
+	$scope.rollConfig = {
+		rollAll: true
 	};
 });
 ```

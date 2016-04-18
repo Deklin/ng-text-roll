@@ -63,7 +63,7 @@
       };
 
       var charDiff = function(ctrl, inx) {
-        return ctrl.render[ctrl.current].target[inx] === ctrl.render[ctrl.notCurrent].target[inx];
+        return ctrl.config.rollAll ? false : (ctrl.render[ctrl.current].target[inx] === ctrl.render[ctrl.notCurrent].target[inx]);
       };
 
       // Check incoming values and update/warn accordingly

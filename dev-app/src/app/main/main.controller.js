@@ -30,7 +30,8 @@
       };
       $scope.rollConfig = {
         filter: $scope.calc.type,
-        filterParams: '2'
+        filterParams: '2',
+        //rollAll: true
       };
       $scope.theValue = 1.23;
       $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99) || 1;
