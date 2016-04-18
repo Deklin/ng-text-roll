@@ -22,6 +22,7 @@ Add the ngTextRoll directive to your markup:
 <ng-text-roll target="amount" height="20px"></ng-text-roll>
 ```
 
+Create a target value in your controller.
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	$scope.amount = 1.23;
