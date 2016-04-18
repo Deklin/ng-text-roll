@@ -21,6 +21,10 @@
         "demoDate": {
           templateUrl: 'app/demos/date.html',
           controller: 'dateCtrl'
+        },
+        "demoCountDown": {
+          templateUrl: 'app/demos/clock.html',
+          controller: 'clockCtrl'
         }
       }
     });
