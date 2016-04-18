@@ -22,7 +22,7 @@ Add the ngTextRoll directive to your markup:
 <ng-text-roll target="amount" height="20px"></ng-text-roll>
 ```
 
-Create a target value in your controller.
+Create a target value in your controller:
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	$scope.amount = 1.23;
@@ -43,7 +43,7 @@ Example: `height="12px"`
 #### config
 Configuration object for additional options.
 ##### filter
-Add and AngularJS [filter](https://docs.angularjs.org/api/ng/filter) to the `target` value.
+Apply an AngularJS [filter](https://docs.angularjs.org/api/ng/filter) to the `target` value.
 Example:
 ```html
 <ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
