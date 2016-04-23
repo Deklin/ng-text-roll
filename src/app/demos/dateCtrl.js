@@ -9,7 +9,8 @@
   function DateCtrl($scope, demoSvc) {
 
     $scope.calc = {
-      operator: 'add'
+      operator: 'add',
+      delta:  demoSvc.getRandomInt(1, 16)
     };
 
     $scope.rollConfig = {
@@ -22,10 +23,10 @@
       var val = new Date($scope.dateValue.valueOf());
       switch ($scope.calc.operator) {
         case 'add':
-          val.setDate($scope.dateValue.getDate() + $scope.calc.amount);
+          val.setDate($scope.dateValue.getDate() + $scope.calc.delta);
           break;
         case 'substract':
-          val.setDate($scope.dateValue.getDate() - $scope.calc.amount);
+          val.setDate($scope.dateValue.getDate() - $scope.calc.delta);
           break;
         default:
           break;
@@ -33,12 +34,11 @@
       $scope.dateValue = val;
     };
 
-    $scope.changeAmt = function() {
-      $scope.calc.amount = demoSvc.getRandomInt(1, 16);
+    $scope.changeDelta = function() {
+      $scope.calc.delta = demoSvc.getRandomInt(1, 16);
     };
 
     $scope.dateValue = demoSvc.getRandomDate();
-    $scope.calc.amount = demoSvc.getRandomInt(1, 16);
 
   }
 

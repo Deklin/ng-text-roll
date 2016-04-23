@@ -6,7 +6,7 @@
     .controller('clockCtrl', CurrencyCtrl);
 
   /** @ngInject */
-  function CurrencyCtrl($scope, $timeout, demoSvc) {
+  function CurrencyCtrl($scope, $timeout) {
 
     $scope.rollConfig = {
       filter: 'date',

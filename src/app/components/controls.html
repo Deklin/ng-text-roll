@@ -1,0 +1,20 @@
+<form class="form-horizontal">
+  <label class="radio-inline">
+    <input type="radio" name="calcOperator" ng-model="$ctrl.init.operator" value="add">Add
+  </label>
+  <label class="radio-inline">
+    <input type="radio" name="calcOperator" ng-model="$ctrl.init.operator" value="substract">Substract
+  </label>
+  <label class="radio-inline" ng-hide="$ctrl.hideMultiply">
+    <input type="radio" name="calcOperator" ng-model="$ctrl.init.operator" value="multiply">Multiply
+  </label>
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" ng-click="$ctrl.onUpdate()" title="{{$ctrl.init.operator}} {{$ctrl.init.operator === 'multiply' ? 'by ' : ''}}{{$ctrl.init.delta}}">
+      <span class="glyphicon" ng-class="$ctrl.updateGlyph()" aria-hidden="true"></span>
+      {{$ctrl.init.delta}}
+    </button>
+    <button type="button" class="btn btn-default" ng-click="$ctrl.onNewDelta()" title="get new operator value">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+    </button>
+  </div>
+</form>

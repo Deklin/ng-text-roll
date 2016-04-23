@@ -1,28 +1,12 @@
 <div class="row">
   <div class="col-sm-6">
-
     <h3>Date</h3>
-    <p>
-      Utilize the 'filterParams' property of the config object to format dates (and currency, etc.).
-      This demo is also showing rolling all characters can be enabled.
-    </p>
+    Utilize the 'filterParams' property of the config object to format dates (and currency, etc.). This demo is also showing rolling all characters can be enabled.
   </div>
   <div class="col-sm-6">
-    <p>
-      The date
-      <ng-text-roll target="dateValue" height="18px" config="rollConfig"></ng-text-roll>
-      is a date!
-    </p>
-    <ul>
-      <li><input type="radio" ng-model="calc.operator" value="add">
-        Add</li>
-      <li><input type="radio" ng-model="calc.operator" value="substract">
-        Substract</li>
-    </ul>
-    <button type="button" class="btn btn-primary" ng-click="updateDate()">{{calc.operator}}
-      by
-      {{calc.amount}}
-      days</button>
-    <button type="button" class="btn btn-info" ng-click="changeAmt()">new delta</button>
+    The date
+    <ng-text-roll target="dateValue" height="18px" config="rollConfig"></ng-text-roll>
+    is a date!
+    <controls init="calc" on-new-delta="changeDelta()" on-update="updateDate()" hide-multiply=true></controls>
   </div>
 </div>
