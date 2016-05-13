@@ -55,12 +55,12 @@
         operator: 'add',
         type: 'number'
       };
-      $scope.rollConfig = {
-        filter: $scope.calc.type,
-        filterParams: '2',
-        rollBetween: true,
-        rollAll: true
-      };
+      // $scope.rollConfig = {
+      //   filter: $scope.calc.type,
+      //   filterParams: '2',
+      //   rollBetween: true,
+      //   rollAll: true
+      // };
       $scope.theValue = 1.23;
       $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99) || 1;
       $scope.nextValue = doTheCalc();
