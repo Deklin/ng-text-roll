@@ -86,3 +86,18 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	};
 });
 ```
+##### rollBetween
+Roll characters between each change.  For example, if the character is changing from '2' to '5', 
+roll the '3' and '4' as well as the '5'
+Example:
+```html
+<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+```
+```js
+angular.moddule('myApp', []).controller('myCtrl', function($scope) {
+	// ...
+	$scope.rollConfig = {
+		rollBetween: true
+	};
+});
+```

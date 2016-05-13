@@ -4,11 +4,13 @@
   </h1>
 </div>
 
+<br>
 <div class="row">
-  <p>Text before
-    <ng-text-roll target="theValue" height="35px" config="rollConfig"></ng-text-roll>
-    and text after.</p>
+  Text before
+  <ng-text-roll target="theValue" height="35px" config="rollConfig"></ng-text-roll>
+  and text after.
 </div>
+<br>
 
 <div class="row">
   <label class="radio-inline">
@@ -42,7 +44,7 @@
       {{calc.operator === 'multiply' ? 'by' : ''}}
       {{calc.specAmt || calc.amount}}
     </button>
-    <input type="text" class="form-control" ng-model="calc.specAmt">
+    <input type="text" class="form-control" placeholder="specific amount" ng-change="updateNext()" ng-model="calc.specAmt">Next:{{nextValue}}
   </div>
 
 </div>

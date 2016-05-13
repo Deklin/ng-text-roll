@@ -13,8 +13,16 @@
 }
 #ng-text-roll .inner {
   position: relative;
+  line-height: 1;
 }
 #ng-text-roll .char {
   position: absolute;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-flex-direction: column;
   visibility: visible;
 }

@@ -1,9 +1,13 @@
 <div id="ng-text-roll">
-  <div class="outer" ng-style="{'font-size' : $ctrl.height }">
+  <div class="outer" ng-style="{ 'font-size' : $ctrl.height }">
     <div class="inner" ng-repeat="pChar in $ctrl.render[$ctrl.current].target track by $index">
-      <div class="char" ng-style="$ctrl.render[0].style[$index]">{{$ctrl.render[0].target[$index]}}</div>
-      <div class="char" ng-style="$ctrl.render[1].style[$index]">{{$ctrl.render[1].target[$index]}}</div>
-      {{pChar}}
+      <div class="char" ng-style="$ctrl.render[0].style[$index]">
+        <div ng-repeat="iChar in $ctrl.render[0].target[$index]">{{iChar}}</div>
+      </div>
+      <div class="char" ng-style="$ctrl.render[1].style[$index]">
+        <div ng-repeat="jChar in $ctrl.render[1].target[$index]">{{jChar}}</div>
+      </div>
+      {{pChar[0]}}
     </div>
   </div>
 </div>
