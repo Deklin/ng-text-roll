@@ -25,6 +25,7 @@
         ctrl.heightValue = parseFloat(ctrl.height);
         ctrl.heightUnit = ctrl.height.replace(ctrl.heightValue, '');
         ctrl.heightOffset = ctrl.heightValue * 0.5;
+        ctrl.config = ctrl.config || {}; // ensure config is not null
         ctrl.svc.init(ctrl);
       };
 
@@ -124,7 +125,6 @@
         ctrl.render[ctrl.current].style = { // set initial render
           'top': zero
         };
-        ctrl.config = ctrl.config || {}; // ensure config is not null
         ctrl.render[ctrl.current].target = formatTarget(ctrl.config, ctrl.target);
       };
 
