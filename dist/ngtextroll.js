@@ -84,11 +84,13 @@
       };
 
       var trans = function(ctrl, scale) {
-        return transTemplate.replace(transRegex, ngTextRollUtilSvc.randDec(tumbleMs.min, tumbleMs.max) * scale * (ctrl.config.rollBetween ? 0.3 : 1));
+        return transTemplate.replace(transRegex, ngTextRollUtilSvc.randDec(tumbleMs.min, tumbleMs.max) * (ctrl.config.rollBetween === false ? 1 : scale * 0.4));
       };
 
-      var charDiff = function(ctrl, inx) {
-        return ctrl.config.rollAll ? false : (ctrl.render[ctrl.current].target[inx] === ctrl.render[ctrl.notCurrent].target[inx]);
+      var charMatch = function(ctrl, inx) {
+        return ctrl.config.rollAll ? false :
+          (ctrl.render[ctrl.current].target[inx] && ctrl.render[ctrl.current].target[inx][0]) ===
+          (ctrl.render[ctrl.notCurrent].target[inx] && ctrl.render[ctrl.notCurrent].target[inx][0]);
       };
 
       var calcTopStartPos = function(ctrl, isIncrease, scale) {
@@ -132,8 +134,7 @@
         var strNewVal = formatTarget(ctrl.config, newVal);
         var strOldVal = formatTarget(ctrl.config, oldVal);
         var lengthDiffers = (strNewVal.length !== strOldVal.length);
-
-        if (ctrl.config.rollBetween && !lengthDiffers) {
+        if (!lengthDiffers && ctrl.config.rollBetween !== false) {
           ctrl.render[ctrl.current].target = [];
           angular.forEach(strNewVal, function(char, inx) {
             ctrl.render[ctrl.current].target.push(ngTextRollUtilSvc.buildRange(isIncrease, char, strOldVal[inx]));
@@ -142,7 +143,6 @@
           ctrl.render[ctrl.current].target = strNewVal;
         }
         ctrl.render[ctrl.notCurrent].target = strOldVal;
-
         return lengthDiffers;
       };
 
@@ -172,21 +172,21 @@
       // Enable animations on divs and animate
       var animate = function(ctrl, isIncrease, lengthDiffers) {
         angular.forEach(ctrl.render[ctrl.current].style, function(s, inx) {
-          if (!charDiff(ctrl, inx)) {
+          if (!charMatch(ctrl, inx)) {
             var tran = trans(ctrl, ctrl.render[ctrl.current].target[inx].length);
             s['-webkit-transition'] = tran;
             s['-moz-transition'] = tran;
             s.transition = tran;
-            if (ctrl.config.rollBetween) {
-              s.top = calcTopEndPos(ctrl, isIncrease, ctrl.render[ctrl.current].target[inx].length);
-            } else {
+            if (ctrl.config.rollBetween === false) {
               s.top = zero;
+            } else {
+              s.top = calcTopEndPos(ctrl, isIncrease, ctrl.render[ctrl.current].target[inx].length);
             }
           }
         });
 
         angular.forEach(ctrl.render[ctrl.notCurrent].style, function(s, inx) {
-          if (!charDiff(ctrl, inx)) {
+          if (!charMatch(ctrl, inx)) {
             var tran = trans(ctrl, 1);
             s['-webkit-transition'] = tran;
             s['-moz-transition'] = tran;
