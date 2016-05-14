@@ -35,7 +35,13 @@
       ctrl.$onChanges = function(obj) {
         if (obj.target) {
           ctrl.config = ctrl.config || {}; // ensure config is not null
-          ngTextRollSvc.roll(ctrl, obj.target.previousValue, obj.target.currentValue);
+          // In certain cases, the previousValue is an object called UNINITIALIZED_VALUE {}
+          //  I guess this means the component target value has initiated this event
+          //   to fire but there seems no spcific way to test if the previousValue
+          //   is falsy.  Resorting to this ridiculus check...
+          if (obj.target.previousValue.constructor() !== undefined) {
+            ngTextRollSvc.roll(ctrl, obj.target.previousValue, obj.target.currentValue);
+          }
         }
       };
 
