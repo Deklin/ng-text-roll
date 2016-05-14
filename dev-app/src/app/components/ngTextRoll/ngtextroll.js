@@ -171,6 +171,7 @@
 
       // Enable animations on divs and animate
       var animate = function(ctrl, isIncrease, lengthDiffers) {
+        ctrl.config = ctrl.config || {}; // ensure config is not null
         angular.forEach(ctrl.render[ctrl.current].style, function(s, inx) {
           if (!charMatch(ctrl, inx)) {
             var tran = trans(ctrl, ctrl.render[ctrl.current].target[inx].length);
