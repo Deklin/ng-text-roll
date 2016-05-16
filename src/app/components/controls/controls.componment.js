@@ -4,7 +4,7 @@
   angular
     .module('devApp')
     .component('controls', {
-      templateUrl: 'app/components/controls.html',
+      templateUrl: 'app/components/controls/controls.html',
       bindings: {
         targetValue: '<',
         init: '<',
@@ -24,7 +24,7 @@
         ctrl.updateGlyph = function() {
           return ctrl.glyphs[ctrl.init.operator];
         };
-        
+
       }
     });
 

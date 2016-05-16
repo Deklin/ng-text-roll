@@ -5,29 +5,37 @@
     .module('devApp')
     .config(routeConfig);
 
-  function routeConfig($stateProvider) {
+  function routeConfig($stateProvider, $urlRouterProvider) {
 
-    $stateProvider.state('index', {
-      url: '',
-      views: {
-        "demoNumber": {
-          templateUrl: 'app/demos/number.html',
-          controller: 'numberCtrl'
-        },
-        "demoCurrency": {
-          templateUrl: 'app/demos/currency.html',
-          controller: 'currencyCtrl'
-        },
-        "demoDate": {
-          templateUrl: 'app/demos/date.html',
-          controller: 'dateCtrl'
-        },
-        "demoCountDown": {
-          templateUrl: 'app/demos/clock.html',
-          controller: 'clockCtrl'
+    $urlRouterProvider.otherwise("/demos");
+
+    $stateProvider
+      .state('index', {
+        templateUrl: 'app/views/demos.html',
+        controller: 'demosCtrl',
+        controllerAs: 'demos'
+      })
+      .state('index.demos', {
+        url: '/demos',
+        views: {
+          'demoNumber': {
+            templateUrl: 'app/views/demos/number.html',
+            controller: 'numberCtrl'
+          },
+          'demoCurrency': {
+            templateUrl: 'app/views/demos/currency.html',
+            controller: 'currencyCtrl'
+          },
+          'demoDate': {
+            templateUrl: 'app/views/demos/date.html',
+            controller: 'dateCtrl'
+          },
+          'demoCountDown': {
+            templateUrl: 'app/views/demos/clock.html',
+            controller: 'clockCtrl'
+          }
         }
-      }
-    });
+      });
 
   }
 

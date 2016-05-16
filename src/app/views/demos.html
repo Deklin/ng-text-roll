@@ -1,0 +1,9 @@
+<h2>ngTextRoll <small>demo page</small></h2>
+
+<div style="height: 500px">
+  <uib-carousel active=0>
+    <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+      <div class="demo" ui-view="{{slide.namedView}}"></div>
+    </uib-slide>
+  </uib-carousel>
+</div>

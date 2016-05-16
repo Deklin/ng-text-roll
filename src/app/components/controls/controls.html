@@ -9,7 +9,7 @@
     <input type="radio" name="calcOperator" ng-model="$ctrl.init.operator" value="multiply">Multiply
   </label>
   <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-default" ng-click="$ctrl.onUpdate()" title="{{$ctrl.init.operator}} {{$ctrl.init.operator === 'multiply' ? 'by ' : ''}}{{$ctrl.init.delta}}">
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.onUpdate()" title="{{$ctrl.init.operator}} {{$ctrl.init.operator === 'multiply' ? 'by ' : ''}}{{$ctrl.init.delta}}">
       <span class="glyphicon" ng-class="$ctrl.updateGlyph()" aria-hidden="true"></span>
       {{$ctrl.init.delta}}
     </button>

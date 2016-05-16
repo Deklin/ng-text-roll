@@ -5,13 +5,17 @@
   padding: 0.2em 0;
 }
 .demo {
-  padding: 10px;
+  padding-left: 15%;
+  padding-right: 15%;
   margin: 10px;
-  background-color: #ccc;
 }
 
 .demo li {
   list-style-type: none;
+}
+
+.demo pre {
+  text-align: left;
 }
 
 /* Sticky footer styles
