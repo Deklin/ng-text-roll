@@ -86,7 +86,7 @@
         };
 
       var formatTarget = function(cfg, target) {
-        return (cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParams) : String(target);
+	    return (cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParam1, cfg.filterParam2, cfg.filterParam3) : String(target);
       };
 
       var trans = function(ctrl, scale) {
@@ -113,10 +113,6 @@
           var defaultHeight = '1em';
           console.warn('ngTextRoll: height not specified, defaulting to \'' + defaultHeight + '\'');
           ctrl.height = defaultHeight;
-        }
-        if (!ctrl.target) {
-          console.error('ngTextRoll: target not specified');
-          ctrl.target = 'ngTextRoll error';
         }
         if (ctrl.config && ctrl.config.filter) {
           try {

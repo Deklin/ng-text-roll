@@ -86,7 +86,7 @@
         };
 
       var formatTarget = function(cfg, target) {
-        return (cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParams) : String(target);
+	    return (cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParam1, cfg.filterParam2, cfg.filterParam3) : String(target);
       };
 
       var trans = function(ctrl, scale) {
@@ -113,10 +113,6 @@
           var defaultHeight = '1em';
           console.warn('ngTextRoll: height not specified, defaulting to \'' + defaultHeight + '\'');
           ctrl.height = defaultHeight;
-        }
-        if (!ctrl.target) {
-          console.error('ngTextRoll: target not specified');
-          ctrl.target = 'ngTextRoll error';
         }
         if (ctrl.config && ctrl.config.filter) {
           try {
@@ -232,7 +228,7 @@
     });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\">\n  <div class=\"outer\" ng-style=\"{ \'font-size\' : $ctrl.height }\">\n    <div class=\"inner\" ng-repeat=\"pChar in $ctrl.render[$ctrl.current].target track by $index\">\n      <div class=\"char\" ng-style=\"$ctrl.render[0].style[$index]\">\n        <div ng-repeat=\"iChar in $ctrl.render[0].target[$index]\">{{iChar}}</div>\n      </div>\n      <div class=\"char\" ng-style=\"$ctrl.render[1].style[$index]\">\n        <div ng-repeat=\"jChar in $ctrl.render[1].target[$index]\">{{jChar}}</div>\n      </div>\n      {{pChar[0]}}\n    </div>\n  </div>\n</div>\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\">\r\n  <div class=\"outer\" ng-style=\"{ \'font-size\' : $ctrl.height }\">\r\n    <div class=\"inner\" ng-repeat=\"pChar in $ctrl.render[$ctrl.current].target track by $index\">\r\n      <div class=\"char\" ng-style=\"$ctrl.render[0].style[$index]\">\r\n        <div ng-repeat=\"iChar in $ctrl.render[0].target[$index]\">{{iChar}}</div>\r\n      </div>\r\n      <div class=\"char\" ng-style=\"$ctrl.render[1].style[$index]\">\r\n        <div ng-repeat=\"jChar in $ctrl.render[1].target[$index]\">{{jChar}}</div>\r\n      </div>\r\n      {{pChar[0]}}\r\n    </div>\r\n  </div>\r\n</div>\r\n");}]);
   // endinject
 
 })();

@@ -53,15 +53,16 @@
     $scope.init = function() {
       $scope.calc = {
         operator: 'add',
-        type: 'number'
+        type: 'currency'
       };
-      // $scope.rollConfig = {
-      //   filter: $scope.calc.type,
-      //   filterParams: '2',
-      //   //rollBetween: false,
-      //   //rollAll: true
-      // };
-      $scope.theValue = 1.23;
+      $scope.rollConfig = {
+        filter: $scope.calc.type,
+		//filterParam1: 'MM/dd/yyyy'
+		//filterParam2 : '0'
+        //rollBetween: false,
+        //rollAll: true
+      };
+      $scope.theValue = 1.12;
       $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99) || 1;
       $scope.nextValue = doTheCalc();
     };

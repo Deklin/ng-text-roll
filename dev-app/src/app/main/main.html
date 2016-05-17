@@ -14,6 +14,10 @@
 
 <div class="row">
   <label class="radio-inline">
+    <input type="radio" ng-model="calc.type" value="currency" ng-change="changeType()">
+    Currency
+  </label>
+  <label class="radio-inline">
     <input type="radio" ng-model="calc.type" value="number" ng-change="changeType()">
     Number
   </label>
