@@ -56,7 +56,7 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	};
 });
 ```
-##### filterParams
+##### filterParam1
 Some AngularJS filters can have extra parameters passed, like `date` can take a string formatting parameter.
 Example:
 ```html
@@ -67,7 +67,22 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 	// ...
 	$scope.rollConfig = {
 		filter: 'date',
-		filterParams: 'MM/dd/yyyy'
+		filterParam1: 'MM/dd/yyyy'
+	};
+});
+```
+##### filterParam2
+If the chosen filter has more than one parameter, pass it using this parameter.
+Example:
+```html
+<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+```
+```js
+angular.moddule('myApp', []).controller('myCtrl', function($scope) {
+	// ...
+	$scope.rollConfig = {
+		filter: 'currency',
+		filterParam2: '0'   // this will tell the currency filter to not show decimals
 	};
 });
 ```
