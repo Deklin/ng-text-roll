@@ -10,7 +10,7 @@
 
     $scope.rollConfig = {
       filter: 'date',
-      filterParams: 'MMM dd, yyyy - HH:mm:ss'
+      filterParam1: 'MMM dd, yyyy - HH:mm:ss'
     };
 
     var onTimer = function() {

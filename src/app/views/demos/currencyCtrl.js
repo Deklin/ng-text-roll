@@ -22,7 +22,8 @@
       'color': 'green',
       'font-family': 'Times New Roman',
       'letter-spacing': '3px',
-      'font-style': 'italic'
+      'font-style': 'italic',
+      'font-weight': 'bold'
     };
 
     $scope.updateNumeric = function() {
