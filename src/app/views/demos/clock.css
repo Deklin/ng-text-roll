@@ -1,8 +1,7 @@
 .clock-demo {
   background-color: #333;
+  color: #FFF;
   text-align: center;
-  -webkit-box-shadow: inset 0px 0px 10px #222;
-  box-shadow: inset 0px 0px 10px #222;
   -webkit-border-radius: 5px;
   border-radius: 5px;
   font-size: 30px;
