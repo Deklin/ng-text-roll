@@ -12,16 +12,17 @@
    */
 
   angular.module('ui.ngTextRoll', [])
-    .controller('ngTextRollCtrl', function($timeout, ngTextRollSvc) {
+    .controller('ngTextRollCtrl', function($element, $document, $timeout, ngTextRollSvc, ngTextRollUtilSvc) {
       var ctrl = this;
 
       // local vars
       ctrl.current = 0;
       ctrl.render = [{}, {}];
+      ctrl.height = ngTextRollUtilSvc.getHeight($element, $document);
 
       ctrl.$onInit = function() {
         ctrl.svc = ngTextRollSvc;
-        ctrl.svc.validate(ctrl); // set height if not provided
+        //ctrl.svc.validate(ctrl); // set height if not provided
         ctrl.heightValue = parseFloat(ctrl.height);
         ctrl.heightUnit = ctrl.height.replace(ctrl.heightValue, '');
         ctrl.heightOffset = ctrl.heightValue * 0.5;
@@ -71,6 +72,28 @@
         return arrStr;
       };
 
+      // Thanks: http://www.javascriptkit.com/dhtmltutors/dhtmlcascade4.shtml
+      util.getCompStyle = function($ele, $doc) {
+        if ($ele.currentStyle) { //IE
+          return $ele.currentStyle;
+        } else if ($doc[0].defaultView && $doc[0].defaultView.getComputedStyle) {
+          return $doc[0].defaultView.getComputedStyle($ele[0]);
+        } else { //try and get inline style
+          return $ele.style;
+        }
+      };
+
+      util.getHeight = function($ele, $doc) {
+        var style = util.getCompStyle($ele, $doc);
+        if (style.height && style.height !== 'auto') {
+          return style.height;
+        }
+        if (style['font-size']) {
+          return style['font-size'];
+        }
+        return '1em';
+      };
+
       return util;
     })
     .factory('ngTextRollSvc', function($timeout, $filter, ngTextRollUtilSvc) {
@@ -86,7 +109,7 @@
         };
 
       var formatTarget = function(cfg, target) {
-	    return (cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParam1, cfg.filterParam2, cfg.filterParam3) : String(target);
+        return (cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParam1, cfg.filterParam2, cfg.filterParam3) : String(target);
       };
 
       var trans = function(ctrl, scale) {
@@ -108,21 +131,21 @@
       };
 
       // Check incoming values and update/warn accordingly
-      svc.validate = function(ctrl) {
-        if (!ctrl.height) {
-          var defaultHeight = '1em';
-          console.warn('ngTextRoll: height not specified, defaulting to \'' + defaultHeight + '\'');
-          ctrl.height = defaultHeight;
-        }
-        if (ctrl.config && ctrl.config.filter) {
-          try {
-            $filter(ctrl.config.filter);
-          } catch (e) {
-            ctrl.config.filter = undefined;
-            console.warn('ngTextRoll: config.filter incorrectly specified; disabling');
-          }
-        }
-      };
+      // svc.validate = function(ctrl) {
+      //   // if (!ctrl.height) {
+      //   //   var defaultHeight = '1em';
+      //   //   console.warn('ngTextRoll: height not specified, defaulting to \'' + defaultHeight + '\'');
+      //   //   ctrl.height = defaultHeight;
+      //   // }
+      //   // if (ctrl.config && ctrl.config.filter) {
+      //   //   try {
+      //   //     $filter(ctrl.config.filter);
+      //   //   } catch (e) {
+      //   //     ctrl.config.filter = undefined;
+      //   //     console.warn('ngTextRoll: config.filter incorrectly specified; disabling');
+      //   //   }
+      //   // }
+      // };
 
       // Initialize values and setup value defaults
       svc.init = function(ctrl) {

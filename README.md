@@ -19,7 +19,7 @@ angular.module('myModule', ['ui.ngTextRoll']);
 ### Example usage
 Add the ngTextRoll directive to your markup:
 ```html
-<ng-text-roll target="amount" height="20px"></ng-text-roll>
+<ng-text-roll target="amount"></ng-text-roll>
 ```
 
 Create a target value in your controller:
@@ -37,16 +37,13 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 #### target
 Required.  Value used to present in ngTextRoll directive when first displayed.
 Example: `target="values.totalPrice"`
-#### height
-Element height.  If height is not provided, a warning is thrown and a default value of 1em is set.
-Example: `height="12px"`
 #### config
 Configuration object for additional options.
 ##### filter
 Apply an AngularJS [filter](https://docs.angularjs.org/api/ng/filter) to the `target` value.
 Example:
 ```html
-<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+<ng-text-roll target="amount" config="rollConfig"></ng-text-roll>
 ```
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
@@ -60,7 +57,7 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 Some AngularJS filters can have extra parameters passed, like `date` can take a string formatting parameter.
 Example:
 ```html
-<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+<ng-text-roll target="amount" config="rollConfig"></ng-text-roll>
 ```
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
@@ -75,7 +72,7 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 If the chosen filter has more than one parameter, pass it using this parameter.
 Example:
 ```html
-<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+<ng-text-roll target="amount" config="rollConfig"></ng-text-roll>
 ```
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
@@ -91,7 +88,7 @@ By default, `ngTextRoll` will only roll characters that have changed.  Enabling 
 will roll all the characters with each change.
 Example:
 ```html
-<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+<ng-text-roll target="amount" config="rollConfig"></ng-text-roll>
 ```
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {
@@ -102,12 +99,12 @@ angular.moddule('myApp', []).controller('myCtrl', function($scope) {
 });
 ```
 ##### rollBetween
-By default, `ngTextRoll` will roll all characters between each character change.  For example, if the character is 
+By default, `ngTextRoll` will roll all characters between each character change.  For example, if the character is
 changing from '2' to '5', `ngTextRoll` will roll the '3' and '4' and then the '5'.  Set this config option
 to false to disable this behaviour.
 Example:
 ```html
-<ng-text-roll target="amount" height="20px" config="rollConfig"></ng-text-roll>
+<ng-text-roll target="amount" config="rollConfig"></ng-text-roll>
 ```
 ```js
 angular.moddule('myApp', []).controller('myCtrl', function($scope) {

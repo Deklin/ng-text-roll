@@ -1,5 +1,5 @@
 <div id="ng-text-roll">
-  <div class="outer" ng-style="{ 'font-size' : $ctrl.height }">
+  <div class="outer">
     <div class="inner" ng-repeat="pChar in $ctrl.render[$ctrl.current].target track by $index">
       <div class="char" ng-style="$ctrl.render[0].style[$index]">
         <div ng-repeat="iChar in $ctrl.render[0].target[$index]">{{iChar}}</div>
