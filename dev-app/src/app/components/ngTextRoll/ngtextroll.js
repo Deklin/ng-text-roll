@@ -130,23 +130,6 @@
         return isIncrease ? (((scale - 1) * -1) * ctrl.heightValue) + ctrl.heightUnit : zero;
       };
 
-      // Check incoming values and update/warn accordingly
-      // svc.validate = function(ctrl) {
-      //   // if (!ctrl.height) {
-      //   //   var defaultHeight = '1em';
-      //   //   console.warn('ngTextRoll: height not specified, defaulting to \'' + defaultHeight + '\'');
-      //   //   ctrl.height = defaultHeight;
-      //   // }
-      //   // if (ctrl.config && ctrl.config.filter) {
-      //   //   try {
-      //   //     $filter(ctrl.config.filter);
-      //   //   } catch (e) {
-      //   //     ctrl.config.filter = undefined;
-      //   //     console.warn('ngTextRoll: config.filter incorrectly specified; disabling');
-      //   //   }
-      //   // }
-      // };
-
       // Initialize values and setup value defaults
       svc.init = function(ctrl) {
         ctrl.render[ctrl.current].style = { // set initial render
@@ -244,7 +227,6 @@
       templateUrl: 'app/components/ngTextRoll/ngtextroll.html',
       bindings: {
         target: '<',
-        height: '@',
         config: '<'
       },
       controller: 'ngTextRollCtrl'
