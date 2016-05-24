@@ -7,12 +7,13 @@
 <br>
 <div class="row">
   <span>Text before
-  <ng-text-roll class="roll-style" target="theValue" config="rollConfig"></ng-text-roll>
-  and text after.</span>
+    <!-- <ng-text-roll class="roll-style" target="theValue" config="rollConfig"></ng-text-roll> -->
+    and text after.</span>
 </div>
+<ng-text-roll class="roll-style" target="theValue"></ng-text-roll>
 <br>
 
-<div class="row">
+<!-- <div class="row">
   <label class="radio-inline">
     <input type="radio" ng-model="calc.type" value="currency" ng-change="changeType()">
     Currency
@@ -39,16 +40,15 @@
     <input type="radio" ng-model="calc.operator" value="multiply">
     Multiply
   </label>
-</div>
+</div> -->
 
 <div class="row">
   <form class="form-inline">
-    <button ng-click="updateValue()">
-      {{calc.operator}}
+    <button ng-click="updateValue()">Go
+      <!-- {{calc.operator}}
       {{calc.operator === 'multiply' ? 'by' : ''}}
-      {{calc.specAmt || calc.amount}}
+      {{calc.specAmt || calc.amount}} -->
     </button>
-    <input type="text" class="form-control" placeholder="specific amount" ng-change="updateNext()" ng-model="calc.specAmt">Next:{{nextValue}}
-  </div>
-
+    <!-- <input type="text" class="form-control" placeholder="specific amount" ng-change="updateNext()" ng-model="calc.specAmt">Next:{{nextValue}} -->
+  </form>
 </div>
