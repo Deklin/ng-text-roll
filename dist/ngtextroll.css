@@ -1,7 +1,5 @@
 #ng-text-roll {
   display: inline-block;
-  vertical-align: text-bottom;
-  box-sizing: border-box;
 }
 #ng-text-roll .outer {
   display: -webkit-box;

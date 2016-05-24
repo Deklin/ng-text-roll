@@ -22,7 +22,6 @@
 
       ctrl.$onInit = function() {
         ctrl.svc = ngTextRollSvc;
-        //ctrl.svc.validate(ctrl); // set height if not provided
         ctrl.heightValue = parseFloat(ctrl.height);
         ctrl.heightUnit = ctrl.height.replace(ctrl.heightValue, '');
         ctrl.heightOffset = ctrl.heightValue * 0.5;
@@ -85,11 +84,14 @@
 
       util.getHeight = function($ele, $doc) {
         var style = util.getCompStyle($ele, $doc);
-        if (style.height && style.height !== 'auto') {
-          return style.height;
+        if (style.fontSize) { // Edge
+          return style.fontSize;
         }
         if (style['font-size']) {
           return style['font-size'];
+        }
+        if (style.height && style.height !== 'auto') {
+          return style.height;
         }
         return '1em';
       };
