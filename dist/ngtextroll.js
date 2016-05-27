@@ -24,7 +24,6 @@
         ctrl.svc = ngTextRollSvc;
         ctrl.heightValue = parseFloat(ctrl.height);
         ctrl.heightUnit = ctrl.height.replace(ctrl.heightValue, '');
-        ctrl.heightOffset = ctrl.heightValue * 0.5;
         ctrl.svc.init(ctrl);
       };
 
@@ -103,8 +102,8 @@
 
       // Constants
       var zero = '0',
-        transTemplate = 'top Xs ease-in-out',
-        transRegex = /X/,
+        transTemplate = 'top Xs ease-in-out, bottom Xs ease-in-out',
+        transRegex = /X/g,
         tumbleMs = { // range of milliseconds for random tumble effect
           min: 0.3,
           max: 0.8
@@ -115,21 +114,13 @@
       };
 
       var trans = function(ctrl, scale) {
-        return transTemplate.replace(transRegex, ngTextRollUtilSvc.randDec(tumbleMs.min, tumbleMs.max) * (ctrl.config.rollBetween === false ? 1 : scale * 0.4));
+        return transTemplate.replace(transRegex, ngTextRollUtilSvc.randDec(tumbleMs.min, tumbleMs.max) * (ctrl.config.rollBetween === false ? 1 : scale * 0.5));
       };
 
       var charMatch = function(ctrl, inx) {
         return ctrl.config.rollAll ? false :
           (ctrl.render[ctrl.current].target[inx] && ctrl.render[ctrl.current].target[inx][0]) ===
           (ctrl.render[ctrl.notCurrent].target[inx] && ctrl.render[ctrl.notCurrent].target[inx][0]);
-      };
-
-      var calcTopStartPos = function(ctrl, isIncrease, scale) {
-        return isIncrease ? ctrl.heightValue + ctrl.heightOffset + ctrl.heightUnit : (((ctrl.heightValue * scale) + ctrl.heightOffset) * -1) + ctrl.heightUnit;
-      };
-
-      var calcTopEndPos = function(ctrl, isIncrease, scale) {
-        return isIncrease ? (((scale - 1) * -1) * ctrl.heightValue) + ctrl.heightUnit : zero;
       };
 
       // Initialize values and setup value defaults
@@ -159,23 +150,34 @@
       // Move pre-animation divs without animations
       var animSetup = function(ctrl, oldVal, newVal, isIncrease) {
         ctrl.render[ctrl.current].style = [];
-        angular.forEach(ctrl.render[ctrl.current].target, function(s, inx) {
-          ctrl.render[ctrl.current].style.push({
+        angular.forEach(ctrl.render[ctrl.current].target, function(undefined, inx) {
+          var s = {
             '-webkit-transition': undefined,
             '-moz-transition': undefined,
-            'transition': undefined,
-            'top': calcTopStartPos(ctrl, isIncrease, ctrl.render[ctrl.current].target[inx].length)
-          });
+            'transition': undefined
+          };
+          // top takes priority over bottom, can't just set top to zero
+          var scale = ctrl.render[ctrl.current].target[inx].length;
+          if (isIncrease) {
+            s.top = ctrl.heightValue + ctrl.heightUnit;
+            s.bottom = ((ctrl.heightValue * scale) * -1) + ctrl.heightUnit;
+          } else {
+            s.top = (ctrl.heightValue * scale * -1) + ctrl.heightUnit;
+            s.bottom = ctrl.heightValue + ctrl.heightUnit;
+          }
+          ctrl.render[ctrl.current].style.push(s);
         });
 
         ctrl.render[ctrl.notCurrent].style = [];
         angular.forEach(ctrl.render[ctrl.notCurrent].target, function() {
-          ctrl.render[ctrl.notCurrent].style.push({
+          var s = {
             '-webkit-transition': undefined,
             '-moz-transition': undefined,
             'transition': undefined,
-            'top': zero
-          });
+            'top': zero,
+            'bottom': zero
+          };
+          ctrl.render[ctrl.notCurrent].style.push(s);
         });
       };
 
@@ -188,10 +190,13 @@
             s['-webkit-transition'] = tran;
             s['-moz-transition'] = tran;
             s.transition = tran;
-            if (ctrl.config.rollBetween === false) {
-              s.top = zero;
+            // top takes priority over bottom, can't just set top to zero
+            if (isIncrease) {
+              s.top = undefined;
+              s.bottom = zero;
             } else {
-              s.top = calcTopEndPos(ctrl, isIncrease, ctrl.render[ctrl.current].target[inx].length);
+              s.bottom = undefined;
+              s.top = zero;
             }
           }
         });
@@ -202,7 +207,14 @@
             s['-webkit-transition'] = tran;
             s['-moz-transition'] = tran;
             s.transition = tran;
-            s.top = (ctrl.heightValue + ctrl.heightOffset) * (isIncrease ? -1 : 1) + ctrl.heightUnit;
+            // top takes priority over bottom, can't just set top to zero
+            if (isIncrease) {
+              s.top = undefined;
+              s.bottom = ctrl.heightValue + ctrl.heightUnit;
+            } else {
+              s.top = ctrl.heightValue + ctrl.heightUnit;
+              s.bottom = undefined;
+            }
             if (lengthDiffers) {
               s['-webkit-filter'] = 'blur(5px)';
               s.filter = 'blur(5px)';

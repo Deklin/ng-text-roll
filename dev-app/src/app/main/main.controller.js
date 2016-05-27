@@ -55,13 +55,17 @@
       //   operator: 'add',
       //   type: 'currency'
       // };
-      // $scope.rollConfig = {
-      //   filter: $scope.calc.type,
+      $scope.rollConfig = {
+         filter: 'currency',
+         filterParam2 : '2'
+         //rollBetween: false,
+         //rollAll: true
+       };
       //filterParam1: 'MM/dd/yyyy'
       //filterParam2 : '0'
       //rollBetween: false,
       //rollAll: true
-      $scope.theValue = 12345; // $scope.getRandomInt(10000, 50000);
+      $scope.theValue = 34567.23; // $scope.getRandomInt(10000, 50000);
   //  };
     // $scope.calc.amount = $scope.getRandomDecimal(0.01, 30.99) || 1;
     // $scope.nextValue = doTheCalc();
@@ -70,10 +74,19 @@
 
     var onTimer = function() {
       $scope.theValue = $scope.getRandomInt(10000, 50000);
-      $scope.time = $scope.getRandomInt(1000, 1500);
+      $scope.time = $scope.getRandomInt(2000, 3000);
       tm = $timeout(onTimer, $scope.time);
     };
     var tm = $timeout(onTimer, $scope.time);
+
+    $scope.updateValue = function() {
+      //$scope.theValue = $scope.getRandomInt(10000, 50000);
+      $scope.theValue += 24256.11;
+    };
+
+    $scope.downValue = function() {
+      $scope.theValue -= 24256.12;
+    };
 
     // $scope.changeType = function() {
     //   $scope.rollConfig = {
@@ -91,10 +104,10 @@
     //   $scope.nextValue = doTheCalc();
     // };
 
-    $scope.updateValue = function() {
-      $scope.theValue = $scope.getRandomInt(10000, 50000);
-      //$scope.updateNext();
-    };
+    // $scope.updateValue = function() {
+    //   $scope.theValue = $scope.getRandomInt(10000, 50000);
+    //   //$scope.updateNext();
+    // };
 
   }
 
