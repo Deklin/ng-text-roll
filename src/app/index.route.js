@@ -2,40 +2,49 @@
   'use strict';
 
   angular
-    .module('devApp')
-    .config(routeConfig);
+    .module('demoApp')
+    .config(routerConfig);
 
-  function routeConfig($stateProvider, $urlRouterProvider) {
+  /** @ngInject */
+  function routerConfig($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise("/demos");
+    $urlRouterProvider.otherwise('/intro');
 
     $stateProvider
-      .state('index', {
-        templateUrl: 'app/views/demos.html',
-        controller: 'demosCtrl',
-        controllerAs: 'demos'
+      .state('main', {
+        templateUrl: 'app/main/main.html',
+        controller: 'MainController',
+        controllerAs: 'main'
       })
-      .state('index.demos', {
-        url: '/demos',
-        views: {
-          'demoNumber': {
-            templateUrl: 'app/views/demos/number.html',
-            controller: 'numberCtrl'
-          },
-          'demoCurrency': {
-            templateUrl: 'app/views/demos/currency.html',
-            controller: 'currencyCtrl'
-          },
-          'demoDate': {
-            templateUrl: 'app/views/demos/date.html',
-            controller: 'dateCtrl'
-          },
-          'demoCountDown': {
-            templateUrl: 'app/views/demos/clock.html',
-            controller: 'clockCtrl'
-          }
-        }
+      .state('main.intro', {
+        url: '/intro',
+        templateUrl: 'app/main/views/intro/intro.html',
+        controller: 'IntroController',
+        controllerAs: 'intro'
+      })
+      .state('main.number', {
+        url: '/number',
+        templateUrl: 'app/main/views/number/number.html',
+        controller: 'NumberDemoController',
+        controllerAs: 'number'
       });
+
+    // $stateProvider
+    //   .state('main', {
+    //     templateUrl: 'app/main/main.html',
+    //     controller: 'MainController',
+    //     controllerAs: 'main'
+    //   })
+    //   .state('main.demos', {
+    //     url: '/demos',
+    //     views: {
+    //       'numberDemo': {
+    //         templateUrl: 'app/main/demos/number/number.html',
+    //         controller: 'NumberDemoController',
+    //         controllerAs: 'number'
+    //       }
+    //     }
+    //   });
 
   }
 

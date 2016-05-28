@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('devApp', ['ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.ngTextRoll']);
+    .module('demoApp', ['ngAnimate', 'ngAria', 'ui.router', 'ngMaterial', 'ui.ngTextRoll']);
 
 })();
