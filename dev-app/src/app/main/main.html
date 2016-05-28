@@ -9,16 +9,18 @@
   <!-- <span>Text before -->
   <!-- <ng-text-roll class="roll-style" target="theValue" config="rollConfig"></ng-text-roll> -->
   <!-- and text after.</span> -->
-  <br>
-  <br>
-  <br>
-  <br>
-  <ng-text-roll class="roll-style" target="theValue" config="rollConfig"></ng-text-roll>
-  <br>
-  <br>
-  <br>
-  <br>
+  <p style="font-size:25px">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    <ng-text-roll target="theValue" config="rollConfig"></ng-text-roll>
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+
 </div>
+<br>
 
 <!-- <div class="row">
   <label class="radio-inline">
@@ -51,24 +53,12 @@
 
 <div class="row">
   <form class="form-inline">
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    <button ng-click="updateValue()">up
+    <button class="btn btn-primary" ng-click="updateValue()">up
       <!-- {{calc.operator}}
       {{calc.operator === 'multiply' ? 'by' : ''}}
       {{calc.specAmt || calc.amount}} -->
     </button>
-    <button ng-click="downValue()">down</button>
+    <button class="btn btn-primary" ng-click="downValue()">down</button>
     <!-- <input type="text" class="form-control" placeholder="specific amount" ng-change="updateNext()" ng-model="calc.specAmt">Next:{{nextValue}} -->
   </form>
 </div>

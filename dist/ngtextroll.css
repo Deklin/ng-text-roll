@@ -1,12 +1,9 @@
 #ng-text-roll {
-  display: inline-block;
-}
-#ng-text-roll .outer {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;
+  display: inline-flex;
   visibility: hidden;
   overflow-y: hidden;
 }

@@ -77,7 +77,7 @@
       $scope.time = $scope.getRandomInt(2000, 3000);
       tm = $timeout(onTimer, $scope.time);
     };
-    var tm = $timeout(onTimer, $scope.time);
+    //var tm = $timeout(onTimer, $scope.time);
 
     $scope.updateValue = function() {
       //$scope.theValue = $scope.getRandomInt(10000, 50000);

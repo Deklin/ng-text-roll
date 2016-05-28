@@ -247,7 +247,7 @@
     });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\">\n  <div class=\"outer\">\n    <div class=\"inner\" ng-repeat=\"pChar in $ctrl.render[$ctrl.current].target track by $index\">\n      <div class=\"char\" ng-style=\"$ctrl.render[0].style[$index]\">\n        <div ng-repeat=\"iChar in $ctrl.render[0].target[$index]\">{{iChar}}</div>\n      </div>\n      <div class=\"char\" ng-style=\"$ctrl.render[1].style[$index]\">\n        <div ng-repeat=\"jChar in $ctrl.render[1].target[$index]\">{{jChar}}</div>\n      </div>\n      {{pChar[0]}}\n    </div>\n  </div>\n</div>\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\">\n  <div class=\"inner\" ng-repeat=\"pChar in $ctrl.render[$ctrl.current].target track by $index\">\n    <div class=\"char\" ng-style=\"$ctrl.render[0].style[$index]\">\n      <div ng-repeat=\"iChar in $ctrl.render[0].target[$index]\">{{iChar}}</div>\n    </div>\n    <div class=\"char\" ng-style=\"$ctrl.render[1].style[$index]\">\n      <div ng-repeat=\"jChar in $ctrl.render[1].target[$index]\">{{jChar}}</div>\n    </div>\n    {{pChar[0]}}\n  </div>\n</div>\n");}]);
   // endinject
 
 })();
