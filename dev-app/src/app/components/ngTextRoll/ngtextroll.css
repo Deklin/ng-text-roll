@@ -4,6 +4,7 @@
   display: inline-flex;
   visibility: hidden;
   overflow-y: hidden;
+  overflow: -moz-hidden-unscrollable;
 }
 #ng-text-roll .inner {
   position: relative;
