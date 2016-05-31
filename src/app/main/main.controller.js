@@ -6,14 +6,38 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController( /*$timeout, webDevTec, toastr*/ ) {
+  function MainController($mdSidenav, $timeout, $rootScope, $scope /*$timeout, webDevTec, toastr*/ ) {
     var vm = this;
 
-    vm.demoMenuItems = [
-      { label: 'Number', stateName: 'main.number' }/*,
-      { label: 'Currency', stateName: 'currency' },
-      { label: 'Date', stateName: 'date' }*/
+    vm.demoMenuItems = [{
+        label: 'Introduction',
+        stateName: 'main.intro'
+      }, {
+        label: 'Number',
+        stateName: 'main.number'
+      }
+      /*{ label: 'Currency', stateName: 'currency' },
+            { label: 'Date', stateName: 'date' }*/
     ];
+    vm.demoMenuInx = 0;
+
+    vm.openNav = function() {
+      $timeout(function() {
+        $mdSidenav('left').open();
+      });
+    };
+
+    var locChgSuc = $rootScope.$on('$locationChangeSuccess', function() {
+      $timeout(function() {
+        $mdSidenav('left').close();
+      });
+    });
+
+    $scope.$on('$destroy', function() {
+      if (locChgSuc) {
+        locChgSuc();
+      }
+    });
 
     //   var vm = this;
     //
