@@ -9,12 +9,14 @@
   <md-content class="demo-navigation flex" role="navigation">
     <ul class="demo-nav-header">
       <li>
-        <a class="md-button md-ink-ripple nav-header-item" ui-sref="{{main.demoMenuItems[0].stateName}}" ng-click="main.demoMenuInx = 0">{{main.demoMenuItems[0].label}}</a>
+        <a md-ink-ripple="#3F51B5" class="md-button md-ink-ripple nav-header-item" ui-sref="{{main.demoMenuItems[0].stateName}}" ng-click="main.demoMenuInx = 0">
+          <span>{{main.demoMenuItems[0].label}}</span>
+        </a>
       <li>
         <div class="demo-nav-section-header">Demos</div>
         <ul>
           <li ng-repeat="menuItem in main.demoMenuItems" ng-if="$index > 0">
-            <a class="md-button md-ink-ripple" ui-sref="{{menuItem.stateName}}" ng-click="main.demoMenuInx = $index">{{menuItem.label}}</a>
+            <a md-ink-ripple="#3F51B5" class="md-button md-ink-ripple" ui-sref="{{menuItem.stateName}}" ng-click="main.demoMenuInx = $index">{{menuItem.label}}</a>
           </li>
         </ul>
       </li>
@@ -37,7 +39,6 @@
           <a class="md-icon-button md-button ng-scope md-ink-ripple" href="https://github.com/daveteply/ng-text-roll" aria-label="View Source on Github" target="_blank">
             <img src="assets/images/GitHub-Mark-32px.png" alt=""></img>
             <md-tooltip md-direction="left">View Source on Github</md-tooltip>
-            <div class="md-ripple-container"></div>
           </a>
         </div>
       </div>
