@@ -12,10 +12,31 @@
 <h2>Installation</h2>
 <p>
   <ol>
-    <li>Install via <a href="http://bower.io/" target="_blank">Bower</a></li>
-    <pre>>$ bower install ng-text-roll</pre>
+    <li>Install via
+      <a href="http://bower.io/" target="_blank">Bower</a>
+    </li>
+    <div hljs hljs-no-escape>>$ bower install ng-text-roll</div>
     <li>Add the ngTextRoll module</li>
-    <pre>angular.module('myApp', ['ui.ngTextRoll'])</pre>
+    <div hljs>angular.module('myApp', ['ui.ngTextRoll'])</div>
+    <li>Use the component</li>
+
+    <!-- htmlmin:ignore --><p>
+      Markup:
+      <div hljs hljs-language="HTML">
+<ng-text-roll target="theValue"></ng-text-roll></div>
+    </p><!-- htmlmin:ignore -->
+
+    JS:
+    <!-- htmlmin:ignore -->
+    <div hljs hljs-language="JavaScript">
+angular
+  .module('demoApp')
+  .controller('IntroController',
+    function($scope) {
+      $scope.theValue = 123;
+    });<!-- htmlmin:ignore -->
+        </div>
+
   </ol>
 </p>
 <p>
