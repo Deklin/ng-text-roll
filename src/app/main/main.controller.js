@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($mdSidenav, $timeout, $rootScope, $scope /*$timeout, webDevTec, toastr*/ ) {
+  function MainController($mdSidenav, $timeout, $rootScope, $scope, $state /*$timeout, webDevTec, toastr*/ ) {
     var vm = this;
 
     vm.demoMenuItems = [{
@@ -21,6 +21,16 @@
     ];
     vm.demoMenuInx = 0;
 
+    var getLabel = function() {
+      angular.forEach(vm.demoMenuItems, function(item) {
+        if (item.stateName === $state.current.name) {
+          vm.currentLabel = item.label;
+          return true;
+        }
+      });
+    };
+    getLabel();
+
     vm.openNav = function() {
       $timeout(function() {
         $mdSidenav('left').open();
@@ -28,6 +38,7 @@
     };
 
     var locChgSuc = $rootScope.$on('$locationChangeSuccess', function() {
+      getLabel();
       $timeout(function() {
         $mdSidenav('left').close();
       });
@@ -53,11 +64,6 @@
     //     $timeout(function() {
     //       vm.classAnimation = 'rubberBand';
     //     }, 4000);
-    //   }
-    //
-    //   function showToastr() {
-    //     toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-    //     vm.classAnimation = '';
     //   }
     //
     //   function getWebDevTec() {
