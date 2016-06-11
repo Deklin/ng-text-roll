@@ -14,6 +14,8 @@
       vm.theValue = demoUtilSvc.getRandomDecimal(100.00, 900.00);
     }
 
+    vm.theOtherValue = 12345.67;
+
   }
 
 })();

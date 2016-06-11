@@ -9,8 +9,8 @@ md-sidenav {
 }
 body.demo-body {
   overflow: hidden;
-  max-width: 100%;
-  max-height: 100%;
+  // max-width: 100%;
+  // max-height: 100%;
   .main-logo {
     text-decoration: none;
     color: #333;
@@ -82,4 +82,7 @@ body.demo-body {
     font-size: small;
     color: #999;
   }
+}
+section:not(:last-child) {
+  border-bottom: 1px solid #ccc;
 }

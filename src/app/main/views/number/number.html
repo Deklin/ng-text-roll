@@ -1,26 +1,34 @@
-<md-content class="layout-padding">
+<section>
   <p>
-    <b>ngTextRoll</b> can be embedded in a paragrah of text.  Take the following example:
+    <b>ngTextRoll</b>
+    can be embedded in a paragrah of text. Take the following example:
   </p>
   <p>
     Lorem ipsum dolor sit amet, pellentesque sed libero, orci nec massa netus,
     dolor est augue nec odio sit, quo in enim arcu pede ultrices. Vitae cras
     inventore urna dapibus. Orci amet
     &nbsp;<ng-text-roll target="number.theValue"></ng-text-roll>
-    nullam vitae, urna curabitur lorem etiam
-    tristique leo, ipsum dignissim magna. Sollicitudin mollis et dictum sed, quam
-    at fusce dui sit sed et. Vitae integer nisl malesuada ullamcorper tincidunt,
-    non aliquet bibendum. Metus netus, dignissim diam.
+    nullam vitae, urna curabitur lorem etiam tristique leo, ipsum dignissim
+     magna. Sollicitudin mollis et dictum sed, quam at fusce dui sit sed et.
+     Vitae integer nisl malesuada ullamcorper tincidunt, non aliquet bibendum.
+     Metus netus, dignissim diam.
   </p>
   <p>Now change the value:
-    <button style="vertical-align:bottom;" md-ink-ripple="#3F51B5" class="md-button md-raised md-ink-ripple" type="button" ng-click="number.changeValue()">
+    <button style="vertical-align:bottom;" md-ink-ripple="#3F51B5"
+      class="md-button md-raised md-ink-ripple" type="button" ng-click="number.changeValue()">
       <span>Change Value</span>
     </button>
-    Really catches your eye, eh? :)  You may notice sometimes there's a slight blurring
-    effect when the text changes.  This occurs when the over length of the string changes
-    to compensate for propotional fonts.
+    Really catches your eye, eh? :) You may notice sometimes there's a slight
+    blurring effect when the text changes. This occurs when the over length
+    of the string changes to compensate for propotional fonts.
+  </p>
+</section>
+<section>
+  <p>
+    Here's another example:
+    <ng-text-roll target="number.theOtherValue"></ng-text-roll>
   </p>
   <p>
-    Code:
+    Change the config:
   </p>
-</md-content>
+</section>

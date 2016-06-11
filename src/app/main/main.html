@@ -25,7 +25,7 @@
 </md-sidenav>
 <!-- end main side bar -->
 
-<!-- main content -->
+<!-- right panel -->
 <div class="layout-column flex demo-main-content" layout="column" role="main">
   <md-toolbar class="md-whiteframe-glow-z1">
     <div class="md-toolbar-tools demo-main-tools">
@@ -44,7 +44,9 @@
       </div>
     </div>
   </md-toolbar>
-  <md-content class="layout-column flex" md-scroll-y="" layout="column">
+  <!-- main content -->
+  <md-content layout-padding>
+  <!-- <md-content layout="column" class="layout-column flex" md-scroll-y flex layout-padding> -->
 
     <div class="layout-padding ng-scope flex-noshrink" flex="noshrink">
       <div class="demo-content-block" ui-view></div>
@@ -54,5 +56,6 @@
       Code licensed under the MIT License.
     </div>
   </md-content>
+  <!-- end main content -->
 </div>
-<!-- end main content -->
+<!-- end right panel -->
