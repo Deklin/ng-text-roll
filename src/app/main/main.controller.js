@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($mdSidenav, $timeout, $rootScope, $scope, $state /*$timeout, webDevTec, toastr*/ ) {
+  function MainController($mdSidenav, $timeout, $rootScope, $scope, $state) {
     var vm = this;
 
     vm.demoMenuItems = [{
@@ -22,9 +22,10 @@
     vm.demoMenuInx = 0;
 
     var getLabel = function() {
-      angular.forEach(vm.demoMenuItems, function(item) {
+      angular.forEach(vm.demoMenuItems, function(item, inx) {
         if (item.stateName === $state.current.name) {
           vm.currentLabel = item.label;
+          vm.demoMenuInx = inx;
           return true;
         }
       });
@@ -37,7 +38,7 @@
       });
     };
 
-    var locChgSuc = $rootScope.$on('$locationChangeSuccess', function() {
+    var locationChangeSuccessEvent = $rootScope.$on('$locationChangeSuccess', function() {
       getLabel();
       $timeout(function() {
         $mdSidenav('left').close();
@@ -45,34 +46,11 @@
     });
 
     $scope.$on('$destroy', function() {
-      if (locChgSuc) {
-        locChgSuc();
+      if (locationChangeSuccessEvent) {
+        locationChangeSuccessEvent();
       }
     });
 
-    //   var vm = this;
-    //
-    //   vm.awesomeThings = [];
-    //   vm.classAnimation = '';
-    //   vm.creationDate = 1463661750758;
-    //   vm.showToastr = showToastr;
-    //
-    //   activate();
-    //
-    //   function activate() {
-    //     getWebDevTec();
-    //     $timeout(function() {
-    //       vm.classAnimation = 'rubberBand';
-    //     }, 4000);
-    //   }
-    //
-    //   function getWebDevTec() {
-    //     vm.awesomeThings = webDevTec.getTec();
-    //
-    //     angular.forEach(vm.awesomeThings, function(awesomeThing) {
-    //       awesomeThing.rank = Math.random();
-    //     });
-    //   }
   }
 
 })();

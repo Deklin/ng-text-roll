@@ -1,61 +1,53 @@
-<!-- main side bar -->
-<md-sidenav class="md-sidenav-left md-whiteframe-z2 hide-print md-closed md-locked-open" md-is-locked-open="$mdMedia('gt-sm')" md-component-id="left">
-  <header>
-    <a class="main-logo" href="https://daveteply.github.io/ng-text-roll/dist/">
-      <img src="assets/images/ngTextRoll.png" alt="ngTextRoll Logo"></img>
-      <h1>ngTextRoll</h1>
-    </a>
-  </header>
-  <md-content class="demo-navigation flex" role="navigation">
-    <ul class="demo-nav-header">
-      <li>
-        <a md-ink-ripple="#3F51B5" class="md-button md-ink-ripple nav-header-item" ui-sref="{{main.demoMenuItems[0].stateName}}" ng-click="main.demoMenuInx = 0">
-          <span>{{main.demoMenuItems[0].label}}</span>
+<div id="ng-text-roll-docs" layout="row">
+  <div hide show-gt-sm flex></div>
+  <section flex="66" layout="row" md-whiteframe="4">
+    <!-- main left side bar -->
+    <md-sidenav class="main-site-nav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-disable-backdrop md-whiteframe="4">
+      <div class="main-logo">
+        <a href="https://daveteply.github.io/ng-text-roll/dist/">
+          <img src="assets/images/ngTextRoll.png" alt="ngTextRoll Logo"></img>
+          <h1>ngTextRoll</h1>
         </a>
-      <li>
-        <div class="demo-nav-section-header">Demos</div>
-        <ul>
-          <li ng-repeat="menuItem in main.demoMenuItems" ng-if="$index > 0">
-            <a md-ink-ripple="#3F51B5" class="md-button md-ink-ripple" ui-sref="{{menuItem.stateName}}" ng-click="main.demoMenuInx = $index">{{menuItem.label}}</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </md-content>
-</md-sidenav>
-<!-- end main side bar -->
-
-<!-- right panel -->
-<div class="layout-column flex demo-main-content" layout="column" role="main">
-  <md-toolbar class="md-whiteframe-glow-z1">
-    <div class="md-toolbar-tools demo-main-tools">
-      <button class="md-icon-button md-button md-link-ripple hide-gt-sm" ng-click="main.openNav()">
-        <i class="material-icons">menu</i>
-      </button>
-      <div class="fill-height layout-row flex">
-        <h2 class="md-toolbar-item md-breadcrumb md-headline">{{main.currentLabel}}</h2>
-        <span class="flex" flex=""></span>
-        <div class="md-toolbar-item layout-row" layout="row">
-          <a class="md-icon-button md-button ng-scope md-ink-ripple" href="https://github.com/daveteply/ng-text-roll" aria-label="View Source on Github" target="_blank">
-            <img src="assets/images/GitHub-Mark-32px.png" alt=""></img>
-            <md-tooltip md-direction="left">View Source on Github</md-tooltip>
-          </a>
-        </div>
       </div>
+      <md-content flex role="navigation">
+        <md-list>
+          <md-subheader class="md-no-sticky">What is ngTextRoll?</md-subheader>
+          <md-list-item ui-sref="{{main.demoMenuItems[0].stateName}}" ng-click="main.demoMenuInx = 0" ng-class="{active: main.demoMenuInx === 0}">
+            <span>{{main.demoMenuItems[0].label}}</span>
+          </md-list-item>
+        </md-list>
+        <md-divider></md-divider>
+        <md-list>
+          <md-subheader class="md-no-sticky">Demos</md-subheader>
+          <md-list-item ng-repeat="menuItem in main.demoMenuItems" ui-sref="{{menuItem.stateName}}" ng-click="main.demoMenuInx = $index" ng-if="$index > 0" ng-class="{active: main.demoMenuInx === $index}">
+            <span>{{menuItem.label}}</span>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-sidenav>
+    <!-- end main left side bar -->
+    <div layout="column" flex role="main">
+      <md-toolbar layout-padding md-whiteframe="6">
+        <div class="md-toolbar-tools" flex>
+          <button class="md-icon-button md-button hide-gt-sm" ng-click="main.openNav()">
+            <i class="material-icons">menu</i>
+          </button>
+          <h2 class="md-toolbar-item md-breadcrumb md-headline">{{main.currentLabel}}</h2>
+          <span flex></span>
+          <div class="md-toolbar-item layout-row" layout="row">
+            <a class="md-icon-button md-button ng-scope md-ink-ripple" href="https://github.com/daveteply/ng-text-roll" aria-label="View Source on Github" target="_blank">
+              <img src="assets/images/GitHub-Mark-32px.png" alt=""></img>
+              <md-tooltip md-direction="left">View Source on Github</md-tooltip>
+            </a>
+          </div>
+        </div>
+      </md-toolbar>
+      <!-- main view content -->
+      <md-content flex layout-padding>
+        <div ui-view></div>
+      </md-content>
+      <!-- end main view content -->
     </div>
-  </md-toolbar>
-  <!-- main content -->
-  <md-content layout-padding>
-  <!-- <md-content layout="column" class="layout-column flex" md-scroll-y flex layout-padding> -->
-
-    <div class="layout-padding ng-scope flex-noshrink" flex="noshrink">
-      <div class="demo-content-block" ui-view></div>
-    </div>
-
-    <div class="layout-row flex-noshrink demo-footer" layout="row" flex="noshrink">
-      Code licensed under the MIT License.
-    </div>
-  </md-content>
-  <!-- end main content -->
+  </section>
+  <div hide show-gt-sm flex></div>
 </div>
-<!-- end right panel -->
