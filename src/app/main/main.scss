@@ -3,6 +3,7 @@ $mainSiteNavWidth: 272px;
   overflow: hidden;
   max-width: 100%;
   max-height: 100%;
+  height: 100%;
   .main-site-nav {
     width: $mainSiteNavWidth;
     min-width: $mainSiteNavWidth;
@@ -32,88 +33,15 @@ $mainSiteNavWidth: 272px;
       }
     }
   }
+  #left-extra-panel {
+    background: url("/assets/images/b-r.jpg") no-repeat top left;
+  }
+  #right-extra-panel {
+    background: url("/assets/images/b-l.jpg") no-repeat top right;
+  }
 }
-// $side-nav-width: 225px;
-// $menu-item-background-color: #eee;
-// $demo-unit-1x: 16px;
-// $demo-unit-2x: 32px;
-// md-sidenav {
-//   width: $side-nav-width;
-//   min-width: $side-nav-width;
-//   max-width: $side-nav-width;
-// }
-// body.demo-body {
-//   // overflow: hidden;
-//   // max-width: 100%;
-//   // max-height: 100%;
-//   .main-logo {
-//     text-decoration: none;
-//     color: #333;
-//     img {
-//       margin: $demo-unit-1x;
-//     }
-//     h1 {
-//       margin-bottom: 0;
-//     }
-//     text-align: center;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     padding: 0 0 $demo-unit-1x;
-//   }
-//   .demo-navigation {
-//     ul {
-//       list-style: none;
-//       padding: 0 $demo-unit-1x;
-//       max-width: 100%;
-//     }
-//     .demo-nav-header {
-//       text-transform: uppercase;
-//       .nav-header-item {
-//         text-transform: uppercase;
-//         font-size: inherit;
-//       }
-//       .demo-nav-section-header {
-//         background-color: #ddd;
-//         padding: 10px;
-//         margin-left: $demo-unit-1x;
-//       }
-//     }
-//     .md-button {
-//       text-transform: capitalize;
-//       border-radius: 0;
-//       width: 100%;
-//       text-align: left;
-//       margin: 0;
-//       padding: 0 $demo-unit-1x;
-//     }
-//   }
-//   .demo-main-content {
-//     width: 864px;
-//     h2 {
-//       margin-bottom: 0;
-//     }
-//   }
-//   .demo-content-block {
-//     a {
-//       text-decoration: none;
-//       font-weight: bold;
-//       color: #5555ff;
-//     }
-//     pre {
-//       padding: 8px;
-//     }
-//   }
-//   .demo-footer {
-//     align-self: flex-end;
-//     padding: $demo-unit-1x $demo-unit-2x;
-//     text-align: center;
-//     width: 100%;
-//     border-top: 1px solid #ddd;
-//     font-size: small;
-//     color: #999;
-//   }
-// }
-// section:not(:last-child) {
-//   border-bottom: 1px solid #ccc;
-// }
+
+footer {
+  background-color: #dddddd;
+  color: #aaaaaa;
+}
