@@ -23,12 +23,33 @@
     of the string changes to compensate for propotional fonts.
   </p>
 </section>
+<md-divider></md-divider>
 <section>
   <p>
     Here's another example:
-    <ng-text-roll target="number.theOtherValue"></ng-text-roll>
+    <ng-text-roll class="md-display-1" target="number.theOtherValue"></ng-text-roll>
   </p>
-  <p>
-    Change the config:
-  </p>
+<p>
+  Change the value:
+  <div layout="column">
+    <md-input-container>
+      <label>Select Operation</label>
+      <md-select ng-model="number.chosenOperation">
+        <md-option ng-repeat="op in number.operations" value="{{op.op}}">
+          {{op.label}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container>
+      <label>Enter a value</label>
+      <input type="number" ng-model="number.delta">
+    </md-input-container>
+    <md-input-container>
+      <md-button class="md-raised md-primary" ng-click="number.changeValue()">Change Value</md-button>
+    </md-input-container>
+    <md-input-container>
+      <md-button class="md-raised md-primary" ng-click="number.theOtherValue = 12345.67">Reset</md-button>
+    </md-input-container>
+  </div>
+</p>
 </section>
