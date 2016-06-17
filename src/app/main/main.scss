@@ -39,6 +39,14 @@ $mainSiteNavWidth: 272px;
   #right-extra-panel {
     background: url("../assets/images/b-l.jpg") no-repeat top right;
   }
+  /* Thank you! https://css-tricks.com/snippets/css/make-pre-text-wrap/ */
+  pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;
+  }
 }
 
 footer {
