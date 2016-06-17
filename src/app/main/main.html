@@ -1,6 +1,6 @@
 <div id="ng-text-roll-docs" layout="row">
   <div id="left-extra-panel" hide show-gt-md flex></div>
-  <section flex-xs="100" flex-sm="100" flex-md="100" flex-gt-md="55" layout="row" md-whiteframe="4">
+  <section id="middle-panel" flex-xs="100" flex-sm="100" flex-md="100" flex-gt-md="55" layout="row">
     <!-- main left side bar -->
     <md-sidenav class="main-site-nav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-disable-backdrop md-whiteframe="4">
       <div class="main-logo">
@@ -43,15 +43,17 @@
         </div>
       </md-toolbar>
       <!-- main view content -->
-      <md-content layout-padding>
-        <div ui-view></div>
-      </md-content>
-      <!-- end main view content -->
-      <footer>
-        <div layout="row" layout-align="center center">
-          <span>Code licensed under the MIT License.</span>
-        </div>
-      </footer>
+      <div layout="column" flex>
+        <md-content flex layout-padding>
+          <div ui-view></div>
+        </md-content>
+        <!-- end main view content -->
+        <footer>
+          <div layout="row" layout-align="center center">
+            <span>Code licensed under the MIT License.</span>
+          </div>
+        </footer>
+      </div>
     </div>
   </section>
   <div id="right-extra-panel" hide show-gt-md flex></div>
