@@ -27,6 +27,11 @@
         templateUrl: 'app/main/views/number/number.html',
         controller: 'NumberDemoController',
         controllerAs: 'number'
+      }).state('main.date', {
+        url: '/date',
+        templateUrl: 'app/main/views/date/date.html',
+        controller: 'DateDemoController',
+        controllerAs: 'date'
       });
 
     // $stateProvider

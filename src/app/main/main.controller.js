@@ -15,9 +15,11 @@
       }, {
         label: 'Number',
         stateName: 'main.number'
+      }, {
+        label: 'Date',
+        stateName: 'main.date'
       }
-      /*{ label: 'Currency', stateName: 'currency' },
-            { label: 'Date', stateName: 'date' }*/
+      /*{ label: 'Currency', stateName: 'currency' }*/
     ];
     vm.demoMenuInx = 0;
 

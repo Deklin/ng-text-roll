@@ -1,0 +1,38 @@
+<section>
+  <p>
+    Use
+    <b>ngTextRoll</b>
+    to bring attention to date changes:
+  </p>
+  <p id="date-demo">
+    Lorem ipsum dolor sit amet, pellentesque sed libero, orci nec massa netus,
+    &nbsp;<ng-text-roll target="date.theValue" config="date.rollConfig"></ng-text-roll>
+    dolor est augue nec odio sit, quo in enim arcu pede ultrices. Vitae cras inventore urna dapibus.
+  </p>
+  <div layout="row" layout-xs="column">
+    <md-input-container>
+      <label>Select Operation</label>
+      <md-select ng-model="date.chosenOperation">
+        <md-option ng-repeat="op in date.operations" value="{{op.op}}">
+          {{op.label}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container>
+      <label>Enter a value</label>
+      <input type="number" ng-model="date.delta">
+    </md-input-container>
+    <div flex>
+      <md-button class="md-raised md-primary" ng-click="date.changeValue()" ng-disabled="!date.chosenOperation || !date.delta">Change Value</md-button>
+      <md-button class="md-raised md-primary" ng-click="date.resetValue()">Reset Value</md-button>
+    </div>
+  </div>
+  <div layout="row" layout-xs="column">
+    <md-input-container>
+      <md-switch ng-model="date.rollConfig.rollAll">Rolling {{date.rollConfig.rollAll ? "all" : "only changed"}} characters</md-switch>
+    </md-input-container>
+    <md-input-container>
+      <md-switch ng-model="date.rollConfig.rollBetween">Rolling {{date.rollConfig.rollBetween ? "all characters between changes" : "only character differences"}} </md-switch>
+    </md-input-container>
+  </div>
+</section>
