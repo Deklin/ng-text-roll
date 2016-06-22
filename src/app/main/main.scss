@@ -50,6 +50,9 @@ $mainSiteNavWidth: 272px;
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;
   }
+  md-input-container {
+    margin-bottom: 0;
+  }
 }
 
 footer {

@@ -27,12 +27,20 @@
       <md-button class="md-raised md-primary" ng-click="date.resetValue()">Reset Value</md-button>
     </div>
   </div>
-  <div layout="row" layout-xs="column">
+  <div layout="row" layout-xs="column" class="roll-chars">
     <md-input-container>
-      <md-switch ng-model="date.rollConfig.rollAll">Rolling {{date.rollConfig.rollAll ? "all" : "only changed"}} characters</md-switch>
+      <md-switch ng-model="date.rollConfig.rollAll">Rolling {{date.rollConfig.rollAll ? "all" : "only changed"}}
+        characters</md-switch>
     </md-input-container>
     <md-input-container>
-      <md-switch ng-model="date.rollConfig.rollBetween">Rolling {{date.rollConfig.rollBetween ? "all characters between changes" : "only character differences"}} </md-switch>
+      <md-switch ng-model="date.rollConfig.rollBetween">Rolling {{date.rollConfig.rollBetween ? "all characters between changes" : "only character differences"}}
+      </md-switch>
     </md-input-container>
   </div>
+  <!-- <div layout="row" layout-xs="column">
+    <md-input-container>
+      <label>Enter a date format</label>
+      <input type="text" ng-model="date.rollConfig.filterParam1" ng-change="date.triggerChange()">
+    </md-input-container>
+  </div> -->
 </section>
