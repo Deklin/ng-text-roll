@@ -2,6 +2,14 @@
   'use strict';
 
   angular
-    .module('demoApp', ['ngAnimate', 'ngAria', 'ui.router', 'ngMaterial', 'ui.ngTextRoll', 'hljs']);
+    .module('demoApp', [
+      'demoApp.currency',
+      'ngAnimate',
+      'ngAria',
+      'ngMaterial',
+      'ui.router',
+      'ui.ngTextRoll',
+      'hljs'
+    ]);
 
 })();

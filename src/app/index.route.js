@@ -33,24 +33,6 @@
         controller: 'DateDemoController',
         controllerAs: 'date'
       });
-
-    // $stateProvider
-    //   .state('main', {
-    //     templateUrl: 'app/main/main.html',
-    //     controller: 'MainController',
-    //     controllerAs: 'main'
-    //   })
-    //   .state('main.demos', {
-    //     url: '/demos',
-    //     views: {
-    //       'numberDemo': {
-    //         templateUrl: 'app/main/demos/number/number.html',
-    //         controller: 'NumberDemoController',
-    //         controllerAs: 'number'
-    //       }
-    //     }
-    //   });
-
   }
 
 })();

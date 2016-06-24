@@ -1,0 +1,12 @@
+<section>
+  <h3>Currncy Demo</h3>
+  <p>Here's an example computer parts shopping experience, enchanced with <b>ng-text-roll</b>
+  </p>
+  <md-content id="currency-demo" class="md-padding">
+    <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+      <md-tab ng-repeat="tab in currency.tabs" label="{{tab.title}}" ui-sref="{{tab.stateName}}">
+        <div ui-view class="md-padding"></div>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</section>
