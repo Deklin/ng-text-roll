@@ -6,7 +6,7 @@
     .controller('CurrencyDemoController', CurrencyDemoController);
 
   /** @ngInject */
-  function CurrencyDemoController( /*$scope, $timeout*/ ) {
+  function CurrencyDemoController($state) {
     var vm = this;
 
     vm.tabs = [{
@@ -16,6 +16,15 @@
       title: 'CPUs',
       stateName: 'main.currency.cpu'
     }];
+
+    var setSelectedTab = function() {
+      angular.forEach(vm.tabs, function(item, inx) {
+        if (item.stateName === $state.current.name) {
+          vm.selectedTab = inx;
+        }
+      });
+    };
+    setSelectedTab();
 
   }
 

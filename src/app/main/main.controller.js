@@ -21,6 +21,10 @@
     }, {
       label: 'Currency',
       stateName: 'main.currency.case'
+    }, {
+      label: 'Currency',
+      stateName: 'main.currency.cpu',
+      hide: true
     }];
     vm.demoMenuInx = 0;
 

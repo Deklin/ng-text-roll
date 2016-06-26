@@ -1,1 +1,8 @@
-cpus {{cpu.foo}}
+<md-list id="currency-demo">
+  <md-subheader class="md-no-sticky">Check out these awesome CPUs!</md-subheader>
+  <md-list-item class="currency-demo-item" ng-repeat="cpu in cpu.cpus">
+    <div layout="row">
+      <div class="demo-item-img" ng-style="{'background-image':'url(/assets/images/currency_demo/CPU{{$index + 1}}.jpg)'}"></div>
+    </div>
+  </md-list-item>
+</md-list>

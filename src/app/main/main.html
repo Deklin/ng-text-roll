@@ -19,7 +19,11 @@
         <md-divider></md-divider>
         <md-list>
           <md-subheader class="md-no-sticky">Demos</md-subheader>
-          <md-list-item ng-repeat="menuItem in main.demoMenuItems" ui-sref="{{menuItem.stateName}}" ng-click="main.demoMenuInx = $index" ng-if="$index > 0" ng-class="{active: main.demoMenuInx === $index}">
+          <md-list-item ng-repeat="menuItem in main.demoMenuItems"
+              ui-sref="{{menuItem.stateName}}"
+              ng-click="main.demoMenuInx = $index"
+              ng-if="$index > 0 && !menuItem.hide"
+              ng-class="{active: main.demoMenuInx === $index}">
             <span>{{menuItem.label}}</span>
           </md-list-item>
         </md-list>

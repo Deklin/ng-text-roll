@@ -9,7 +9,6 @@
   function routerConfig($stateProvider) {
     $stateProvider
       .state('main.currency', {
-        url: '/currency',
         templateUrl: 'app/main/views/currency/currency.html',
         controller: 'CurrencyDemoController',
         controllerAs: 'currency'
