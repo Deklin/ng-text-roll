@@ -30,7 +30,7 @@
       </md-content>
     </md-sidenav>
     <!-- end main left side bar -->
-    <div layout="column" flex role="main">
+    <div layout="column" role="main" layout-fill>
       <md-toolbar layout-padding md-whiteframe="6">
         <div class="md-toolbar-tools" flex>
           <button class="md-icon-button md-button hide-gt-sm" ng-click="main.openNav()">
@@ -48,7 +48,7 @@
       </md-toolbar>
       <!-- main view content -->
       <div layout="column" flex>
-        <md-content flex layout-padding>
+        <md-content layout-padding flex>
           <div ui-view></div>
         </md-content>
         <!-- end main view content -->

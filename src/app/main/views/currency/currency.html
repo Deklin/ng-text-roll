@@ -1,11 +1,11 @@
-<h3>Currncy Demo</h3>
-<p>Here's an example computer parts shopping experience, enchanced with
-  <b>ng-text-roll</b>
-</p>
-<md-tabs md-selected="currency.selectedTab" md-border-bottom md-dynamic-height>
-  <md-tab ng-repeat="tab in currency.tabs" label="{{tab.title}}" ui-sref="{{tab.stateName}}">
-    <md-tab-body>
+<section id="currency-demo">
+  <h3>Currency Demo</h3>
+  <p>Here's an example computer parts shopping experience, enchanced with
+    <b>ng-text-roll</b>
+  </p>
+  <md-tabs md-selected="currency.selectedTab" md-border-bottom md-dynamic-height>
+    <md-tab ng-repeat="tab in currency.tabs" label="{{tab.title}}" ui-sref="{{tab.stateName}}">
       <div ui-view class="md-padding"></div>
-    </md-tab-body>
-  </md-tab>
-</md-tabs>
+    </md-tab>
+  </md-tabs>
+</section>
