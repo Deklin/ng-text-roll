@@ -1,11 +1,18 @@
-<section id="currency-demo">
-  <h3>Currency Demo</h3>
-  <p>Here's an example computer parts shopping experience, enchanced with
-    <b>ng-text-roll</b>
-  </p>
-  <md-tabs md-selected="currency.selectedTab" md-border-bottom md-dynamic-height>
-    <md-tab ng-repeat="tab in currency.tabs" label="{{tab.title}}" ui-sref="{{tab.stateName}}">
-      <div ui-view class="md-padding"></div>
-    </md-tab>
-  </md-tabs>
-</section>
+<div id="currency-demo" layout="column" layout-fill>
+  <div layout-padding>
+    <h3>Currency Demo</h3>
+    <p>Here's an example computer parts shopping experience, enchanced with
+      <b>ng-text-roll</b>
+    </p>
+  </div>
+  <md-content layout="column" flex layout-padding>
+    <md-toolbar class="md-hue-1">
+      <div class="md-toolbar-tools">
+        <md-button ng-repeat="tab in currency.tabs" ui-sref="{{tab.stateName}}">
+          {{tab.title}}
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-content ui-view></md-content>
+  </md-content>
+</div>

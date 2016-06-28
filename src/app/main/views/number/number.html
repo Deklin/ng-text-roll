@@ -1,58 +1,60 @@
-<section>
-  <p>
-    <b>ngTextRoll</b>
-    can be embedded in a paragrah of text. Take the following example:
-  </p>
-  <p>
-    Lorem ipsum dolor sit amet, pellentesque sed libero, orci nec massa netus,
-    dolor est augue nec odio sit, quo in enim arcu pede ultrices. Vitae cras
-    inventore urna dapibus. Orci amet
-    &nbsp;<ng-text-roll target="number.theValue"></ng-text-roll>
-    nullam vitae, urna curabitur lorem etiam tristique leo, ipsum dignissim
-     magna. Sollicitudin mollis et dictum sed, quam at fusce dui sit sed et.
-     Vitae integer nisl malesuada ullamcorper tincidunt, non aliquet bibendum.
-     Metus netus, dignissim diam.
-  </p>
-  <p>Now change the value:
-    <button style="vertical-align:bottom;" md-ink-ripple="#3F51B5"
-      class="md-button md-raised md-ink-ripple" type="button" ng-click="number.changeTheValue()">
-      <span>Change Value</span>
-    </button>
-    Really catches your eye, eh? :) You may notice sometimes there's a slight
-    blurring effect when the text changes. This occurs when the over length
-    of the string changes to compensate for propotional fonts.
-  </p>
-</section>
-<md-divider></md-divider>
-<section>
-  <p>
-    Here's another example:
-    <ng-text-roll class="md-display-1" target="number.theOtherValue" config="number.rollConfig"></ng-text-roll>
-  </p>
-  <div layout="row" layout-xs="column">
-    <md-input-container>
-      <label>Select Operation</label>
-      <md-select ng-model="number.chosenOperation">
-        <md-option ng-repeat="op in number.operations" value="{{op.op}}">
-          {{op.label}}
-        </md-option>
-      </md-select>
-    </md-input-container>
-    <md-input-container>
-      <label>Enter a value</label>
-      <input type="number" ng-model="number.delta">
-    </md-input-container>
-    <div flex>
-      <md-button class="md-raised md-primary" ng-click="number.changeValue()" ng-disabled="!number.chosenOperation || !number.delta">Change Value</md-button>
-      <md-button class="md-raised md-primary" ng-click="number.theOtherValue = 12345.67">Reset Value</md-button>
+<div layout-padding>
+  <section>
+    <p>
+      <b>ngTextRoll</b>
+      can be embedded in a paragrah of text. Take the following example:
+    </p>
+    <p>
+      Lorem ipsum dolor sit amet, pellentesque sed libero, orci nec massa netus,
+      dolor est augue nec odio sit, quo in enim arcu pede ultrices. Vitae cras
+      inventore urna dapibus. Orci amet
+      &nbsp;<ng-text-roll target="number.theValue"></ng-text-roll>
+      nullam vitae, urna curabitur lorem etiam tristique leo, ipsum dignissim
+       magna. Sollicitudin mollis et dictum sed, quam at fusce dui sit sed et.
+       Vitae integer nisl malesuada ullamcorper tincidunt, non aliquet bibendum.
+       Metus netus, dignissim diam.
+    </p>
+    <p>Now change the value:
+      <button style="vertical-align:bottom;" md-ink-ripple="#3F51B5"
+        class="md-button md-raised md-ink-ripple" type="button" ng-click="number.changeTheValue()">
+        <span>Change Value</span>
+      </button>
+      Really catches your eye, eh? :) You may notice sometimes there's a slight
+      blurring effect when the text changes. This occurs when the over length
+      of the string changes to compensate for propotional fonts.
+    </p>
+  </section>
+  <md-divider></md-divider>
+  <section>
+    <p>
+      Here's another example:
+      <ng-text-roll class="md-display-1" target="number.theOtherValue" config="number.rollConfig"></ng-text-roll>
+    </p>
+    <div layout="row" layout-xs="column">
+      <md-input-container>
+        <label>Select Operation</label>
+        <md-select ng-model="number.chosenOperation">
+          <md-option ng-repeat="op in number.operations" value="{{op.op}}">
+            {{op.label}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container>
+        <label>Enter a value</label>
+        <input type="number" ng-model="number.delta">
+      </md-input-container>
+      <div flex>
+        <md-button class="md-raised md-primary" ng-click="number.changeValue()" ng-disabled="!number.chosenOperation || !number.delta">Change Value</md-button>
+        <md-button class="md-raised md-primary" ng-click="number.theOtherValue = 12345.67">Reset Value</md-button>
+      </div>
     </div>
-  </div>
-  <div layout="row" layout-xs="column" class="roll-chars">
-    <md-input-container>
-      <md-switch ng-model="number.rollConfig.rollAll">Rolling {{number.rollConfig.rollAll ? "all" : "only changed"}} characters</md-switch>
-    </md-input-container>
-    <md-input-container>
-      <md-switch ng-model="number.rollConfig.rollBetween">Rolling {{number.rollConfig.rollBetween ? "all characters between changes" : "only character differences"}} </md-switch>
-    </md-input-container>
-  </div>
-</section>
+    <div layout="row" layout-xs="column" class="roll-chars">
+      <md-input-container>
+        <md-switch ng-model="number.rollConfig.rollAll">Rolling {{number.rollConfig.rollAll ? "all" : "only changed"}} characters</md-switch>
+      </md-input-container>
+      <md-input-container>
+        <md-switch ng-model="number.rollConfig.rollBetween">Rolling {{number.rollConfig.rollBetween ? "all characters between changes" : "only character differences"}} </md-switch>
+      </md-input-container>
+    </div>
+  </section>
+</div>

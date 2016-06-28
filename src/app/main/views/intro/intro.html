@@ -1,45 +1,49 @@
-<h2>What is ngTextRoll?</h2>
-<p>
-  With today's very dynamic web experience, elements and text on a page can change frequently. ngTextRoll is an
-  <a href="https://angularjs.org/" target="_blank">AngularJS</a>
-  <a href="https://docs.angularjs.org/guide/component" target="_blank">component</a>
-  designed to help draw attention to these types of changes.
-</p>
-<div class="layout-align-center layout-row">
-  <ng-text-roll class="intro-demo" target="intro.theValue"></ng-text-roll>
-</div>
+<div layout-padding>
+  <h2>What is ngTextRoll?</h2>
+  <p>
+    With today's very dynamic web experience, elements and text on a page can change frequently.
+    &nbsp;&nbsp;<b>ngTextRoll</b> is an
+    <a href="https://angularjs.org/" target="_blank">AngularJS</a>
+    <a href="https://docs.angularjs.org/guide/component" target="_blank">component</a>
+    designed to help draw attention to these types of changes.
+  </p>
+  <div class="layout-align-center layout-row">
+    <ng-text-roll class="intro-demo" target="intro.theValue"></ng-text-roll>
+  </div>
 
-<h2>Installation</h2>
-<p>
-  <ol>
-    <li>Install via
-      <a href="http://bower.io/" target="_blank">Bower</a>
-    </li>
-    <div hljs hljs-no-escape>>$ bower install ng-text-roll</div>
-    <li>Add the ngTextRoll module</li>
-    <div hljs>angular.module('myApp', ['ui.ngTextRoll'])</div>
-    <li>Use the component</li>
+  <h2>Installation</h2>
+  <section>
+    <ol>
+      <li>Install via
+        <a href="http://bower.io/" target="_blank">Bower</a>
+      </li>
+      <div hljs hljs-no-escape>>$ bower install ng-text-roll</div>
+      <li>Add the ngTextRoll module</li>
+      <div hljs>angular.module('myApp', ['ui.ngTextRoll'])</div>
+      <li>Use the component</li>
 
-    <!-- htmlmin:ignore --><p>
-      Markup:
-      <div hljs hljs-language="HTML">
-<ng-text-roll target="theValue"></ng-text-roll></div>
-    </p><!-- htmlmin:ignore -->
+      <!-- htmlmin:ignore -->
+      <p>
+        Markup:
+        <div hljs hljs-language="HTML"><ng-text-roll target="theValue"></ng-text-roll></div>
+      </p>
+      <!-- htmlmin:ignore -->
 
-    JS:
-    <!-- htmlmin:ignore -->
-    <div hljs hljs-language="JavaScript">
-angular
+      JS:
+      <!-- htmlmin:ignore -->
+      <div hljs hljs-language="JavaScript">angular
   .module('demoApp')
-  .controller('IntroController',
-    function($scope) {
-      $scope.theValue = 123;
-    });<!-- htmlmin:ignore -->
-        </div>
+    .controller('IntroController', function() {
+      var vm = this;
+      this.theValue = 123;
+    });</div>
+      <!-- htmlmin:ignore -->
 
-  </ol>
-</p>
-<p>
-  Check out the <a href="https://github.com/daveteply/ng-text-roll">GitHub</a>
-  page for usage and available options.
-</p>
+    </ol>
+  </section>
+  <p>
+    Check out the
+    <a href="https://github.com/daveteply/ng-text-roll">GitHub</a>
+    page for usage and available options.
+  </p>
+</div>
