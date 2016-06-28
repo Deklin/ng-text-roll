@@ -6,7 +6,7 @@
     .controller('CurrencyDemoController', CurrencyDemoController);
 
   /** @ngInject */
-  function CurrencyDemoController($state) {
+  function CurrencyDemoController($state, currencySvc) {
     var vm = this;
 
     vm.tabs = [{
@@ -25,6 +25,11 @@
       });
     };
     setSelectedTab();
+
+    vm.svc = currencySvc;
+    vm.rollConfig = {
+      filter: 'currency'
+    };
 
   }
 

@@ -11,6 +11,12 @@
         <md-button ng-repeat="tab in currency.tabs" ui-sref="{{tab.stateName}}">
           {{tab.title}}
         </md-button>
+        <span flex></span>
+        <md-button aria-label="Cart">
+          Cart ({{currency.svc.cart.length}})
+        </md-button>
+        Total Price:&nbsp;
+        <b><ng-text-roll target="currency.svc.totalPrice" config="currency.rollConfig"></ng-text-roll></b>
       </div>
     </md-toolbar>
     <md-content ui-view></md-content>

@@ -1,9 +1,18 @@
-<md-list>
-  <md-subheader class="md-no-sticky">Check out these awesome CPUs!</md-subheader>
-  <md-list-item class="currency-demo-item" ng-repeat="cpu in cpu.cpus">
-    <div layout="row">
-      <div class="demo-item-img" ng-style="{'background-image':'url(/assets/images/currency_demo/CPU{{$index + 1}}.jpg)'}"></div>
-    </div>
-    <md-divider></md-divider>
-  </md-list-item>
-</md-list>
+<section class="currency-demo">
+  <h3>Check out these awesome CPUs!</h3>
+  <md-card ng-repeat="item in cpu.cpus" class="currency-demo-item">
+    <md-card-title>
+      <md-card-title-media>
+        <div class="md-media-md card-media demo-item-img" ng-style="{'background-image':'url(/assets/images/currency_demo/CPU{{$index + 1}}.jpg)'}"></div>
+      </md-card-title-media>
+      <md-card-title-text>
+        <span class="md-headline">{{item.title}}</span>
+        <span class="md-subhead">{{item.desc}}</span>
+      </md-card-title-text>
+      <md-card-title-text layout-align="center end">
+        <span class="md-headline">{{item.price|currency}}</span>
+        <md-button class="md-raised" ng-click="cpu.svc.addToCart(item)">Add to Cart</md-button>
+      </md-card-title-text>
+    </md-card-title>
+  </md-card>
+</section>
