@@ -22,6 +22,16 @@
         templateUrl: 'app/main/views/currency/views/cpu/cpu.html',
         controller: 'CPUsController',
         controllerAs: 'cpu'
+      }).state('main.currency.mem', {
+        url: '/currency/mem',
+        templateUrl: 'app/main/views/currency/views/mem/mem.html',
+        controller: 'MemController',
+        controllerAs: 'mem'
+      }).state('main.currency.storage', {
+        url: '/currency/storage',
+        templateUrl: 'app/main/views/currency/views/storage/storage.html',
+        controller: 'StorageController',
+        controllerAs: 'storage'
       });
   }
 

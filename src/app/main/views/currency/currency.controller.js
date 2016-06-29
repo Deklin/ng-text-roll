@@ -15,6 +15,12 @@
     }, {
       title: 'CPUs',
       stateName: 'main.currency.cpu'
+    }, {
+      title: 'Memory',
+      stateName: 'main.currency.mem'
+    }, {
+      title: 'Hard-Drives',
+      stateName: 'main.currency.storage'
     }];
 
     var setSelectedTab = function() {
