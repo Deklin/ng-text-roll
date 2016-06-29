@@ -1,1 +1,17 @@
-cases {{case.foo}}
+<section class="currency-demo">
+  <md-card ng-repeat="item in case.cases" class="currency-demo-item">
+    <md-card-title>
+      <md-card-title-media hide show-gt-xs>
+        <div class="md-media-md card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/ComputerCase{{$index + 1}}.jpg)'}"></div>
+      </md-card-title-media>
+      <md-card-title-text>
+        <span class="md-headline">{{item.title}}</span>
+        <span class="md-subhead">{{item.description}}</span>
+      </md-card-title-text>
+      <div layout="column" layout-align="center end">
+        <span class="md-headline">{{item.price|currency}}</span>
+        <md-button class="md-raised" ng-click="case.svc.addToCart(item)">Add to Cart</md-button>
+      </div>
+    </md-card-title>
+  </md-card>
+</section>
