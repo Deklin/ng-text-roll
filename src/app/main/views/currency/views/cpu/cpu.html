@@ -3,7 +3,7 @@
   <md-card ng-repeat="item in cpu.cpus" class="currency-demo-item">
     <md-card-title>
       <md-card-title-media hide show-gt-xs>
-        <div class="md-media-md card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/CPU{{$index + 1}}.jpg)'}"></div>
+        <div class="md-media-md card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/CPU{{item.imgId}}.jpg)'}"></div>
       </md-card-title-media>
       <md-card-title-text>
         <span class="md-headline">{{item.title}}</span>

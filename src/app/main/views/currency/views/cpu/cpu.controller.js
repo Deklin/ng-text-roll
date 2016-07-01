@@ -12,33 +12,47 @@
     vm.svc = currencySvc;
 
     vm.cpus = [{
-      "description": "amet velit eros Integer Integer molestie id Neque ac torquent perspiciatis varius consequat velit id",
-      "price": 0.8,
-      "title": "8.2GHz CPU - Refurbished"
+      "description": "pede vestibulum integer torquent id sed tortor sodales metus lorem tortor sodales tincidunt sunt interdum erat erat metus suspendisse pretium Nullam placerat erat",
+      "imgId": 2,
+      "price": 17.6,
+      "productId": "HHQ1B",
+      "title": "22.9GHz CPU - Refurbished"
     }, {
-      "description": "neque elit hendrerit eu quis id quis id lacus nunc praesent dictumst erat pretium consequat eu lacus nunc eu eu luctus Integer Tincidunt metus tellus eu massa vitae eros eu lectus porttitor",
-      "price": 14.5,
-      "title": "84.7GHz CPU - Refurbished"
+      "description": "eu erat nunc aenean lectus magna nullam integer adipiscing id leo tortor id",
+      "imgId": 1,
+      "price": 45.71,
+      "productId": "PY39N",
+      "title": "97.4GHz CPU"
     }, {
-      "description": "ligula ligula Sed sodales ac nulla est leo amet hendrerit velit nunc sunt non varius erat faucibus consectetuer cursus tortor placerat tellus Neque et",
-      "price": 8.55,
-      "title": "10.1GHz CPU - Refurbished"
+      "description": "justo erat laoreet phasellus cursus justo Neque eros porttitor metus erat metus",
+      "imgId": 3,
+      "price": 171.77,
+      "productId": "417GN",
+      "title": "189GHz CPU"
     }, {
-      "description": "dui arcu arcu ligula Sed vel Odio sed phasellus voluptatem justo sed Integer massa hac gravida turpis turpis sed eu est leo vitae eros",
-      "price": 61.05,
-      "title": "131.1GHz CPU"
+      "description": "porttitor amet id voluptatem adipiscing ac conubia turpis vitae luctus vestibulum arcu eu eros pellentesque porttitor id ac eu praesent sodales adipiscing elit Integer lacus phasellus non hendrerit",
+      "imgId": 6,
+      "price": 2.6,
+      "productId": "ND69R",
+      "title": "36.5GHz CPU"
     }, {
-      "description": "aenean lacus lacus pede vitae sed dictumst molestie in arcu consequat dui nullam vestibulum amet est ligula accumsan elementum phasellus",
-      "price": 188.23,
-      "title": "264.7GHz CPU - Refurbished"
+      "description": "amet consequat id hac sodales faucibus conubia porttitor consectetuer aenean praesent massa massa nulla interdum arcu litora varius conubia",
+      "imgId": 5,
+      "price": 18.42,
+      "productId": "1EF1F",
+      "title": "124.8GHz CPU"
     }, {
-      "description": "molestie porttitor metus erat metus laoreet integer hac dolor pede nulla luctus amet quis",
-      "price": 37.16,
-      "title": "110.7GHz CPU - Refurbished"
+      "description": "arcu pede est metus integer Nullam velit sodales laoreet pede ac id metus metus vestibulum ante praesent ligula neque tincidunt ridiculus ridiculus Sed volutpat nunc nullam",
+      "imgId": 7,
+      "price": 0.11,
+      "productId": "9KFNH",
+      "title": "44GHz CPU"
     }, {
-      "description": "vivamus elit lacus voluptatem sunt ligula ligula nulla non id erat sed est pede ac Sed lorem metus pretium elit elit hendrerit lacus id vel orci pede aliquam voluptatem est ridiculus vivamus dolor integer tortor",
-      "price": 22.16,
-      "title": "202.3GHz CPU - Refurbished"
+      "description": "molestie ligula litora tincidunt consectetuer neque wisi sodales pellentesque placerat ante Nulla litora hendrerit Tincidunt ac justo eros Lorem tincidunt nunc elit integer id consectetuer Sed",
+      "imgId": 4,
+      "price": 19.85,
+      "productId": "8ZAA9",
+      "title": "23.4GHz CPU"
     }];
 
   }
