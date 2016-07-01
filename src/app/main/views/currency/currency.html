@@ -8,15 +8,30 @@
   <md-content layout="column" flex layout-padding>
     <md-toolbar class="md-hue-1">
       <div class="md-toolbar-tools">
-        <md-button ng-repeat="tab in currency.tabs" ui-sref="{{tab.stateName}}">
+        <md-menu>
+          <md-button class="md-menu-origin md-icon-button md-button hide-gt-xs" ng-click="currency.openMenu($mdOpenMenu, $event)">
+            <i class="material-icons">menu</i>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item ng-repeat="tab in currency.tabs">
+               <md-button ng-click="currency.navFromMenu(tab.stateName)">
+                 <md-icon><i class="material-icons">{{tab.icon}}</i></md-icon>
+                 <span>{{tab.title}}</span>
+               </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <md-button hide show-gt-xs ng-repeat="tab in currency.tabs" ui-sref="{{tab.stateName}}">
           {{tab.title}}
         </md-button>
         <span flex></span>
         <md-button aria-label="Cart">
           Cart ({{currency.svc.cart.length}})
         </md-button>
-        Total Price:&nbsp;
-        <b><ng-text-roll target="currency.svc.totalPrice" config="currency.rollConfig"></ng-text-roll></b>
+        <span hide show-gt-sm>Total Price:&nbsp;</span>
+        <b>
+          <ng-text-roll target="currency.svc.totalPrice" config="currency.rollConfig"></ng-text-roll>
+        </b>
       </div>
     </md-toolbar>
     <md-content ui-view></md-content>

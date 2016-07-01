@@ -11,16 +11,20 @@
 
     vm.tabs = [{
       title: 'Cases',
-      stateName: 'main.currency.case'
+      stateName: 'main.currency.case',
+      icon: 'work'
     }, {
       title: 'CPUs',
-      stateName: 'main.currency.cpu'
+      stateName: 'main.currency.cpu',
+      icon: 'select_all'
     }, {
       title: 'Memory',
-      stateName: 'main.currency.mem'
+      stateName: 'main.currency.mem',
+      icon: 'sd_card'
     }, {
       title: 'Hard-Drives',
-      stateName: 'main.currency.storage'
+      stateName: 'main.currency.storage',
+      icon: 'storage'
     }];
 
     var setSelectedTab = function() {
@@ -35,6 +39,14 @@
     vm.svc = currencySvc;
     vm.rollConfig = {
       filter: 'currency'
+    };
+
+    vm.openMenu = function($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    };
+
+    vm.navFromMenu = function(stateName) {
+      $state.go(stateName);
     };
 
   }
