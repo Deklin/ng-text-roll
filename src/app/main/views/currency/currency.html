@@ -1,7 +1,7 @@
 <div id="currency-demo" layout="column" layout-fill>
   <div layout-padding>
     <h3>Currency Demo</h3>
-    <p>Here's an example computer parts shopping experience, enchanced with
+    <p hide show-gt-xs>Here's an example computer parts shopping experience, enchanced with
       <b>ng-text-roll</b>
     </p>
   </div>
@@ -13,16 +13,16 @@
             <i class="material-icons">menu</i>
           </md-button>
           <md-menu-content width="4">
-            <md-menu-item ng-repeat="tab in currency.tabs">
-               <md-button ng-click="currency.navFromMenu(tab.stateName)">
-                 <md-icon><i class="material-icons">{{tab.icon}}</i></md-icon>
-                 <span>{{tab.title}}</span>
+            <md-menu-item ng-repeat="action in currency.actions">
+               <md-button ng-click="currency.navFromMenu(action.stateName)">
+                 <md-icon><i class="material-icons">{{action.icon}}</i></md-icon>
+                 <span>{{action.title}}</span>
                </md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-        <md-button hide show-gt-xs ng-repeat="tab in currency.tabs" ui-sref="{{tab.stateName}}">
-          {{tab.title}}
+        <md-button hide show-gt-xs ng-repeat="action in currency.actions" ui-sref="{{action.stateName}}">
+          {{action.title}}
         </md-button>
         <span flex></span>
         <md-button aria-label="Cart">

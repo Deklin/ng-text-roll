@@ -9,7 +9,7 @@
   function CurrencyDemoController($state, currencySvc) {
     var vm = this;
 
-    vm.tabs = [{
+    vm.actions = [{
       title: 'Cases',
       stateName: 'main.currency.case',
       icon: 'work'
@@ -27,14 +27,14 @@
       icon: 'storage'
     }];
 
-    var setSelectedTab = function() {
+    var setSelectedButton = function() {
       angular.forEach(vm.tabs, function(item, inx) {
         if (item.stateName === $state.current.name) {
-          vm.selectedTab = inx;
+          vm.selectedButton = inx;
         }
       });
     };
-    setSelectedTab();
+    setSelectedButton();
 
     vm.svc = currencySvc;
     vm.rollConfig = {

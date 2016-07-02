@@ -20,10 +20,22 @@
       stateName: 'main.date'
     }, {
       label: 'Currency',
+      subLabel: 'Cases',
       stateName: 'main.currency.case'
     }, {
       label: 'Currency',
+      subLabel: 'CPUs',
       stateName: 'main.currency.cpu',
+      hide: true
+    }, {
+      label: 'Currency',
+      subLabel: 'Hard-Drives',
+      stateName: 'main.currency.storage',
+      hide: true
+    }, {
+      label: 'Currency',
+      subLabel: 'Memory',
+      stateName: 'main.currency.mem',
       hide: true
     }];
     vm.demoMenuInx = 0;
@@ -32,6 +44,7 @@
       angular.forEach(vm.demoMenuItems, function(item, inx) {
         if (item.stateName === $state.current.name) {
           vm.currentLabel = item.label;
+          vm.currentSubLabel = item.subLabel;
           vm.demoMenuInx = inx;
           return true;
         }
