@@ -9,9 +9,12 @@
           <span class="md-headline">{{item.title}}</span>
           <span class="md-subhead">{{item.description}}</span>
         </md-card-title-text>
-        <div layout="column" layout-align="center end">
-          <span class="md-headline">{{item.price|currency}}</span>
-          <md-button class="md-raised" ng-click="case.svc.addToCart(item)">Add to Cart</md-button>
+        <div layout-xs="row">
+          <div flex class="md-media-xs card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/ComputerCase{{item.imgId}}.jpg)'}"></div>
+          <div layout="column" layout-align="center end">
+            <span class="md-headline">{{item.price|currency}}</span>
+            <md-button class="md-raised" ng-click="case.svc.addToCart(item)">Add to Cart</md-button>
+          </div>
         </div>
       </div>
     </md-card-title>
