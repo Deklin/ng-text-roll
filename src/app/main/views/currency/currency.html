@@ -1,7 +1,7 @@
 <div id="currency-demo" layout="column" layout-fill>
-  <div layout-padding>
+  <div layout-padding hide show-gt-sm>
     <h3>Currency Demo</h3>
-    <p hide show-gt-xs>Here's an example computer parts shopping experience, enchanced with
+    <p>Here's an example computer parts shopping experience, enchanced with
       <b>ng-text-roll</b>
     </p>
   </div>
@@ -9,7 +9,7 @@
     <md-toolbar class="md-hue-1">
       <div class="md-toolbar-tools">
         <md-menu>
-          <md-button class="md-menu-origin md-icon-button md-button hide-gt-xs" ng-click="currency.openMenu($mdOpenMenu, $event)">
+          <md-button class="md-menu-origin md-icon-button md-button hide-gt-sm" ng-click="currency.openMenu($mdOpenMenu, $event)">
             <i class="material-icons">menu</i>
           </md-button>
           <md-menu-content width="4">
@@ -21,7 +21,7 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-        <md-button hide show-gt-xs ng-repeat="action in currency.actions"
+        <md-button hide show-gt-sm ng-repeat="action in currency.actions"
           ng-click="currency.selectedButton = $index"
           ui-sref="{{action.stateName}}"
           ng-class="{'md-raised md-primary':currency.selectedButton===$index}">
