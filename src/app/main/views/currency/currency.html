@@ -21,14 +21,18 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-        <md-button hide show-gt-xs ng-repeat="action in currency.actions" ui-sref="{{action.stateName}}">
+        <md-button hide show-gt-xs ng-repeat="action in currency.actions"
+          ng-click="currency.selectedButton = $index"
+          ui-sref="{{action.stateName}}"
+          ng-class="{'md-raised md-primary':currency.selectedButton===$index}">
           {{action.title}}
         </md-button>
         <span flex></span>
         <md-button aria-label="Cart">
-          Cart ({{currency.svc.cart.length}})
+          <md-icon><i class="material-icons">shopping_cart</i></md-icon>
+          ({{currency.svc.cart.length}})
         </md-button>
-        <span hide show-gt-sm>Total Price:&nbsp;</span>
+        Total:&nbsp;
         <b>
           <ng-text-roll target="currency.svc.totalPrice" config="currency.rollConfig"></ng-text-roll>
         </b>

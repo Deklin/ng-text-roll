@@ -5,13 +5,15 @@
       <md-card-title-media hide show-gt-xs>
         <div class="md-media-md card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/HardDrive{{item.imgId}}.jpg)'}"></div>
       </md-card-title-media>
-      <md-card-title-text>
-        <span class="md-headline">{{item.title}}</span>
-        <span class="md-subhead">{{item.description}}</span>
-      </md-card-title-text>
-      <div layout="column" layout-align="center end">
-        <span class="md-headline">{{item.price|currency}}</span>
-        <md-button class="md-raised" ng-click="storage.svc.addToCart(item)">Add to Cart</md-button>
+      <div layout-xs="column" layout-gt-xs="row">
+        <md-card-title-text>
+          <span class="md-headline">{{item.title}}</span>
+          <span class="md-subhead">{{item.description}}</span>
+        </md-card-title-text>
+        <div layout="column" layout-align="center end">
+          <span class="md-headline">{{item.price|currency}}</span>
+          <md-button class="md-raised" ng-click="storage.svc.addToCart(item)">Add to Cart</md-button>
+        </div>
       </div>
     </md-card-title>
   </md-card>

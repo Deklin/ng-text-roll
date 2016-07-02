@@ -28,7 +28,7 @@
     }];
 
     var setSelectedButton = function() {
-      angular.forEach(vm.tabs, function(item, inx) {
+      angular.forEach(vm.actions, function(item, inx) {
         if (item.stateName === $state.current.name) {
           vm.selectedButton = inx;
         }
