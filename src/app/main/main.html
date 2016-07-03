@@ -1,6 +1,6 @@
 <div id="ng-text-roll-docs" layout="row">
-  <div id="left-extra-panel" hide show-gt-sm flex></div>
-  <section id="middle-panel" flex="100" flex-gt-sm="80" flex-gt-md="75" flex-gt-lg="55" flex-gt-xl="45" layout="row">
+  <div id="left-extra-panel" hide show-gt-md flex></div>
+  <md-content id="middle-panel" flex="100" flex-sm="100" flex-md="100" flex-lg="55" flex-xl="45" layout="row">
     <!-- main left side bar -->
     <md-sidenav class="main-site-nav md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-disable-backdrop md-whiteframe="4">
       <div class="main-logo">
@@ -19,18 +19,14 @@
         <md-divider></md-divider>
         <md-list>
           <md-subheader class="md-no-sticky">Demos</md-subheader>
-          <md-list-item ng-repeat="menuItem in main.demoMenuItems"
-              ui-sref="{{menuItem.stateName}}"
-              ng-click="main.demoMenuInx = $index"
-              ng-if="$index > 0 && !menuItem.hide"
-              ng-class="{active: main.demoMenuInx === $index}">
+          <md-list-item ng-repeat="menuItem in main.demoMenuItems" ui-sref="{{menuItem.stateName}}" ng-click="main.demoMenuInx = $index" ng-if="$index > 0 && !menuItem.hide" ng-class="{active: main.demoMenuInx === $index}">
             <span>{{menuItem.label}}</span>
           </md-list-item>
         </md-list>
       </md-content>
     </md-sidenav>
     <!-- end main left side bar -->
-    <div layout="column" role="main" layout-fill>
+    <md-content layout="column" role="main" layout-fill>
       <md-toolbar layout-padding md-whiteframe="6">
         <div class="md-toolbar-tools" flex>
           <button class="md-icon-button md-button hide-gt-sm" ng-click="main.openNav()">
@@ -51,7 +47,7 @@
         </div>
       </md-toolbar>
       <!-- main view content -->
-      <div layout="column" flex>
+      <md-content layout="column" flex>
         <md-content flex ui-view></md-content>
         <!-- end main view content -->
         <footer>
@@ -59,8 +55,8 @@
             <span>Code licensed under the MIT License.</span>
           </div>
         </footer>
-      </div>
-    </div>
-  </section>
+      </md-content>
+    </md-content>
+  </md-content>
   <div id="right-extra-panel" hide show-gt-sm flex></div>
 </div>
