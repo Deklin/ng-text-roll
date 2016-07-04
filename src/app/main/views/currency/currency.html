@@ -21,7 +21,7 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-        <md-button hide show-gt-sm ng-repeat="action in currency.actions"
+        <md-button hide show-gt-xs ng-repeat="action in currency.actions"
           ng-click="currency.selectedButton = $index"
           ui-sref="{{action.stateName}}"
           ng-class="{'md-raised md-primary':currency.selectedButton===$index}">
