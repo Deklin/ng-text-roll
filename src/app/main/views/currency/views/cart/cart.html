@@ -2,7 +2,7 @@
   <md-card ng-repeat="item in cart.svc.cart track by $index" class="currency-demo-item">
     <md-card-title>
       <md-card-title-media hide show-gt-xs flex="none" layout-padding>
-        <div class="md-media-md card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/ComputerCase{{item.imgId}}.jpg)'}"></div>
+        <div class="md-media-md card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/{{item.category}}{{item.imgId}}.jpg)'}"></div>
       </md-card-title-media>
       <div layout-xs="column" layout-gt-xs="row">
         <md-card-title-text>
@@ -10,7 +10,7 @@
           <span class="md-subhead">{{item.description}}</span>
         </md-card-title-text>
         <div layout-xs="row">
-          <div flex class="md-media-xs card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/ComputerCase{{item.imgId}}.jpg)'}"></div>
+          <div flex class="md-media-xs card-media demo-item-img" ng-style="{'background-image':'url(assets/images/currency_demo/{{item.category}}{{item.imgId}}.jpg)'}"></div>
           <div layout="column" layout-align="center end">
             <span class="md-headline">{{item.price|currency}}</span>
             <md-button class="md-raised" ng-click="cart.svc.removeFromCart(item)">Remove Cart</md-button>
