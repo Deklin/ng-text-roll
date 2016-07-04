@@ -32,6 +32,11 @@
         templateUrl: 'app/main/views/currency/views/storage/storage.html',
         controller: 'StorageController',
         controllerAs: 'storage'
+      }).state('main.currency.cart', {
+        url: '/currency/cart',
+        templateUrl: 'app/main/views/currency/views/cart/cart.html',
+        controller: 'CartController',
+        controllerAs: 'cart'
       });
   }
 

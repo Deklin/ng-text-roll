@@ -28,9 +28,14 @@
     }];
 
     var setSelectedButton = function() {
+      if ($state.current.name === 'main.currency.cart') {
+        vm.selectedButton = vm.actions.length;
+        return;
+      }
       angular.forEach(vm.actions, function(item, inx) {
         if (item.stateName === $state.current.name) {
           vm.selectedButton = inx;
+          return;
         }
       });
     };

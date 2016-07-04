@@ -28,7 +28,10 @@
           {{action.title}}
         </md-button>
         <span flex></span>
-        <md-button aria-label="Cart">
+        <md-button aria-label="Cart"
+          ng-click="currency.selectedButton = currency.actions.length"
+          ui-sref="main.currency.cart"
+          ng-class="{'md-raised md-primary':currency.selectedButton===currency.actions.length}">
           <md-icon><i class="material-icons">shopping_cart</i></md-icon>
           ({{currency.svc.cart.length}})
         </md-button>

@@ -37,6 +37,11 @@
       subLabel: 'Memory',
       stateName: 'main.currency.mem',
       hide: true
+    }, {
+      label: 'Currency',
+      subLabel: 'Cart',
+      stateName: 'main.currency.cart',
+      hide: true
     }];
     vm.demoMenuInx = 0;
 

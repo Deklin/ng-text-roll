@@ -10,16 +10,22 @@
       svc.totalPrice = 0;
 
       svc.addToCart = function(item) {
-//console.log('asdf')
         svc.cart.push(item);
-        calcTotalPrice();
+        calcTotalPrice(item, true);
       };
 
-      var calcTotalPrice = function() {
-        svc.totalPrice = 0;
-        angular.forEach(svc.cart, function(item) {
+      svc.removeFromCart = function(item) {
+        var inx = svc.cart.indexOf(item);
+        svc.cart.splice(inx, 1);
+        calcTotalPrice(item);
+      };
+
+      var calcTotalPrice = function(item, add) {
+        if (add) {
           svc.totalPrice += item.price;
-        });
+        } else {
+          svc.totalPrice -= item.price;
+        }
       };
 
       svc.foo = function() {
