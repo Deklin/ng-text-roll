@@ -23,6 +23,7 @@
       ctrl.$onInit = function() {
         ctrl.svc = ngTextRollSvc;
         ctrl.heightValue = parseFloat(ctrl.height);
+        ctrl.offset = Number(Math.round(ctrl.heightValue * 0.5 + 'e2') + 'e-2');
         ctrl.heightUnit = ctrl.height.replace(ctrl.heightValue, '');
         ctrl.svc.init(ctrl);
       };
@@ -210,9 +211,9 @@
             // top takes priority over bottom, can't just set top to zero
             if (isIncrease) {
               s.top = undefined;
-              s.bottom = ctrl.heightValue + ctrl.heightUnit;
+              s.bottom = (ctrl.heightValue + ctrl.offset) + ctrl.heightUnit;
             } else {
-              s.top = ctrl.heightValue + ctrl.heightUnit;
+              s.top = (ctrl.heightValue + ctrl.offset) + ctrl.heightUnit;
               s.bottom = undefined;
             }
             if (lengthDiffers) {

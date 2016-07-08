@@ -32,7 +32,8 @@
         //filterParam2 : '0'
     };
 
-    $scope.theValue = $scope.getRandomInt(10000, 50000);
+    $scope.theValue = 23; //$scope.getRandomInt(10000, 50000);
+    $scope.delta = 999;
 
     var tm;
     var onTimer = function() {
@@ -44,11 +45,11 @@
 
     $scope.updateValue = function() {
       //$scope.theValue = $scope.getRandomInt(10000, 50000);
-      $scope.theValue += 24256.11;
+      $scope.theValue += $scope.delta;
     };
 
     $scope.downValue = function() {
-      $scope.theValue -= 24256.12;
+      $scope.theValue -= $scope.delta;
     };
 
     $scope.$on('$destroy', function() {
