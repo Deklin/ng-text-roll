@@ -6,7 +6,7 @@
     .controller('DateDemoController', DateDemoController);
 
   /** @ngInject */
-  function DateDemoController(/*$scope, $timeout*/) {
+  function DateDemoController($scope, $timeout) {
     var vm = this;
 
     vm.theValue = new Date();
@@ -39,23 +39,23 @@
 
     vm.rollConfig = {
       filter: 'date',
-      filterParam1: 'MM/dd/yyyy',
+      filterParam1: 'MMMM dd, yyyy',
       rollBetween: true
     };
 
-    // vm.triggerChange = function() {
-    //   var preValue = vm.theValue;
-    //   vm.theValue = 9999;
-    //   vm.changeTimer = $timeout(function() {
-    //     vm.theValue = preValue;
-    //   }, 250);
-    // };
-    //
-    // $scope.$on('$destroy', function() {
-    //   if (vm.changeTimer) {
-    //     $timeout.cancel(vm.changeTimer);
-    //   }
-    // });
+    vm.triggerChange = function() {
+      var preValue = vm.theValue;
+      vm.theValue = 9999;
+      vm.changeTimer = $timeout(function() {
+        vm.theValue = preValue;
+      }, 250);
+    };
+
+    $scope.$on('$destroy', function() {
+      if (vm.changeTimer) {
+        $timeout.cancel(vm.changeTimer);
+      }
+    });
 
   }
 
