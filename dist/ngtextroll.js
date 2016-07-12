@@ -111,11 +111,15 @@
         };
 
       var formatTarget = function(cfg, target) {
-        return (cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParam1, cfg.filterParam2, cfg.filterParam3) : String(target);
+        var strTarget = ((cfg && cfg.filter) ? $filter(cfg.filter)(target, cfg.filterParam1, cfg.filterParam2, cfg.filterParam3) : String(target)).split('');
+        for (var i = 0; i < strTarget.length; i++) {
+          strTarget[i] = (strTarget[i] === ' ' ? 'nbsp;' : strTarget[i]);
+        }
+        return strTarget;
       };
 
       var trans = function(ctrl, scale) {
-        return transTemplate.replace(transRegex, ngTextRollUtilSvc.randDec(tumbleMs.min, tumbleMs.max) * (ctrl.config.rollBetween === false ? 1 : scale * 0.5));
+        return transTemplate.replace(transRegex, ngTextRollUtilSvc.randDec(tumbleMs.min, tumbleMs.max) * (ctrl.config.rollBetween === false ? 1 : (scale > 5 ? 5 : scale) * 0.5));
       };
 
       var charMatch = function(ctrl, inx) {
@@ -139,7 +143,11 @@
         if (!lengthDiffers && ctrl.config.rollBetween !== false) {
           ctrl.render[ctrl.current].target = [];
           angular.forEach(strNewVal, function(char, inx) {
-            ctrl.render[ctrl.current].target.push(ngTextRollUtilSvc.buildRange(isIncrease, char, strOldVal[inx]));
+            if (char === 'nbsp;') {
+              ctrl.render[ctrl.current].target.push(char);
+            } else {
+              ctrl.render[ctrl.current].target.push(ngTextRollUtilSvc.buildRange(isIncrease, char, strOldVal[inx]));
+            }
           });
         } else {
           ctrl.render[ctrl.current].target = strNewVal;
@@ -151,14 +159,14 @@
       // Move pre-animation divs without animations
       var animSetup = function(ctrl, oldVal, newVal, isIncrease) {
         ctrl.render[ctrl.current].style = [];
-        angular.forEach(ctrl.render[ctrl.current].target, function(undefined, inx) {
+        angular.forEach(ctrl.render[ctrl.current].target, function(targ, inx) {
           var s = {
             '-webkit-transition': undefined,
             '-moz-transition': undefined,
             'transition': undefined
           };
           // top takes priority over bottom, can't just set top to zero
-          var scale = ctrl.render[ctrl.current].target[inx].length;
+          var scale = targ.length;
           if (isIncrease) {
             s.top = ctrl.heightValue + ctrl.heightUnit;
             s.bottom = ((ctrl.heightValue * scale) * -1) + ctrl.heightUnit;
@@ -248,7 +256,7 @@
     });
 
   // template:js
-  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\">\n  <div class=\"inner\" ng-repeat=\"pChar in $ctrl.render[$ctrl.current].target track by $index\">\n    <div class=\"char\" ng-style=\"$ctrl.render[0].style[$index]\">\n      <div ng-repeat=\"iChar in $ctrl.render[0].target[$index]\">{{iChar}}</div>\n    </div>\n    <div class=\"char\" ng-style=\"$ctrl.render[1].style[$index]\">\n      <div ng-repeat=\"jChar in $ctrl.render[1].target[$index]\">{{jChar}}</div>\n    </div>\n    {{pChar[0]}}\n  </div>\n</div>\n");}]);
+  angular.module("ui.ngTextRoll.template", []).run(["$templateCache", function($templateCache) {$templateCache.put("template/ngtextroll.html","<div id=\"ng-text-roll\">\n  <div class=\"inner\" ng-repeat=\"pChar in $ctrl.render[$ctrl.current].target track by $index\">\n    <div class=\"char\" ng-show=\"pChar !== \'nbsp;\'\" ng-style=\"$ctrl.render[0].style[$index]\">\n      <div ng-repeat=\"iChar in $ctrl.render[0].target[$index]\">{{iChar}}</div>\n    </div>\n    <div class=\"char\" ng-show=\"pChar !== \'nbsp;\'\" ng-style=\"$ctrl.render[1].style[$index]\">\n      <div ng-repeat=\"jChar in $ctrl.render[1].target[$index]\">{{jChar}}</div>\n    </div>\n    {{pChar === \'nbsp;\' ? \'&nbsp;\' : pChar[0]}}\n  </div>\n</div>\n");}]);
   // endinject
 
 })();

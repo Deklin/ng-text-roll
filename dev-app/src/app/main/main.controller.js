@@ -8,32 +8,39 @@
   /** @ngInject */
   function MainController($scope, $timeout) {
 
-    $scope.getRandomDecimal = function(min, max) {
+    /*
+    var getRandomDecimal = function(min, max) {
       return parseFloat((Math.random() * (max - min) + min).toFixed(2));
     };
 
-    $scope.getRandomInt = function(min, max) {
+    var getRandomInt = function(min, max) {
       return parseInt((Math.random() * (max - min) + min));
     };
 
-    $scope.getRandomDate = function() {
+    var getRandomDate = function() {
       var inc = parseInt($scope.getRandomDecimal(1, 99));
       var date = new Date();
       date.setDate(date.getDate() + inc);
       return date;
     };
+    */
+
+    var incDate = function(inDate, days) {
+      var d = new Date(inDate);
+      return new Date(d.setDate(d.getDate() + days));
+    };
 
     $scope.rollConfig = {
-      filter: 'currency',
-      filterParam2: '2'
+      filter: 'date',
+      filterParam1: 'MMMM dd, yyyy'
         //rollBetween: false,
         //rollAll: true
         //filterParam1: 'MM/dd/yyyy'
         //filterParam2 : '0'
     };
 
-    $scope.theValue = 23; //$scope.getRandomInt(10000, 50000);
-    $scope.delta = 999;
+    $scope.theValue = new Date(); // 23; //$scope.getRandomInt(10000, 50000);
+    $scope.delta = 11;
 
     var tm;
     var onTimer = function() {
@@ -45,7 +52,11 @@
 
     $scope.updateValue = function() {
       //$scope.theValue = $scope.getRandomInt(10000, 50000);
-      $scope.theValue += $scope.delta;
+      if (typeof $scope.theValue === 'object') {
+        $scope.theValue = incDate($scope.theValue, $scope.delta);
+      } else if (typeof $scope.theValue === 'number') {
+        $scope.theValue += $scope.delta;
+      }
     };
 
     $scope.downValue = function() {
