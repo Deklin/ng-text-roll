@@ -248,7 +248,7 @@
       return svc;
     }])
     .component('ngTextRoll', {
-      templateUrl: 'template/ngtextroll.html',
+      templateUrl: 'app/components/ngTextRoll/ngtextroll.html',
       bindings: {
         target: '<',
         config: '<'
