@@ -12,7 +12,8 @@
    */
 
   angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
-    .controller('ngTextRollCtrl', function($element, $document, $timeout, ngTextRollSvc, ngTextRollUtilSvc) {
+    .controller('ngTextRollCtrl', ['$element','$document','$timeout','ngTextRollSvc','ngTextRollUtilSvc', 
+      function($element, $document, $timeout, ngTextRollSvc, ngTextRollUtilSvc) {
       var ctrl = this;
 
       // local vars
@@ -45,7 +46,7 @@
         }
       };
 
-    })
+    }])
     .factory('ngTextRollUtilSvc', function() {
       var util = {};
 
@@ -98,7 +99,7 @@
 
       return util;
     })
-    .factory('ngTextRollSvc', function($timeout, $filter, ngTextRollUtilSvc) {
+    .factory('ngTextRollSvc', ['$timeout','$filter','ngTextRollUtilSvc', function($timeout, $filter, ngTextRollUtilSvc) {
       var svc = {};
 
       // Constants
@@ -245,7 +246,7 @@
       };
 
       return svc;
-    })
+    }])
     .component('ngTextRoll', {
       templateUrl: 'template/ngtextroll.html',
       bindings: {
