@@ -11,7 +11,7 @@
    * # ngTextRoll
    */
 
-  angular.module('ui.ngTextRoll', ['ui.ngTextRoll.template'])
+  angular.module('ui.ngTextRoll', [''])
     .controller('ngTextRollCtrl', ['$element','$document','$timeout','ngTextRollSvc','ngTextRollUtilSvc', 
       function($element, $document, $timeout, ngTextRollSvc, ngTextRollUtilSvc) {
       var ctrl = this;
